@@ -29,28 +29,24 @@ export const themeConfig: ThemeConfig = {
     // default theme mode
     mode: 'light', // light, dark, auto
     light: {
-      // primary color
-      // used for title, hover, etc
-      // oklch color picker: https://oklch.com/
-      primary: 'oklch(25% 0.005 298)',
-      // secondary color
-      // used for post text
-      secondary: 'oklch(40% 0.005 298)',
-      // background color
-      background: 'oklch(96% 0.005 298)',
-      // highlight color
-      // used for navbar, selected text, etc
-      highlight: 'oklch(0.93 0.195089 103.2532 / 0.5)', // rgba(255,235,0,0.5)
+      // primary color - Dark slate for titles and important elements
+      primary: 'oklch(25% 0.015 240)',
+      // secondary color - Medium gray for body text
+      secondary: 'oklch(45% 0.01 240)',
+      // background color - Clean white with very subtle blue tint
+      background: 'oklch(98% 0.005 240)',
+      // highlight color - Subtle blue for selections and hover states
+      highlight: 'oklch(70% 0.12 240 / 0.15)',
     },
     dark: {
-      // primary color
-      primary: 'oklch(92% 0.005 298)',
-      // secondary color
-      secondary: 'oklch(77% 0.005 298)',
-      // background color
-      background: 'oklch(22% 0.005 298)',
-      // highlight color
-      highlight: 'oklch(0.93 0.195089 103.2532 / 0.2)', // rgba(255,235,0,0.2)
+      // primary color - Light gray for dark mode titles
+      primary: 'oklch(90% 0.01 240)',
+      // secondary color - Medium light gray for dark mode text
+      secondary: 'oklch(70% 0.01 240)',
+      // background color - Dark gray with subtle blue undertone
+      background: 'oklch(15% 0.01 240)',
+      // highlight color - Muted blue for dark mode selections
+      highlight: 'oklch(50% 0.12 240 / 0.2)',
     },
   },
   // COLOR SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
@@ -62,7 +58,7 @@ export const themeConfig: ThemeConfig = {
     // more languages
     // not fill in the locale code above again, can be an empty array []
     moreLocales: ['en'], // ['de', 'en', 'es', 'fr', 'ja', 'ko', 'pl', 'pt', 'ru', 'zh', 'zh-tw']
-    // font styles for post text
+    // font styles for post text - using clean sans-serif for tech blog
     fontStyle: 'sans', // sans, serif
     // date format for posts
     dateFormat: 'YYYY-MM-DD', // YYYY-MM-DD, MM-DD-YYYY, DD-MM-YYYY, MONTH DAY YYYY, DAY MONTH YYYY
