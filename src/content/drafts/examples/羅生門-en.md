@@ -5,6 +5,8 @@ tags:
   - Ryunosuke Akutagawa
   - Modern Literature
 lang: en
+draft: true
+
 abbrlink: rashomon
 ---
 

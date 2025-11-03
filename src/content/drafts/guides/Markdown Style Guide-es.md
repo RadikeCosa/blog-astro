@@ -7,6 +7,8 @@ tags:
 pin: 98
 toc: false
 lang: es
+draft: true
+
 abbrlink: markdown-style-guide
 ---
 

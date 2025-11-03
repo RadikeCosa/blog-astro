@@ -2,6 +2,8 @@
 title: KaTeX Demostración Matemática
 published: 2025-04-01
 lang: es
+draft: true
+
 abbrlink: katex-mathematical-demo
 ---
 
