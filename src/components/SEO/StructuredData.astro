@@ -1,0 +1,130 @@
+---
+import { themeConfig } from '@/config'
+
+interface Props {
+  type?: 'website' | 'article' | 'person' | 'organization'
+  title?: string
+  description?: string
+  url?: string
+  publishedAt?: string
+  modifiedAt?: string
+  tags?: string[]
+}
+
+const {
+  type = 'website',
+  title,
+  description,
+  url,
+  publishedAt,
+  modifiedAt,
+  tags = [],
+} = Astro.props
+
+const { site } = themeConfig
+const currentUrl = url || Astro.url.href
+
+// Base organization/person data
+const baseData = {
+  '@context': 'https://schema.org',
+  '@type': type === 'person' ? 'Person' : 'Organization',
+  'name': site.author,
+  'url': site.url,
+  'description': site.description,
+  'sameAs': [
+    'https://github.com/radikeCosa',
+    'https://linkedin.com/in/ramiro-cosa',
+  ],
+}
+
+// Website structured data
+const websiteData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': site.title,
+  'description': site.description,
+  'url': site.url,
+  'author': baseData,
+  'inLanguage': ['es', 'en'],
+  'potentialAction': {
+    '@type': 'SearchAction',
+    'target': `${site.url}/search?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+}
+
+// Article structured data
+const articleData = title && publishedAt
+? {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  'headline': title,
+  'description': description || site.description,
+  'url': currentUrl,
+  'datePublished': publishedAt,
+  'dateModified': modifiedAt || publishedAt,
+  'author': baseData,
+  'publisher': baseData,
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': currentUrl,
+  },
+  'keywords': tags.join(', '),
+  'articleSection': 'Technology',
+  'inLanguage': ['es', 'en'],
+  'about': [
+    {
+      '@type': 'Thing',
+      'name': 'Web Development',
+    },
+    {
+      '@type': 'Thing',
+      'name': 'Programming',
+    },
+  ],
+}
+: null
+
+// Tech blog specific data
+const blogData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  'name': site.title,
+  'description': site.description,
+  'url': site.url,
+  'author': baseData,
+  'publisher': baseData,
+  'inLanguage': ['es', 'en'],
+  'about': [
+    {
+      '@type': 'Thing',
+      'name': 'Web Development',
+    },
+    {
+      '@type': 'Thing',
+      'name': 'Full Stack Development',
+    },
+    {
+      '@type': 'Thing',
+      'name': 'JavaScript',
+    },
+    {
+      '@type': 'Thing',
+      'name': 'React',
+    },
+    {
+      '@type': 'Thing',
+      'name': 'Node.js',
+    },
+  ],
+}
+
+const structuredDataArray = [websiteData, blogData]
+if (articleData) {
+  structuredDataArray.push(articleData as any)
+}
+---
+
+{structuredDataArray.map(data => (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />
+))}

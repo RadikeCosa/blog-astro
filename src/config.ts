@@ -3,22 +3,22 @@ import type { ThemeConfig } from '@/types'
 export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
-    // site title
+    // site title - optimized for SEO
     title: 'Ramiro N. Cosa',
-    // site subtitle
-    subtitle: 'Full Stack Developer',
-    // site description
-    description: 'Full Stack Developer, Physiotherapist, and Musician. Passionate about creating digital solutions and sharing knowledge about web development, technology, and creative projects.',
+    // site subtitle - appears in search results
+    subtitle: 'Full Stack Developer & Tech Writer',
+    // site description - SEO meta description (150-160 characters optimal)
+    description: 'Full Stack Developer specializing in modern web technologies. Sharing insights on JavaScript, React, Node.js, and web development best practices.',
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
     i18nTitle: false, // true, false
-    // author name
+    // author name - appears in search results and social cards
     author: 'Ramiro N. Cosa',
-    // site url
+    // site url - must match your actual domain for proper SEO
     url: 'https://ramirocosa.is-a.dev',
     // base path
     // root directory for all pages and assets
     base: '/', // e.g., '/blog', '/docs'
-    // favicon url
+    // favicon url - multiple formats for better browser support
     // recommended formats: svg, png or ico
     favicon: '/icons/favicon.svg', // or https://example.com/favicon.svg
   },
@@ -115,40 +115,43 @@ export const themeConfig: ThemeConfig = {
 
   // SEO SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   seo: {
-    // @twitter ID
-    twitterID: '',
-    // site verification
+    // Twitter/X handle - include @ symbol for proper attribution in social cards
+    twitterID: '@ramiro_cosa',
+    // Site verification tokens for search engines (essential for SEO)
     verification: {
-      // google search console
-      // https://search.google.com/search-console
-      google: '',
-      // bing webmaster tools
-      // https://www.bing.com/webmasters
-      bing: '',
-      // yandex webmaster
-      // https://webmaster.yandex.com
+      // Google Search Console verification token
+      // Get from: https://search.google.com/search-console
+      // Add your HTML tag meta content here
+      google: 'your-google-verification-token-here',
+      // Bing Webmaster Tools verification token
+      // Get from: https://www.bing.com/webmasters
+      bing: 'your-bing-verification-token-here',
+      // Yandex Webmaster verification (optional - for Russian/Eastern European reach)
+      // Get from: https://webmaster.yandex.com
       yandex: '',
-      // baidu search
-      // https://ziyuan.baidu.com
+      // Baidu verification (optional - for Chinese market reach)
+      // Get from: https://ziyuan.baidu.com
       baidu: '',
     },
-    // google analytics
-    // https://analytics.google.com
-    googleAnalyticsID: '',
-    // umami analytics
-    // https://cloud.umami.is
+    // Google Analytics 4 for SEO performance tracking
+    // Essential for monitoring organic traffic and user behavior
+    // Get from: https://analytics.google.com (create GA4 property)
+    googleAnalyticsID: 'G-XXXXXXXXXX',
+    // Umami Analytics - privacy-focused alternative to Google Analytics
+    // Get from: https://cloud.umami.is or self-host
     umamiAnalyticsID: '',
-    // follow verification
-    // https://follow.is/
+    // Follow.is verification for RSS syndication and content discovery
+    // Get from: https://follow.is/
     follow: {
-      // feed ID
+      // RSS feed ID for content syndication
       feedID: '',
-      // user ID
+      // User ID for follow.is platform
       userID: '',
     },
-    // apiflash access key
-    // automatically generate website screenshots for open graph images
-    // get your access key at: https://apiflash.com/
+    // APIFlash for automatic Open Graph image generation
+    // Creates beautiful social media preview images automatically
+    // Get your access key at: https://apiflash.com/
+    // Improves social media engagement significantly
     apiflashKey: '',
   },
   // SEO SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
