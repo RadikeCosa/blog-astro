@@ -158,8 +158,8 @@ export const themeConfig: ThemeConfig = {
     // social links
     links: [
       {
-        name: 'RSS',
-        url: '/atom.xml', // or /rss.xml
+        name: 'LinkedIn',
+        url: 'https://linkedin.com/in/ramicosa',
       },
       {
         name: 'GitHub',
