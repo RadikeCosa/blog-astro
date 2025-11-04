@@ -1,89 +1,163 @@
-# Retypeset
+# Blog de Ramiro N. Cosa
 
-![Cover Image](assets/images/v1/retypeset-en-desktop.webp)
-![Cover Image](assets/images/v1/retypeset-en-mobile.webp)
+¡Hola! Soy **Ramiro N. Cosa**, y este es mi blog personal donde comparto mis experiencias, proyectos y aprendizaje en el mundo del desarrollo web y otras tecnologías.
 
-[简体中文](assets/docs/README.zh.md)｜[繁体中文](assets/docs/README.zh-tw.md)｜[日本語](assets/docs/README.ja.md)｜[Español](assets/docs/README.es.md)｜[Français](assets/docs/README.fr.md)｜[Русский](assets/docs/README.ru.md)
+## 🚀 Acerca del Blog
 
-Retypeset is a static blog theme based on the [Astro](https://astro.build/) framework. Inspired by [Typography](https://astro-theme-typography.vercel.app/), Retypeset establishes a new visual standard and reimagines the layout of all pages, creating a reading experience reminiscent of paper books, reviving the beauty of typography. Details in every sight, elegance in every space.
+Este blog está construido con [Astro](https://astro.build/) y utiliza el tema [Retypeset](https://github.com/radishzzz/astro-theme-retypeset), adaptado para crear una experiencia de lectura elegante inspirada en libros impresos. El diseño pone énfasis en la tipografía y la experiencia de usuario.
 
-## Demo
+### Características
 
-- [Retypeset](https://retypeset.radishzz.cc/en/)
-- [Retipografía](https://retypeset.radishzz.cc/es/)
-- [Переверстка](https://retypeset.radishzz.cc/ru/)
-- [重新编排](https://retypeset.radishzz.cc/)
-- [重新編排](https://retypeset.radishzz.cc/zh-tw/)
-- [再組版](https://retypeset.radishzz.cc/ja/)
+- ⚡ **Rendimiento Optimizado**: Construido con Astro para máxima velocidad
+- 🎨 **Diseño Elegante**: Tema Retypeset con tipografía cuidada
+- 🌍 **Multilingüe**: Contenido disponible en español e inglés
+- 📱 **Responsive**: Diseño adaptativo para todos los dispositivos
+- 🌓 **Modo Oscuro/Claro**: Alterna entre temas según tu preferencia
+- 📝 **Soporte MDX**: Artículos con componentes interactivos
+- 🔍 **SEO Optimizado**: Metadatos y sitemap automáticos
+- 📊 **Analytics**: Integración con servicios de analítica
+- 💬 **Sistema de Comentarios**: Waline y Twikoo disponibles
 
-## Features
+## 🛠️ Tecnologías Utilizadas
 
-- Built with Astro and UnoCSS
-- Support for SEO, Sitemap, OpenGraph, RSS, MDX, LaTeX, Mermaid, and TOC
-- i18n support
-- Light / Dark mode
-- Elegant view transitions
-- Rich theme customization
-- Optimized typography
-- Responsive design
-- Comment system
+- **Framework**: [Astro](https://astro.build/)
+- **Styling**: [UnoCSS](https://unocss.dev/)
+- **Tipografía**: EarlySummer Serif (fuente personalizada)
+- **Comentarios**: Waline / Twikoo
+- **Despliegue**: Netlify / Vercel
+- **CMS**: Contenido en Markdown/MDX
 
-## Performance
+## 📁 Estructura del Proyecto
 
-<br>
-<p align="center">
-  <a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fretypeset.radishzz.cc%2Fen%2F&form_factor=desktop">
-    <img width="710" alt="Retypeset Lighthouse Score" src="assets/images/retypeset-lighthouse-score.svg">
-  <a>
-</p>
+```bash
+src/
+├── content/
+│   ├── posts/          # Artículos del blog
+│   └── about/          # Páginas "Sobre mí"
+├── components/         # Componentes reutilizables
+├── layouts/           # Layouts de página
+├── pages/             # Rutas de página
+├── styles/            # Estilos CSS
+├── i18n/              # Configuración de idiomas
+├── plugins/           # Plugins de remark/rehype
+└── utils/             # Utilidades
+```
 
-## Getting Started
+## 🚀 Inicio Rápido
 
-1. [Fork](https://github.com/radishzzz/astro-theme-retypeset/fork) this repository, or use this template to create a new repository.
-2. Run the following commands in your terminal:
+### Prerrequisitos
+
+- [Node.js](https://nodejs.org/) (versión 18+)
+- [pnpm](https://pnpm.io/) (recomendado)
+
+### Instalación
+
+1. **Clona el repositorio**
 
    ```bash
-   # Clone the repository
-   git clone <repository-url>
+   git clone https://github.com/RadikeCosa/blog-astro.git
+   cd blog-astro
+   ```
 
-   # Navigate to the project directory
-   cd <repository-name>
+2. **Instala las dependencias**
 
-   # Install pnpm globally (if not already installed)
-   npm install -g pnpm
-
-   # Install dependencies
+   ```bash
    pnpm install
+   ```
 
-   # Start the development server
+3. **Inicia el servidor de desarrollo**
+
+   ```bash
    pnpm dev
    ```
 
-3. Refer to the [Theme Guide](https://retypeset.radishzz.cc/en/posts/theme-guide/) to customize your blog and create new posts.
-4. Refer to the [Astro Deployment Guides](https://docs.astro.build/en/guides/deploy/) to deploy your blog to Netlify, Vercel, or other platforms.
+4. **Abre tu navegador** en `http://localhost:4321`
 
-&emsp;[![Deploy to Netlify](assets/images/deploy-netlify.svg)](https://app.netlify.com/start) [![Deploy to Vercel](assets/images/deploy-vercel.svg)](https://vercel.com/new)
+### Comandos Disponibles
 
-## Updates
+```bash
+# Desarrollo
+pnpm dev              # Inicia servidor de desarrollo
+pnpm build           # Construye para producción
+pnpm preview         # Vista previa de la build
 
-Retypeset releases [new features](https://github.com/radishzzz/astro-theme-retypeset/issues/18) from time to time. Simply run `pnpm update-theme` to update the theme. If you encounter merge conflicts, please refer to [this video](https://youtu.be/lz5OuKzvadQ?si=sH_ALNgqxrYqNVQT) for manual resolution.
+# Contenido
+pnpm new-post "Título del post"    # Crea nuevo artículo
+pnpm format-posts                 # Formatea posts existentes
 
-## Credits
+# Mantenimiento
+pnpm lint             # Ejecuta linter
+pnpm lint:fix         # Corrige errores de linting
+pnpm update-theme     # Actualiza el tema base
+```
 
-- [Typography](https://github.com/moeyua/astro-theme-typography)
-- [Fuwari](https://github.com/saicaca/fuwari)
-- [Redefine](https://github.com/EvanNotFound/hexo-theme-redefine)
-- [AstroPaper](https://github.com/satnaing/astro-paper)
-- [heti](https://github.com/sivan/heti)
-- [EarlySummerSerif](https://github.com/GuiWonder/EarlySummerSerif)
+## 📝 Creando Contenido
 
-## Star History
+### Nuevo Artículo
 
-<p align="center">
-<a href="https://star-history.com/#radishzzz/astro-theme-retypeset&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=radishzzz/astro-theme-retypeset&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=radishzzz/astro-theme-retypeset&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=radishzzz/astro-theme-retypeset&type=Date" />
-  </picture>
-</p>
+```bash
+pnpm new-post "Mi Nuevo Artículo"
+```
+
+Esto crea un archivo Markdown con frontmatter pre-configurado.
+
+### Frontmatter de Ejemplo
+
+```yaml
+---
+title: Mi Primer Artículo
+published: 2025-01-15
+description: Una descripción breve del artículo
+tags: [desarrollo-web, tutorial]
+draft: false
+---
+```
+
+## 🌍 Internacionalización
+
+El blog soporta múltiples idiomas:
+
+- **Español** (`es`): Contenido principal
+- **Inglés** (`en`): Traducciones disponibles
+
+Las páginas se sirven automáticamente según el idioma preferido del usuario.
+
+## 🚀 Despliegue
+
+### Netlify
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/RadikeCosa/blog-astro)
+
+### Vercel
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/RadikeCosa/blog-astro)
+
+### Manual
+
+```bash
+# Construye el sitio
+pnpm build
+
+# El resultado estará en la carpeta 'dist/'
+```
+
+## 📞 Contacto
+
+- **Autor**: Ramiro N. Cosa
+- **GitHub**: [@radikeCosa](https://github.com/radikeCosa)
+- **Email**: [ramirocosa@gmail.com](mailto:ramirocosa@gmail.com)
+- **Portfolio**: [ramirocosa.is-a.dev](https://ramirocosa.is-a.dev)
+- **LinkedIn**: [linkedin.com/in/ramicosa](https://www.linkedin.com/in/ramicosa)
+
+## 📄 Licencia
+
+Este proyecto está basado en el tema [Retypeset](https://github.com/radishzzz/astro-theme-retypeset) y está disponible bajo la misma licencia.
+
+## 🙏 Créditos
+
+- [Retypeset Theme](https://github.com/radishzzz/astro-theme-retypeset) - Tema base
+- [Astro](https://astro.build/) - Framework web
+- [UnoCSS](https://unocss.dev/) - Motor de estilos
+- [EarlySummer Serif](https://github.com/GuiWonder/EarlySummerSerif) - Tipografía personalizada
+
+---
