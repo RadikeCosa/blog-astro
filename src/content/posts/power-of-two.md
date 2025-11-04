@@ -14,6 +14,8 @@ lang: 'es'
 abbrlink: 'power-of-two-leetcode'
 ---
 
+<!-- Commit de prueba - Radike Cosa -->
+
 ## Prologo
 
 Elegi comenzar el blog con este problema porque es un problema simple con multiples posibles soluciones y posibilidad de usar operadores bitwise que son muy atractivos para aprender.

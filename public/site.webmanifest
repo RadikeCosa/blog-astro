@@ -1,7 +1,7 @@
 {
   "name": "Ramiro N. Cosa - Full Stack Developer Blog",
   "short_name": "Ramiro Cosa",
-  "description": "Full Stack Developer specializing in modern web technologies. Sharing insights on JavaScript, React, Node.js, and web development best practices.",
+  "description": "Full Stack Developer. Sharing insights on JavaScript, React, Node.js, and web development best practices.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
