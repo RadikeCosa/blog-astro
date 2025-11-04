@@ -3,22 +3,22 @@ import type { ThemeConfig } from '@/types'
 export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
-    // site title
-    title: 'Retypeset',
-    // site subtitle
-    subtitle: 'Revive the beauty of typography',
-    // site description
-    description: 'Retypeset is a static blog theme based on the Astro framework. Inspired by Typography, Retypeset establishes a new visual standard and reimagines the layout of all pages, creating a reading experience reminiscent of paper books, reviving the beauty of typography. Details in every sight, elegance in every space.',
+    // site title - optimized for SEO
+    title: 'Ramiro N. Cosa',
+    // site subtitle - appears in search results
+    subtitle: 'Full Stack Developer & Tech Writer',
+    // site description - SEO meta description (150-160 characters optimal)
+    description: 'Full Stack Developer specializing in modern web technologies. Sharing insights on JavaScript, React, Node.js, and web development best practices.',
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
-    i18nTitle: true, // true, false
-    // author name
-    author: 'radishzz',
-    // site url
-    url: 'https://retypeset.radishzz.cc',
+    i18nTitle: false, // true, false
+    // author name - appears in search results and social cards
+    author: 'Ramiro N. Cosa',
+    // site url - must match your actual domain for proper SEO
+    url: 'https://ramirocosa.is-a.dev',
     // base path
     // root directory for all pages and assets
     base: '/', // e.g., '/blog', '/docs'
-    // favicon url
+    // favicon url - multiple formats for better browser support
     // recommended formats: svg, png or ico
     favicon: '/icons/favicon.svg', // or https://example.com/favicon.svg
   },
@@ -29,28 +29,24 @@ export const themeConfig: ThemeConfig = {
     // default theme mode
     mode: 'light', // light, dark, auto
     light: {
-      // primary color
-      // used for title, hover, etc
-      // oklch color picker: https://oklch.com/
-      primary: 'oklch(25% 0.005 298)',
-      // secondary color
-      // used for post text
-      secondary: 'oklch(40% 0.005 298)',
-      // background color
-      background: 'oklch(96% 0.005 298)',
-      // highlight color
-      // used for navbar, selected text, etc
-      highlight: 'oklch(0.93 0.195089 103.2532 / 0.5)', // rgba(255,235,0,0.5)
+      // primary color - Dark slate for titles and important elements
+      primary: 'oklch(25% 0.015 240)',
+      // secondary color - Medium gray for body text
+      secondary: 'oklch(45% 0.01 240)',
+      // background color - Clean white with very subtle blue tint
+      background: 'oklch(98% 0.005 240)',
+      // highlight color - Subtle blue for selections and hover states
+      highlight: 'oklch(70% 0.12 240 / 0.15)',
     },
     dark: {
-      // primary color
-      primary: 'oklch(92% 0.005 298)',
-      // secondary color
-      secondary: 'oklch(77% 0.005 298)',
-      // background color
-      background: 'oklch(22% 0.005 298)',
-      // highlight color
-      highlight: 'oklch(0.93 0.195089 103.2532 / 0.2)', // rgba(255,235,0,0.2)
+      // primary color - Light gray for dark mode titles
+      primary: 'oklch(90% 0.01 240)',
+      // secondary color - Medium light gray for dark mode text
+      secondary: 'oklch(70% 0.01 240)',
+      // background color - Dark gray with subtle blue undertone
+      background: 'oklch(15% 0.01 240)',
+      // highlight color - Muted blue for dark mode selections
+      highlight: 'oklch(50% 0.12 240 / 0.2)',
     },
   },
   // COLOR SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
@@ -58,11 +54,11 @@ export const themeConfig: ThemeConfig = {
   // GLOBAL SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   global: {
     // default language
-    locale: 'zh', // de, en, es, fr, ja, ko, pl, pt, ru, zh, zh-tw
+    locale: 'es', // de, en, es, fr, ja, ko, pl, pt, ru, zh, zh-tw
     // more languages
     // not fill in the locale code above again, can be an empty array []
-    moreLocales: ['en', 'es', 'ja', 'ru', 'zh-tw'], // ['de', 'en', 'es', 'fr', 'ja', 'ko', 'pl', 'pt', 'ru', 'zh', 'zh-tw']
-    // font styles for post text
+    moreLocales: ['en'], // ['de', 'en', 'es', 'fr', 'ja', 'ko', 'pl', 'pt', 'ru', 'zh', 'zh-tw']
+    // font styles for post text - using clean sans-serif for tech blog
     fontStyle: 'sans', // sans, serif
     // date format for posts
     dateFormat: 'YYYY-MM-DD', // YYYY-MM-DD, MM-DD-YYYY, DD-MM-YYYY, MONTH DAY YYYY, DAY MONTH YYYY
@@ -78,7 +74,7 @@ export const themeConfig: ThemeConfig = {
   // COMMENT SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   comment: {
     // enable comment system
-    enabled: true, // true, false
+    enabled: false, // true, false
     // giscus
     // https://giscus.app/
     giscus: {
@@ -119,40 +115,43 @@ export const themeConfig: ThemeConfig = {
 
   // SEO SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   seo: {
-    // @twitter ID
-    twitterID: '@radishzz_',
-    // site verification
+    // Twitter/X handle - include @ symbol for proper attribution in social cards
+    twitterID: '@ramiro_cosa',
+    // Site verification tokens for search engines (essential for SEO)
     verification: {
-      // google search console
-      // https://search.google.com/search-console
-      google: 'AUCrz5F1e5qbnmKKDXl2Sf8u6y0kOpEO1wLs6HMMmlM',
-      // bing webmaster tools
-      // https://www.bing.com/webmasters
-      bing: '64708CD514011A7965C84DDE1D169F87',
-      // yandex webmaster
-      // https://webmaster.yandex.com
+      // Google Search Console verification token
+      // Get from: https://search.google.com/search-console
+      // Add your HTML tag meta content here
+      google: 'your-google-verification-token-here',
+      // Bing Webmaster Tools verification token
+      // Get from: https://www.bing.com/webmasters
+      bing: 'your-bing-verification-token-here',
+      // Yandex Webmaster verification (optional - for Russian/Eastern European reach)
+      // Get from: https://webmaster.yandex.com
       yandex: '',
-      // baidu search
-      // https://ziyuan.baidu.com
+      // Baidu verification (optional - for Chinese market reach)
+      // Get from: https://ziyuan.baidu.com
       baidu: '',
     },
-    // google analytics
-    // https://analytics.google.com
-    googleAnalyticsID: '',
-    // umami analytics
-    // https://cloud.umami.is
-    umamiAnalyticsID: '520af332-bfb7-4e7c-9386-5f273ee3d697',
-    // follow verification
-    // https://follow.is/
+    // Google Analytics 4 for SEO performance tracking
+    // Essential for monitoring organic traffic and user behavior
+    // Get from: https://analytics.google.com (create GA4 property)
+    googleAnalyticsID: 'G-XXXXXXXXXX',
+    // Umami Analytics - privacy-focused alternative to Google Analytics
+    // Get from: https://cloud.umami.is or self-host
+    umamiAnalyticsID: '',
+    // Follow.is verification for RSS syndication and content discovery
+    // Get from: https://follow.is/
     follow: {
-      // feed ID
+      // RSS feed ID for content syndication
       feedID: '',
-      // user ID
+      // User ID for follow.is platform
       userID: '',
     },
-    // apiflash access key
-    // automatically generate website screenshots for open graph images
-    // get your access key at: https://apiflash.com/
+    // APIFlash for automatic Open Graph image generation
+    // Creates beautiful social media preview images automatically
+    // Get your access key at: https://apiflash.com/
+    // Improves social media engagement significantly
     apiflashKey: '',
   },
   // SEO SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
@@ -162,21 +161,21 @@ export const themeConfig: ThemeConfig = {
     // social links
     links: [
       {
-        name: 'RSS',
-        url: '/atom.xml', // or /rss.xml
+        name: 'LinkedIn',
+        url: 'https://linkedin.com/in/ramicosa',
       },
       {
         name: 'GitHub',
-        url: 'https://github.com/radishzzz/astro-theme-retypeset',
+        url: 'https://github.com/radikeCosa',
       },
       {
         name: 'Email',
-        url: 'email@radishzz.cc',
+        url: 'mailto:ramirocosa@gmail.com',
       },
-      // {
-      //   name: 'X',
-      //   url: 'https://x.com/radishzz_',
-      // },
+      {
+        name: 'Portfolio',
+        url: 'https://ramirocosa.is-a.dev',
+      },
     ],
     // year of website start
     startYear: 2025,
@@ -187,7 +186,7 @@ export const themeConfig: ThemeConfig = {
   preload: {
     // image hosting url
     // optimize remote images in Markdown files to avoid cumulative layout shift
-    imageHostURL: 'image.radishzz.cc',
+    imageHostURL: '',
     // custom google analytics js
     // for users who route analytics javascript to a customized domain
     // see https://gist.github.com/xiaopc/0602f06ca465d76bd9efd3dda9393738
@@ -195,7 +194,7 @@ export const themeConfig: ThemeConfig = {
     // custom umami analytics js
     // for users who deploy umami on their own, or route analytics javascript to a customized domain
     // see https://github.com/umami-software/umami/discussions/1026
-    customUmamiAnalyticsJS: 'https://js.radishzz.cc/jquery.min.js',
+    customUmamiAnalyticsJS: '',
   },
   // PRELOAD SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
 }

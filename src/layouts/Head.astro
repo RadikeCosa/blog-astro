@@ -1,6 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions'
 import katexCSS from 'katex/dist/katex.min.css?url'
+import MetaTags from '@/components/SEO/MetaTags.astro'
+import StructuredData from '@/components/SEO/StructuredData.astro'
 import { allLocales, base, defaultLocale, themeConfig } from '@/config'
 import { ui } from '@/i18n/ui'
 import { getPageInfo } from '@/utils/page'
@@ -9,10 +11,13 @@ interface Props {
   postTitle?: string
   postDescription?: string
   postSlug?: string
+  postPublishedAt?: string
+  postModifiedAt?: string
+  postTags?: string[]
 }
 
 // Props and Language
-const { postTitle, postDescription, postSlug } = Astro.props
+const { postTitle, postDescription, postSlug, postPublishedAt, postModifiedAt, postTags = [] } = Astro.props
 const { currentLang } = getPageInfo(Astro.url.pathname)
 const currentUI = ui[currentLang as keyof typeof ui] ?? {}
 const lang = currentLang === defaultLocale ? '' : `${currentLang}/`
@@ -53,6 +58,28 @@ const pageImage = postSlug
 <meta name="author" content={author} />
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content={metaTheme} />
+
+<!-- Enhanced SEO Meta Tags -->
+<MetaTags
+  title={postTitle}
+  description={pageDescription}
+  image={pageImage}
+  type={postTitle ? 'article' : 'website'}
+  publishedAt={postPublishedAt}
+  modifiedAt={postModifiedAt}
+  tags={postTags}
+/>
+
+<!-- Structured Data for SEO -->
+<StructuredData
+  type={postTitle ? 'article' : 'website'}
+  title={postTitle}
+  description={pageDescription}
+  url={Astro.url.href}
+  publishedAt={postPublishedAt}
+  modifiedAt={postModifiedAt}
+  tags={postTags}
+/>
 
 <!-- Preload -->
 <link rel="preload" href={`${base}/fonts/EarlySummer-VF-Split/EarlySummer-VF-Subset.woff2`} as="font" type="font/woff2" crossorigin />
