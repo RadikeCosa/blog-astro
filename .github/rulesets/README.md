@@ -72,7 +72,7 @@ Edita la propiedad `required_approving_review_count`:
 {
   "type": "pull_request",
   "parameters": {
-    "required_approving_review_count": 2  // Cambia a 2 o más
+    "required_approving_review_count": 2 // Cambia a 2 o más
   }
 }
 ```
@@ -87,8 +87,8 @@ Si tienes GitHub Actions u otros checks:
   "parameters": {
     "required_status_checks": [
       {
-        "context": "build",           // Nombre del check
-        "integration_id": null        // Null para cualquier integración
+        "context": "build", // Nombre del check
+        "integration_id": null // Null para cualquier integración
       },
       {
         "context": "test",
@@ -108,7 +108,7 @@ Si tienes un archivo `CODEOWNERS`:
 {
   "type": "pull_request",
   "parameters": {
-    "require_code_owner_review": true  // Cambiar a true
+    "require_code_owner_review": true // Cambiar a true
   }
 }
 ```
@@ -125,7 +125,7 @@ Para máxima protección, considera agregar estos workflows:
    on:
      pull_request:
        branches: [main]
-   
+
    jobs:
      build:
        runs-on: ubuntu-latest
@@ -135,7 +135,7 @@ Para máxima protección, considera agregar estos workflows:
          - uses: actions/setup-node@v4
            with:
              node-version: 18
-             cache: 'pnpm'
+             cache: pnpm
          - run: pnpm install
          - run: pnpm build
    ```
@@ -146,7 +146,7 @@ Para máxima protección, considera agregar estos workflows:
    on:
      pull_request:
        branches: [main]
-   
+
    jobs:
      lint:
        runs-on: ubuntu-latest
@@ -156,7 +156,7 @@ Para máxima protección, considera agregar estos workflows:
          - uses: actions/setup-node@v4
            with:
              node-version: 18
-             cache: 'pnpm'
+             cache: pnpm
          - run: pnpm install
          - run: pnpm lint
    ```
@@ -217,11 +217,11 @@ Una vez que tengas workflows activos, actualiza el ruleset:
 
 ## 🎯 Beneficios de Esta Configuración
 
-✅ **Previene commits accidentales** directamente en main  
-✅ **Requiere revisión de código** antes de fusionar  
-✅ **Mantiene el historial limpio** sin force pushes  
-✅ **Protege contra eliminación** de la rama principal  
-✅ **Mejora la seguridad** con firmas de commits  
+✅ **Previene commits accidentales** directamente en main
+✅ **Requiere revisión de código** antes de fusionar
+✅ **Mantiene el historial limpio** sin force pushes
+✅ **Protege contra eliminación** de la rama principal
+✅ **Mejora la seguridad** con firmas de commits
 ✅ **Facilita la colaboración** mediante pull requests
 
 ---
