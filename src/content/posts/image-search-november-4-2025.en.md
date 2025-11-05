@@ -12,7 +12,7 @@ draft: false
 pin: 0
 toc: true
 lang: 'en'
-abbrlink: ''
+abbrlink: 'image-search-freecodecamp'
 ---
 
 Hello! Today we're going to solve the FreeCodeCamp daily challenge titled "Image Search". This is a simple but useful problem to practice array and string manipulation in JavaScript.

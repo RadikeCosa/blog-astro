@@ -11,8 +11,8 @@ tags:
 draft: false
 pin: 0
 toc: true
-lang: ''
-abbrlink: ''
+lang: 'es'
+abbrlink: 'image-search-freecodecamp'
 ---
 
 ¡Hola! Hoy el desafío diario de FreeCodeCamp es el titulado "Image Search".
