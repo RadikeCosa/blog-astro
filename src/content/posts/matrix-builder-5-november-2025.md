@@ -20,6 +20,7 @@ El desafío de hoy de FreeCodeCamp es "Matrix Builder". El objetivo es crear una
 ## El Problema
 
 Necesitamos implementar una función que tome dos parámetros:
+
 - `rows`: cantidad de filas (arrays externos)
 - `cols`: cantidad de columnas (elementos por fila)
 
