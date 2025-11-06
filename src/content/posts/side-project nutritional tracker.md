@@ -208,6 +208,16 @@ Crear una app para registrar consumos alimenticios con capacidad de análisis po
 
 Para el MVP, se utiliza `localStorage`, lo que permite un desarrollo rápido sin backend y mantiene los datos en el navegador del usuario.
 
+## Próximo Paso
+
+El siguiente paso inmediato en el desarrollo del proyecto será definir la arquitectura base y preparar el entorno de desarrollo. Esto incluye:
+
+- Establecer la estructura del proyecto (scaffolding) para organizar el código de manera eficiente.
+- Instalar las dependencias necesarias, como bibliotecas para manejo de estado o validaciones.
+- Configurar herramientas de desarrollo, como linters, formateadores y scripts de automatización.
+
+Con estos fundamentos, el proyecto estará listo para avanzar hacia la implementación de funcionalidades clave.
+
 ---
 
 <!-- Comentarios para el autor:
