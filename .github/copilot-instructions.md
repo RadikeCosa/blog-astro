@@ -40,8 +40,6 @@ pnpm format-posts
 pnpm apply-lqip
 ```
 
-
-
 ### Build Process
 ```bash
 pnpm dev     # Runs astro check + astro dev
@@ -52,16 +50,16 @@ pnpm build   # Runs astro check + astro build + apply-lqip
 
 ### Post Frontmatter Schema
 ```yaml
-title: string          # Required
-published: date        # Required (YYYY-MM-DD format)
-description: string    # Optional, defaults to ''
-updated: date          # Optional
-tags: string[]         # Optional, defaults to []
-draft: boolean         # Optional, defaults to false
-pin: number (0-99)     # Optional, pin priority (higher = more prominent)
-toc: boolean          # Optional, inherits from themeConfig.global.toc
-lang: string          # Optional, overrides default locale ('' = universal)
-abbrlink: string      # Optional, custom URL slug (lowercase letters, numbers, hyphens only)
+title: string # Required
+published: date # Required (YYYY-MM-DD format)
+description: string # Optional, defaults to ''
+updated: date # Optional
+tags: string[] # Optional, defaults to []
+draft: boolean # Optional, defaults to false
+pin: number (0-99) # Optional, pin priority (higher = more prominent)
+toc: boolean # Optional, inherits from themeConfig.global.toc
+lang: string # Optional, overrides default locale ('' = universal)
+abbrlink: string # Optional, custom URL slug (lowercase letters, numbers, hyphens only)
 ```
 
 ### Typography & Styling
@@ -113,12 +111,12 @@ Edit `src/config.ts` to customize:
 ```typescript
 export const themeConfig: ThemeConfig = {
   site: {
-    title: 'Your Name',                    // Your name or brand
-    subtitle: 'Full Stack Developer',      // Your role/specialty
+    title: 'Your Name', // Your name or brand
+    subtitle: 'Full Stack Developer', // Your role/specialty
     description: 'Your bio and expertise', // SEO description
-    author: 'Your Name',                   // Author name
-    url: 'https://yourdomain.com',         // Your domain
-    favicon: '/icons/favicon.svg',         // Your favicon
+    author: 'Your Name', // Author name
+    url: 'https://yourdomain.com', // Your domain
+    favicon: '/icons/favicon.svg', // Your favicon
   },
   // Configure colors, fonts, and features
 }
@@ -153,7 +151,7 @@ Use conventional commits (feat/fix/docs/style/refactor/chore):
 # Configuration changes
 git commit -m "feat: configure blog for [Your Name]"
 
-# Content updates  
+# Content updates
 git commit -m "content: add professional bio and first post"
 
 # Styling changes
