@@ -54,6 +54,10 @@ npm install -D @testing-library/react @testing-library/jest-dom @testing-library
 npm install -D jsdom
 ```
 
+## Nota sobre la instalación de dependencias
+
+Cuando instalamos las dependencias de testing, usamos la bandera `-D` (o `--save-dev`). Esto indica que estas dependencias son necesarias solo para el entorno de desarrollo y no para la aplicación en producción. Es una buena práctica separar las dependencias de desarrollo de las de producción para mantener el proyecto organizado y optimizar el tamaño del paquete final.
+
 ## Configuración de Vitest
 
 Con las dependencias listas, configuraremos Vitest para integrarlo correctamente en el proyecto. Este paso es clave para que nuestras pruebas se ejecuten sin problemas.
@@ -64,8 +68,11 @@ Crea un archivo llamado `vitest.config.ts` en la raíz del proyecto con este con
 
 ```typescript
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   plugins: [react()],
@@ -108,13 +115,10 @@ Ahora crearemos un archivo de configuración para preparar el entorno de pruebas
 Crea la carpeta `tests/` en la raíz del proyecto y dentro, un archivo `setup.ts` con este contenido:
 
 ```typescript
-// tests/setup.ts
-import * as matchers from '@testing-library/jest-dom/matchers'
 import { cleanup } from '@testing-library/react'
 import { afterEach, expect } from 'vitest'
-
-// Extiende los matchers de jest-dom
-expect.extend(matchers)
+// tests/setup.ts
+import '@testing-library/jest-dom'
 
 // Limpia el DOM después de cada test
 afterEach(() => {
@@ -241,3 +245,121 @@ graph TD
 ```
 
 Este diagrama resume los pasos clave para configurar el entorno de pruebas de manera clara y visual.
+
+## Lecciones Aprendidas y Resolución de Problemas
+
+Durante la configuración del entorno de pruebas, surgieron varios desafíos que requirieron ajustes y soluciones. Aquí se documenta el proceso, los errores encontrados y cómo se resolvieron.
+
+### Problema 1: Compatibilidad con ES Modules
+
+#### Contexto del Problema (ES Modules)
+
+El proyecto utiliza `"type": "module"` en `package.json`, lo que desactiva el uso de variables como `__dirname`.
+
+#### Error Encontrado (ES Modules)
+
+Al intentar configurar `vitest.config.ts`, el uso de `__dirname` generaba errores porque no está disponible en entornos ES Modules.
+
+#### Solución Implementada (ES Modules)
+
+Se utilizó `import.meta.url` junto con `fileURLToPath` para obtener rutas absolutas:
+
+```typescript
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+```
+
+### Problema 2: Cambios en la API de `@testing-library/jest-dom`
+
+#### Contexto del Problema (jest-dom)
+
+La librería `@testing-library/jest-dom` actualizó su API, lo que causó incompatibilidades al extender los matchers.
+
+#### Error Encontrado (jest-dom)
+
+El uso de `expect.extend(matchers)` directo no funcionaba como se esperaba.
+
+#### Solución Implementada (jest-dom)
+
+Se optó por una importación automática más consistente:
+
+```typescript
+import '@testing-library/jest-dom'
+```
+
+### Problema 3: Conflictos de Tipos con Vitest y TypeScript
+
+#### Contexto del Problema (TypeScript)
+
+Vitest tiene diferencias sutiles con Jest en los tipos globales, lo que generó conflictos al usar matchers de `jest-dom`.
+
+#### Error Encontrado (TypeScript)
+
+Errores de tipo al compilar el proyecto con TypeScript.
+
+#### Solución Implementada (TypeScript)
+
+Se creó un archivo de declaración de tipos personalizado:
+
+```typescript
+// tests/vitest.d.ts
+declare global {
+  namespace Vi {
+    interface Assertion extends jest.Matchers<string> {}
+    interface AsymmetricMatchers extends jest.Matchers<string> {}
+  }
+}
+export {}
+```
+
+### Problema 4: Mock de `localStorage`
+
+#### Contexto del Problema (localStorage)
+
+El mock de `localStorage` no funcionaba correctamente en algunos entornos modernos.
+
+#### Error Encontrado (localStorage)
+
+El uso de `global.localStorage` generaba advertencias.
+
+#### Solución Implementada (localStorage)
+
+Se utilizó `globalThis.localStorage` para mayor compatibilidad:
+
+```typescript
+const localStorageMock = (() => {
+  let store: Record<string, string> = {}
+
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value.toString()
+    },
+    removeItem: (key: string) => {
+      delete store[key]
+    },
+    clear: () => {
+      store = {}
+    },
+  }
+})()
+
+globalThis.localStorage = localStorageMock as Storage
+```
+
+### Lecciones Aprendidas
+
+1. **Verificar Compatibilidad de Librerías**:
+   - Revisar changelogs y breaking changes antes de implementar.
+2. **Configuración Incremental**:
+   - Implementar y verificar cada paso antes de avanzar.
+3. **Documentar Problemas**:
+   - Mantener un registro de los errores encontrados y sus soluciones.
+4. **Testing del Testing**:
+   - Verificar que el entorno de pruebas funciona correctamente antes de usarlo.
+
+### Estado Actual
+
+El entorno de desarrollo está completamente funcional y listo para la siguiente fase: **Modelo de Datos y Validaciones**.
