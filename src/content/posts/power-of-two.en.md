@@ -1,5 +1,5 @@
 ---
-title: Power of Two - LeetCode #231
+title: 'Power of Two - LeetCode #231'
 published: 2025-11-04T14:39:59.072Z
 description: 'Solving the Power of Two problem from LeetCode. Step-by-step analysis, multiple solutions and JavaScript optimizations.'
 updated: ''

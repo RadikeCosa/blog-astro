@@ -1,5 +1,5 @@
 ---
-title: Image Search - November 4, 2025
+title: 'Image Search - November 4, 2025'
 published: 2025-11-04T17:03:56.609Z
 description: 'Solution to the FreeCodeCamp daily challenge: implement an image search function that filters file names by search term, ignoring case.'
 updated: ''

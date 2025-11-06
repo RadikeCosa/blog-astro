@@ -1,5 +1,5 @@
 ---
-title: Búsqueda de Imágenes - 4 de noviembre de 2025
+title: 'Búsqueda de Imágenes - 4 de Noviembre de 2025'
 published: 2025-11-04T17:03:56.609Z
 description: 'Solución al desafío diario de FreeCodeCamp: implementar una función de búsqueda de imágenes que filtre nombres de archivos por término de búsqueda, ignorando mayúsculas y minúsculas.'
 updated: ''

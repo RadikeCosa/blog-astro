@@ -1,5 +1,5 @@
 ---
-title: Matrix Builder - 5 de noviembre de 2025
+title: 'Matrix Builder - 5 de Noviembre de 2025'
 published: 2025-11-05T14:04:58.646Z
 description: 'Solución al desafío diario de FreeCodeCamp: construir matrices con Array.from(). Comparación de enfoques y análisis de cuándo usar cada uno.'
 updated: ''
