@@ -24,7 +24,6 @@ Today's daily challenge on FreeCodeCamp is called **Weekly Finder**. The prompt 
 > Given a string date in the format YYYY-MM-DD, return the day of the week.
 >
 > Valid return days are:
->
 > - "Sunday"
 > - "Monday"
 > - "Tuesday"

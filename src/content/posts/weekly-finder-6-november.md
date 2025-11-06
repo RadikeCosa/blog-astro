@@ -12,7 +12,7 @@ tags:
 draft: false
 pin: 0
 toc: true
-lang: ''
+lang: 'es'
 abbrlink: 'weekly-finder-javascript-timezone-solution'
 ---
 

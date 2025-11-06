@@ -234,3 +234,21 @@ By incorporating these elements, posts can be made more interactive, visually ap
 - The primary language for posts is Spanish (Castellano).
 - Once a post is finalized, it should be translated into English to ensure accessibility for a broader audience.
 - Maintain consistency in tone and style between the Spanish and English versions, adapting idiomatic expressions as needed for clarity and cultural relevance.
+
+### Post Internationalization (i18n) Setup
+
+When creating multilingual posts, follow this specific pattern to ensure proper i18n functionality:
+
+**Spanish version** (`post-name.md`):
+```yaml
+lang: 'es'
+abbrlink: 'unique-post-identifier'
+```
+
+**English version** (`post-name.en.md`):
+```yaml
+lang: 'en'
+abbrlink: 'unique-post-identifier'  # Same as Spanish version
+```
+
+Both versions must share the **same `abbrlink`** but have **different `lang` values**. This allows the i18n system to recognize them as translations of the same post. The `lang` field is required for proper routing and language detection.
