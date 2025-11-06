@@ -4,7 +4,13 @@ published: 2025-11-05T16:53:16.913Z
 description: 'Documentación del proceso de diseño y desarrollo de una aplicación React para registro y seguimiento nutricional, desde la configuración inicial hasta las decisiones de arquitectura del modelo de datos.'
 updated: ''
 tags:
-  - Tag
+  - side-project
+  - nutritional-tracker
+  - react
+  - vite
+  - desarrollo
+  - modelado-de-datos
+
 draft: false
 pin: 0
 toc: true
@@ -54,6 +60,37 @@ const registroConsumo = {
   fechaCreacion: '2025-11-05T09:35:00Z' // Timestamp ISO de cuándo se creó el registro
 }
 ```
+
+### Diagrama Entidad-Relación
+
+A continuación, se presenta un diagrama entidad-relación que ilustra el modelo de datos:
+
+```mermaid
+erDiagram
+    REGISTRO_CONSUMO {
+        string id
+        string userId
+        string userName
+        string alimento
+        int cantidad
+        string unidad
+        string fecha
+        string hora
+        string tipoComida
+        string endulzante
+        string notas
+        string fechaCreacion
+    }
+
+    USER {
+        string userId
+        string userName
+    }
+
+    USER ||--o{ REGISTRO_CONSUMO : "registra"
+```
+
+Este diagrama muestra cómo cada registro de consumo está asociado a un usuario mediante el campo `userId`. Además, detalla los atributos principales del modelo de datos.
 
 ## Documentación del Proceso de Diseño
 

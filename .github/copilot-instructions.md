@@ -25,6 +25,11 @@ Custom markdown plugins enhance content:
 - `src/plugins/remark-container-directives.mjs` - Handles custom container syntax (:::note, :::tip)
 - `src/plugins/rehype-code-copy-button.mjs` - Adds copy buttons to code blocks
 
+### Component Communication
+- Components in `src/components/` follow a modular design, enabling reuse and customization.
+- Comment systems (Giscus, Twikoo, Waline) are integrated via `src/components/Comment/`.
+- Widgets like TOC, ImageZoom, and MediaEmbed are in `src/components/Widgets/`.
+
 ## Development Workflows
 
 ### Creating Content
@@ -40,13 +45,16 @@ pnpm format-posts
 pnpm apply-lqip
 ```
 
-
-
 ### Build Process
 ```bash
 pnpm dev     # Runs astro check + astro dev
 pnpm build   # Runs astro check + astro build + apply-lqip
 ```
+
+### Debugging Tips
+- Use `pnpm dev` for a live development server with hot-reloading.
+- Check `src/plugins/` for custom markdown and rehype plugins if content rendering issues arise.
+- Logs for image processing and LQIP generation are in `scripts/apply-lqip.ts`.
 
 ## Key Patterns & Conventions
 
@@ -103,8 +111,6 @@ abbrlink: string      # Optional, custom URL slug (lowercase letters, numbers, h
 - LQIP system requires `pnpm apply-lqip` after adding images
 - Remote images can use `themeConfig.preload.imageHostURL` for optimization
 - Comment systems load via Partytown for better performance
-
-This theme prioritizes reading experience, typography, and international accessibility while maintaining excellent performance.
 
 ## Personalization Guide for Programming Blog
 
@@ -169,3 +175,62 @@ git commit -m "chore: update theme dependencies"
 - Add `pin: 1-99` for important/featured posts
 - Use `draft: true` while writing
 - Leverage container directives: `:::tip`, `:::note`, `:::warning`
+
+## Drafting Posts
+
+### Workflow for Drafting Posts
+When creating a new post, the initial workflow involves pasting your raw notes into the newly created markdown file. These notes may be unordered or loosely structured. The AI agent's role is to:
+
+1. **Organize Content**: Rearrange the notes into a logical structure with clear sections (e.g., introduction, body, conclusion).
+2. **Enhance Readability**: Ensure the post is easy to read by improving sentence flow, grammar, and clarity.
+3. **Add Comments**: Provide inline comments or suggestions for areas that need further elaboration or clarification.
+4. **Ensure Coherence**: Verify that the post has a consistent tone and style, and that ideas are presented in a coherent manner.
+5. **Optimize Structure**: Suggest or implement headings, subheadings, and formatting to make the post visually appealing and easy to navigate.
+
+### Tips for Effective Collaboration
+- Paste your notes as comprehensively as possible, even if they are unordered.
+- Highlight any specific points or sections you want the agent to focus on.
+- **Iterative Editing**: When editing posts, provide suggestions one at a time and implement them individually rather than making multiple changes at once. This allows for better review and refinement of each improvement.
+- Review the AI's edits and suggestions, and iterate as needed to finalize the post.
+
+This workflow aims to streamline the drafting process, ensuring high-quality, well-structured blog posts with minimal effort.
+
+### Enhancing Posts with Visual and Educational Elements
+
+To make posts more engaging and educational, the following resources should be utilized whenever possible:
+
+1. **Mathematical Notation**:
+   - Use KaTeX for rendering mathematical expressions. KaTeX is already integrated into the project via `rehype-katex` and `remark-math` plugins.
+   - Inline math can be written as `$...$`, and block math as `$$...$$`.
+   - Example:
+     ```markdown
+     The quadratic formula is given by:
+     $$
+     x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+     $$
+     ```
+
+2. **Diagrams and Flowcharts**:
+   - Use Mermaid for creating diagrams, flowcharts, and other visualizations. Mermaid is supported via the `rehype-mermaid` plugin.
+   - Example:
+     ```markdown
+     ```mermaid
+     graph TD
+     A[Start] --> B{Is it working?}
+     B -- Yes --> C[Great!]
+     B -- No --> D[Fix it]
+     D --> B
+     ```
+     ```
+
+3. **Other Visual Enhancements**:
+   - Include images with meaningful alt text to ensure accessibility and automatic figure captions.
+   - Use tables, lists, and code blocks to structure information clearly.
+
+By incorporating these elements, posts can be made more interactive, visually appealing, and easier to understand.
+
+### Language Guidelines
+
+- The primary language for posts is Spanish (Castellano).
+- Once a post is finalized, it should be translated into English to ensure accessibility for a broader audience.
+- Maintain consistency in tone and style between the Spanish and English versions, adapting idiomatic expressions as needed for clarity and cultural relevance.
