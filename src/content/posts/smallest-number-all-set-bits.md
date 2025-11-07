@@ -1,7 +1,7 @@
 ---
-title: "Número más pequeño con todos los bits establecidos"
+title: 'El menor número con todos los bits en 1 - LeetCode #3360'
 published: 2025-11-07T15:14:50.893Z
-description: "Problema tipo LeetCode: encontrar el entero más pequeño que cumpla una condición sobre bits establecidos. Explicación, estrategia y esqueleto de solución."
+description: 'Resolviendo el problema "Smallest Number With All Set Bits" de LeetCode. Análisis, estrategia y solución en TypeScript.'
 updated: ''
 tags:
   - leetcode

@@ -1,7 +1,7 @@
 ---
-title: "Smallest Number With All Set Bits"
+title: 'Smallest Number With All Set Bits - LeetCode #3360'
 published: 2025-11-07T15:15:20.003Z
-description: "LeetCode-style exercise: find the smallest integer that satisfies a condition about set bits. Solution outline and drafting skeleton."
+description: 'Solving the LeetCode problem "Smallest Number With All Set Bits" (#3360). Analysis, strategy and TypeScript solution.'
 updated: ''
 tags:
   - leetcode
