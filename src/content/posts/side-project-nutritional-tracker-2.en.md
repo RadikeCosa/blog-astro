@@ -1,5 +1,5 @@
 ---
-title: 'Side-Project Nutritional Tracker: Part Two'
+title: 'Side-Project: Nutritional Tracker 2'
 published: 2025-11-06T00:00:00.000Z
 description: 'Continuation of the development of the side project for nutritional tracking. In this installment, we explore the implementation of persistent storage and validations.'
 updated: ''

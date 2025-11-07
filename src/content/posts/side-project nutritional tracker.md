@@ -1,5 +1,5 @@
 ---
-title: 'Side-Project Nutritional Tracker'
+title: 'Side-Project: Nutritional Tracker 2'
 published: 2025-11-05T16:53:16.913Z
 description: 'Documentación del proceso de diseño y desarrollo de una aplicación React para registro y seguimiento nutricional, desde la configuración inicial hasta las decisiones de arquitectura del modelo de datos.'
 updated: ''
