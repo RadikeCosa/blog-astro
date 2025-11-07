@@ -1,5 +1,5 @@
 ---
-title: 'Power of Two - LeetCode #231'
+title: 'Potencia de Dos - LeetCode #231'
 published: 2025-11-04T12:57:10.787Z
 description: 'Resolviendo el problema Power of Two de LeetCode. Análisis paso a paso, múltiples soluciones y optimizaciones en JavaScript.'
 updated: ''
@@ -13,8 +13,6 @@ toc: true
 lang: 'es'
 abbrlink: 'power-of-two-leetcode'
 ---
-
-<!-- Commit de prueba - Radike Cosa -->
 
 ## Prologo
 
