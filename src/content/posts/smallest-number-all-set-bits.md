@@ -1,5 +1,5 @@
 ---
-title: 'El menor número con todos los bits en 1 - LeetCode #3360'
+title: 'El Menor de Puros Unos - LeetCode #3360'
 published: 2025-11-07T15:14:50.893Z
 description: 'Resolviendo el problema "Smallest Number With All Set Bits" de LeetCode. Análisis, estrategia y solución en TypeScript.'
 updated: ''
