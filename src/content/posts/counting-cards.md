@@ -1,5 +1,5 @@
 ---
-title: 'Counting Cards - 7 de Noviembre de 2025'
+title: 'Contando Cartas - 7 de Noviembre de 2025'
 published: 2025-11-07T12:24:45.141Z
 description: 'Solución al desafío diario de FreeCodeCamp: Counting Cards. Explicación paso a paso y análisis de estrategia.'
 updated: ''
