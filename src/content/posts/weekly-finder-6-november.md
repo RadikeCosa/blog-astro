@@ -1,5 +1,5 @@
 ---
-title: 'Buscador Semanal?, Weekly Finder: Cómo obtener el día de la semana en JavaScript'
+title: 'Buscador Semanal (Weekly Finder): Cómo obtener el día de la semana en JavaScript'
 published: 2025-11-06T15:18:28.517Z
 description: 'Análisis completo del desafío Weekly Finder de FreeCodeCamp: cómo obtener el día de la semana desde una fecha string, evitando problemas con zonas horarias y explorando múltiples enfoques de solución.'
 updated: ''
