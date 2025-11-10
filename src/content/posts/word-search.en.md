@@ -1,10 +1,19 @@
 ---
-title: "Word Search: FreeCodeCamp Daily Challenge November 9, 2025"
-pubDate: 2025-11-09
-description: "Implementation of an algorithm to search for words in a 2D matrix, exploring in the four main directions."
-tags: ["algorithms", "data-structures", "matrix", "search", "javascript"]
-category: "coding-challenges"
-lang: "en"
+title: 'Word Search: FreeCodeCamp Daily Challenge November 9, 2025'
+published: 2025-11-09T00:00:00.000Z
+description: 'Implementation of an algorithm to search for words in a 2D matrix, exploring in the four main directions.'
+updated: ''
+tags:
+- freecodecamp
+- data-structures
+- matrix
+- daily
+- javascript
+draft: false
+pin: 0
+toc: true
+lang: 'en'
+abbrlink: 'word-search-freecodecamp'
 ---
 
 ## Introduction

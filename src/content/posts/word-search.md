@@ -1,10 +1,19 @@
 ---
-title: "Búsqueda de Palabras: FreeCodeCamp Daily Challenge 9/11/2025"
-pubDate: 2025-11-09
-description: "Implementación de un algoritmo para buscar palabras en una matriz bidimensional, explorando en las cuatro direcciones principales."
-tags: ["freeCodeCamp", "data-structures", "matrix", "daily", "javascript"]
-category: "coding-challenges"
-lang: "es"
+title: 'Búsqueda de Palabras: FreeCodeCamp Daily Challenge 9/11/2025'
+published: 2025-11-09T00:00:00.000Z
+description: 'Implementación de un algoritmo para buscar palabras en una matriz bidimensional, explorando en las cuatro direcciones principales.'
+updated: ''
+tags:
+- freecodecamp
+- data-structures
+- matrix
+- daily
+- javascript
+draft: false
+pin: 0
+toc: true
+lang: 'es'
+abbrlink: 'word-search-freecodecamp'
 ---
 
 ## Introducción
