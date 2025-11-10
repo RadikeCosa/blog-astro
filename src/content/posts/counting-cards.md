@@ -43,12 +43,25 @@ Donde "!" denota el factorial de un número. Esta fórmula nos permite calcular 
 En otras palabras, para calcular el número de combinaciones posibles de $n$ cartas de una baraja de 52 tenemos que calcular el factorial de 52 dividido por el producto del factorial de $n$ y el factorial de (52 menos $n$).
 
 > **Nota — límites numéricos**
->
-> Al estar trabajando con factoriales que crecen muy rápido, es importante considerar los límites de los tipos numéricos en JavaScript. Por ese motivo decidí implementar una solución iterativa que evita calcular factoriales completos. En el peor de los casos, los resultados caben cómodamente en el tipo `Number`, por lo que no es necesario usar `BigInt` en esta implementación.
->
-> JavaScript `Number` representa enteros con precisión segura hasta `Number.MAX_SAFE_INTEGER` (2^53 − 1, ≈ 9.007×10^15). Para valores mayores conviene usar `BigInt`.
-> Tambien es importante considerar la perdida de precision al hacer operaciones con numeros en punto flotante, esto en terminos mas sencillos significa que al hacer operaciones con numeros muy grandes o muy pequeños, el resultado puede no ser exacto, por las limitaciones de JavaScript al representar estos numeros.
->Tambien vamos a aprovechar la simetria del coeficiente binomial, que dice que C(52, k) = C(52, 52 − k). Esto significa que para k > 26, podemos calcular C(52, 52 − k) en su lugar, lo que reduce la cantidad de cálculos necesarios.
+>Los factoriales crecen extremadamente rápido, por lo que es fundamental considerar los límites de los tipos numéricos en JavaScript. Para evitar problemas, implementé una solución **iterativa** que no requiere calcular factoriales completos. En el peor caso (N = 52), los resultados caben cómodamente dentro del tipo `Number`, por lo que **no es necesario usar `BigInt`**.
+
+### Precisión segura en JavaScript
+
+El tipo `Number` en JS representa enteros con precisión exacta hasta `Number.MAX_SAFE_INTEGER` (2⁵³ − 1 ≈ **9.007 × 10¹⁵**). Más allá de este valor, se recomienda usar `BigInt`.
+
+### Operaciones en coma flotante
+
+Al realizar multiplicaciones y divisiones con números en **coma flotante**, pueden aparecer pequeñas imprecisiones debido a la representación interna de JavaScript. Por ejemplo, un cálculo que debería dar `2598960` podría resultar en `2598959.9999998`.
+**Solución:** Usar `Math.round()` al final para corregir estos errores de redondeo y garantizar un entero exacto.
+
+### Optimización con simetría binomial
+
+El coeficiente binomial cumple la propiedad:
+> **C(n, k) = C(n, n − k)**
+
+Por eso, si `k > n/2`, calculamos `C(n, n − k)` en su lugar.
+**Ejemplo:** Para `C(52, 30)` → calculamos `C(52, 22)`.
+Esto reduce significativamente la cantidad de operaciones y minimiza el riesgo de desbordamiento intermedio.
 
 ## Implementación
 
@@ -98,5 +111,5 @@ Durante el bucle multiplicativo hacemos operaciones de multiplicación y divisi�
 ## Análisis de complejidad
 
 - Tiempo: O(m) donde m = min(k, N − k). En el peor caso m = k ≈ N/2, por lo que podemos considerar O(k). Cada iteración realiza una multiplicación y una división.
-- Espacio: O(1). Solo almacenamos un acumulador `result` y variables escalares.
+- Espacio: O(1). Solo almacenamos un acumulador `result` y variables auxiliares, independientemente del tamaño de la entrada.
 - Precisión: las operaciones se realizan en `Number` (coma flotante de doble precisión). La estrategia multiplicativa reduce la necesidad de manejar factoriales enormes y, junto con `Math.round`, resuelve la pequeña imprecisión numérica final.
