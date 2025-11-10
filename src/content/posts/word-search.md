@@ -2,14 +2,14 @@
 title: "Búsqueda de Palabras: FreeCodeCamp Daily Challenge 9/11/2025"
 pubDate: 2025-11-09
 description: "Implementación de un algoritmo para buscar palabras en una matriz bidimensional, explorando en las cuatro direcciones principales."
-tags: ["algorithms", "data-structures", "matrix", "search", "javascript"]
+tags: ["freeCodeCamp", "data-structures", "matrix", "daily", "javascript"]
 category: "coding-challenges"
 lang: "es"
 ---
 
 ## Introducción
 
-En este post, exploraremos un problema clásico de algoritmos: buscar una palabra específica en una matriz bidimensional de letras.
+En este post, exploraremos un problema clásico de algoritmos: buscar una palabra específica en una matriz bidimensional de letras. Este tipo de desafío es común en ejercicios de programación como LeetCode o FreeCodeCamp, permitiéndonos practicar conceptos fundamentales como el manejo de matrices, recorridos direccionales y verificación de límites.
 
 El desafío consiste en encontrar la posición de inicio y fin de una palabra que aparece en línea recta (horizontal o vertical, incluyendo direcciones invertidas) dentro de una cuadrícula de letras minúsculas.
 
@@ -141,7 +141,3 @@ Los conceptos aplicados incluyen:
 - **Manejo de índices y límites de matrices**: En la función `verificarDireccion`, verificamos en cada iteración que `fila` y `col` estén dentro de los límites válidos (`fila >= 0 && fila < matriz.length && col >= 0 && col < matriz[0].length`) antes de acceder a `matriz[fila][col]`, evitando errores de índice.
 - **Exploración en múltiples direcciones**: Definimos un array `direcciones` con los desplazamientos para las cuatro direcciones posibles (derecha, izquierda, abajo, arriba) y, desde cada posición que coincide con la primera letra, probamos cada dirección para formar la palabra completa.
 - **Verificación incremental de condiciones**: En el bucle de `verificarDireccion`, avanzamos paso a paso verificando cada letra de la palabra, deteniéndonos inmediatamente si hay una discrepancia o si se alcanza un límite, lo que optimiza el proceso al fallar rápido.
-
-Este tipo de problemas refuerza habilidades fundamentales en algoritmos y estructuras de datos, preparándonos para desafíos más complejos en entrevistas técnicas y desarrollo de software.
-
-¿Has implementado una solución similar? ¿Qué optimizaciones adicionales se te ocurren?

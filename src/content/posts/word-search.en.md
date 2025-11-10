@@ -141,7 +141,3 @@ The applied concepts include:
 - **Matrix index and boundary handling**: In the `verificarDireccion` function, we check in each iteration that `fila` and `col` are within valid limits (`fila >= 0 && fila < matriz.length && col >= 0 && col < matriz[0].length`) before accessing `matriz[fila][col]`, avoiding index errors.
 - **Multi-directional exploration**: We define a `direcciones` array with the offsets for the four possible directions (right, left, down, up) and, from each position matching the first letter, test each direction to form the complete word.
 - **Incremental condition verification**: In the `verificarDireccion` loop, we advance step by step checking each letter of the word, stopping immediately if there's a mismatch or boundary reached, optimizing the process with fast failure.
-
-This type of problem reinforces fundamental skills in algorithms and data structures, preparing us for more complex challenges in technical interviews and software development.
-
-Have you implemented a similar solution? What additional optimizations can you think of?
