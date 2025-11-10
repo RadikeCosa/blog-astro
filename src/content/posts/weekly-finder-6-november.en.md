@@ -1,29 +1,27 @@
 ---
-title: 'Solving the Weekly Finder: How to Get the Day of the Week in JavaScript'
+title: 'Weekly Finder: FreeCodeCamp Daily Challenge'
 published: 2025-11-06T15:18:28.517Z
-description: 'A complete analysis of the Weekly Finder challenge from FreeCodeCamp: how to get the day of the week from a date string, avoiding timezone issues, and exploring multiple solution approaches.'
+description: 'Full analysis of FreeCodeCamp Weekly Finder challenge: how to get the weekday from an ISO date string while avoiding timezone pitfalls, plus alternative approaches.'
 updated: ''
 tags:
-  - javascript
   - freecodecamp
-  - algorithms
-  - dates
-  - problem-solving
+  - daily-challenge
 draft: false
 pin: 0
 toc: true
 lang: 'en'
-abbrlink: 'weekly-finder-javascript-timezone-solution'
+abbrlink: 'weekly-finder'
 ---
 
 ## The Challenge
 
-Today's daily challenge on FreeCodeCamp is called **Weekly Finder**. The prompt is seemingly simple:
+Today\'s FreeCodeCamp daily challenge is **Weekly Finder**. The statement looks simple at first:
 
 > **Weekday Finder**
 > Given a string date in the format YYYY-MM-DD, return the day of the week.
 >
 > Valid return days are:
+>
 > - "Sunday"
 > - "Monday"
 > - "Tuesday"
@@ -34,13 +32,15 @@ Today's daily challenge on FreeCodeCamp is called **Weekly Finder**. The prompt 
 >
 > **Be sure to ignore time zones.**
 
-At first, that last line about "ignoring time zones" wasn't clear to me, but later I understood perfectly why it was crucial.
+At first that last line about "ignore time zones" wasn\'t obvious to me, but later I understood why it\'s crucial.
 
 ## First Approach
 
-The first thing I thought of was using a `Date` object with the string I received as a parameter and finding a method to get the day of the week with the full name.
+The initial idea was to create a `Date` object from the input string and use a formatting method to obtain the weekday name.
 
-I didn't remember the exact method, but I quickly searched and found `toLocaleDateString()`, which takes the locale as the first parameter and an options object as the second. I used `'en-US'` as the locale and set `weekday: 'long'` in the options to get the day of the week in long format.
+I didn\'t remember the exact method, but a quick search revealed `toLocaleDateString()`, which can return the weekday in long form when given the right options. The `Date` object in JavaScript represents a point in time and can be constructed from an ISO string (`YYYY-MM-DD`) or from individual components (year, month, day, hour, minute, second). In this challenge we receive an ISO string as input.
+
+`toLocaleDateString()` formats a `Date` according to a locale. Passing `'en-US'` and `{ weekday: 'long' }` returns the full weekday name (for example: "Monday", "Tuesday").
 
 ```javascript
 function getDayName(dateString) {
@@ -49,17 +49,17 @@ function getDayName(dateString) {
 }
 ```
 
-In theory, the `toLocaleDateString()` method handles returning the day of the week in the correct format.
+The function takes a `dateString` in `YYYY-MM-DD` format, constructs a `Date`, and returns the weekday name in English. At first glance, the challenge appeared solved.
 
 ## The Timezone Problem
 
-But when I ran the tests, they failed. I debugged with a `console.log` and in all the tests, it returned one day earlier than expected. Then I remembered the prompt said **"Be sure to ignore time zones"**, and I immediately knew that was the cause of the error.
+But the tests failed. After adding a few `console.log` statements I discovered the function returned the previous day for every test. Then I remembered the instruction **"Be sure to ignore time zones"** and realized this was the cause.
 
 :::tip
-**The problem**: When JavaScript creates a `Date` object from a string like `"2025-11-06"`, it interprets it as UTC and then converts it to the local timezone, which can shift the day.
+**The issue**: When JavaScript creates a `Date` from a string like `"2025-11-06"`, it interprets it as UTC and then converts it to the local timezone — which can change the calendar day.
 :::
 
-How could I ignore time zones? Very simple: just add `'T00:00:00'` to the string I received as a parameter. This way, the date would always be created at midnight, avoiding timezone issues.
+How to ignore time zones? Very simple: append `'T00:00:00'` to the input string. That way we always create the date at midnight local/explicit time and avoid timezone shifts.
 
 ```javascript
 function getDayName(dateString) {
@@ -70,31 +70,19 @@ function getDayName(dateString) {
 
 ## Alternative Approaches
 
-### Option 2: Using getUTCDay()
+### Option 2: Mathematical Algorithm (Zeller's Congruence)
 
-I could also have used the `getUTCDay()` method to get the day of the week in numeric format (0-6) and then used an array to map the numbers to the days of the week, but I found it simpler to use `toLocaleDateString()`.
+Another approach would avoid creating a `Date` object altogether and compute the weekday using a formula and a weekdays array. It\'s more involved and less readable, but perfectly valid.
 
-```javascript
-function getDayName(dateString) {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const date = new Date(`${dateString}T00:00:00`)
-  return days[date.getUTCDay()]
-}
-```
-
-### Option 3: Mathematical Algorithm (Zeller's Formula)
-
-Another approach could have been to avoid creating a `Date` object altogether, simply using an array with the days of the week and a formula to calculate the day of the week from the given date. But I found it more complicated and less readable.
-
-**Zeller's Formula** allows calculating the day of the week for any date:
+Zeller\'s congruence computes the day of the week for any date:
 
 $$f = d + \left\lfloor \frac{13(m+1)}{5} \right\rfloor + y + \left\lfloor \frac{y}{4} \right\rfloor - \left\lfloor \frac{y}{100} \right\rfloor + \left\lfloor \frac{y}{400} \right\rfloor$$
 
 Where:
 
-- $d$ = day of the month
-- $m$ = adjusted month (March=3, April=4, ..., December=12, January=13, February=14)
-- $y$ = year (subtract 1 if January or February)
+- $d$ = day of month
+- $m$ = adjusted month (March=3, ..., December=12, January=13, February=14)
+- $y$ = year (subtract 1 if month is January or February)
 
 ```javascript
 function getDayName(dateString) {
@@ -108,20 +96,21 @@ function getDayName(dateString) {
 }
 ```
 
-## Approach Comparison
+## Comparison of Approaches
 
-| Method             | Simplicity | Readability | Efficiency |
-|--------------------|------------|-------------|------------|
-| toLocaleDateString | High       | High        | Medium     |
-| getUTCDay         | Medium     | High        | High       |
-| Zeller's Formula  | Low        | Medium      | High       |
+| Method                | Simplicity | Readability | Efficiency |
+|-----------------------|------------|-------------|------------|
+| toLocaleDateString    | High       | High        | Medium     |
+| Zeller's Congruence   | Low        | Medium      | High       |
 
-This table summarizes the advantages and disadvantages of each approach, helping to choose the most appropriate one based on the use case.
+This table summarizes pros and cons to help choose the right approach for your needs.
 
 ## Conclusion
 
-In the end, I stuck with the first option because it is the simplest and most readable. The key to the challenge wasn't so much the algorithm but understanding JavaScript's behavior with dates and time zones.
+I ended up using the first option because it\'s the simplest and most readable. The real challenge was not the algorithm but understanding how JavaScript handles dates and time zones.
 
 :::note
-**Lesson learned**: Whenever you work with dates in JavaScript, keep time zones in mind. A simple `T00:00:00` can save you a lot of headaches.
+**Lesson learned**: When working with dates in JavaScript, always be aware of time zones. A simple `T00:00:00` can save you a lot of headaches.
 :::
+
+-

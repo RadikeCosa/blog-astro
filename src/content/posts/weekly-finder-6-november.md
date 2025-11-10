@@ -1,19 +1,16 @@
 ---
-title: 'Buscador Semanal (Weekly Finder): Cómo obtener el día de la semana en JavaScript'
+title: 'Buscador Semanal (Weekly Finder): FreeCodeCamp Daily Challenge'
 published: 2025-11-06T15:18:28.517Z
 description: 'Análisis completo del desafío Weekly Finder de FreeCodeCamp: cómo obtener el día de la semana desde una fecha string, evitando problemas con zonas horarias y explorando múltiples enfoques de solución.'
 updated: ''
 tags:
-  - javascript
   - freecodecamp
-  - algorithms
-  - dates
-  - problem-solving
+  - daily-challenge
 draft: false
 pin: 0
 toc: true
 lang: 'es'
-abbrlink: 'weekly-finder-javascript-timezone-solution'
+abbrlink: 'weekly-finder'
 ---
 
 ## El Desafío
@@ -39,9 +36,11 @@ Al principio, esa última línea sobre "ignorar las zonas horarias" no me quedab
 
 ## Primera Aproximación
 
-Lo primero que pensé fue usar un objeto `Date` con el string que recibo como parámetro y buscar algún método para obtener el día de la semana con el nombre completo.
+La primera idea fue crear un objeto `Date` a partir del string que recibimos y usar un método de formateo para obtener el nombre del día de la semana.
 
-No recordaba exactamente el método, pero busqué rápidamente y encontré `toLocaleDateString()`, que recibe como primer parámetro el locale y como segundo parámetro un objeto con opciones. Usé `'en-US'` como locale y en las opciones puse `weekday: 'long'` para obtener el día de la semana en formato largo.
+Aunque no recordaba el método exacto, encontré `toLocaleDateString()`, que con las opciones adecuadas devuelve el día en formato largo. El objeto `Date` de JavaScript representa instantes temporales y permite crear, manipular y formatear fechas. Se puede construir a partir de una cadena ISO (`YYYY-MM-DD`) o mediante componentes individuales (año, mes, día, hora, minuto, segundo). En este caso usamos la cadena que llega como parámetro.
+
+El método `toLocaleDateString()` formatea la fecha según la configuración regional. Si pasamos `'en-US'` y `{ weekday: 'long' }` obtendremos el nombre completo del día en inglés (por ejemplo: "Monday", "Tuesday").
 
 ```javascript
 function getDayName(dateString) {
@@ -50,7 +49,7 @@ function getDayName(dateString) {
 }
 ```
 
-En teoría, el método `toLocaleDateString()` se encarga de devolver el día de la semana en el formato correcto.
+La función recibe un `dateString` en formato `YYYY-MM-DD`, crea un `Date` y devuelve el nombre del día de la semana en inglés. A primera vista, el desafío parecía resuelto.
 
 ## El Problema de las Zonas Horarias
 
@@ -71,19 +70,7 @@ function getDayName(dateString) {
 
 ## Enfoques Alternativos
 
-### Opción 2: Usando getUTCDay()
-
-También podría haber usado el método `getUTCDay()` para obtener el día de la semana en formato numérico (0-6) y luego usar un array para mapear los números a los días de la semana, pero me pareció más sencillo usar `toLocaleDateString()`.
-
-```javascript
-function getDayName(dateString) {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const date = new Date(`${dateString}T00:00:00`)
-  return days[date.getUTCDay()]
-}
-```
-
-### Opción 3: Algoritmo Matemático (Fórmula de Zeller)
+### Opción 2: Algoritmo Matemático (Fórmula de Zeller)
 
 Otra aproximación podría haber sido sin crear un objeto `Date`, simplemente usando un array con los días de la semana y una fórmula para calcular el día de la semana a partir de la fecha. Pero me pareció más complicado y menos legible.
 
@@ -114,7 +101,6 @@ function getDayName(dateString) {
 | Método                | Simplicidad | Legibilidad | Eficiencia |
 |-----------------------|-------------|-------------|------------|
 | toLocaleDateString    | Alta        | Alta        | Media      |
-| getUTCDay            | Media       | Alta        | Alta       |
 | Fórmula de Zeller     | Baja        | Media       | Alta       |
 
 Esta tabla resume las ventajas y desventajas de cada enfoque, ayudando a elegir el más adecuado según el caso de uso.
@@ -124,5 +110,5 @@ Esta tabla resume las ventajas y desventajas de cada enfoque, ayudando a elegir 
 Al final me quedé con la primera opción que es la más sencilla y legible. La clave del desafío no era tanto el algoritmo, sino entender el comportamiento de JavaScript con las fechas y las zonas horarias.
 
 :::note
-**Lección aprendida**: Siempre que trabajes with fechas en JavaScript, ten en cuenta las zonas horarias. Un simple `T00:00:00` puede ahorrarte muchos dolores de cabeza.
+**Lección aprendida**: Siempre que trabajes con  fechas en JavaScript, ten en cuenta las zonas horarias. Un simple `T00:00:00` puede ahorrarte muchos dolores de cabeza.
 :::

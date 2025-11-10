@@ -10,7 +10,7 @@ draft: false
 pin: 0
 toc: true
 lang: 'en'
-abbrlink: 'matrix-builder-freecodecamp-nov5'
+abbrlink: 'matrix-builder'
 ---
 
 Today's FreeCodeCamp challenge is "Matrix Builder". The goal is to create a function that generates a matrix (array of arrays) of a specified size, filling it with zeros.
