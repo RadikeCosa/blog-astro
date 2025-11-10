@@ -18,8 +18,7 @@ abbrlink: 'word-search-freecodecamp'
 
 ## Introducción
 
-En este post, exploraremos un problema clásico de algoritmos: buscar una palabra específica en una matriz bidimensional de letras. Este tipo de desafío es común en ejercicios de programación como LeetCode o FreeCodeCamp, permitiéndonos practicar conceptos fundamentales como el manejo de matrices, recorridos direccionales y verificación de límites.
-
+En este post, exploraremos un problema clásico de algoritmos: buscar una palabra específica en una matriz bidimensional de letras.
 El desafío consiste en encontrar la posición de inicio y fin de una palabra que aparece en línea recta (horizontal o vertical, incluyendo direcciones invertidas) dentro de una cuadrícula de letras minúsculas.
 
 ## Enunciado del Problema
@@ -125,21 +124,10 @@ Para ilustrar el proceso, veamos cómo se encuentra "cat" en el ejemplo:
 
 ```mermaid
 graph TD
-  A[Inicio: [0,1] 'c'] --> B[[1,1] 'a']
-  B --> C[[2,1] 't']
-  C --> D[Éxito: retornar [[0,1], [2,1]]]
+  A["Inicio: [0,1] 'c'"] --> B["[1,1] 'a'"]
+  B --> C["[2,1] 't'"]
+  C --> D["Éxito: retornar [[0,1], [2,1]]"]
 ```
-
-## Optimización y Mejoras
-
-Aunque la solución actual es eficiente para la mayoría de casos, podemos considerar algunas optimizaciones:
-
-1. **Verificación de límites previa**: Antes de explorar una dirección, calcular si hay espacio suficiente para la palabra completa.
-2. **Búsqueda en DFS/BFS**: Para problemas más complejos que permitan cambios de dirección, podríamos usar búsqueda en profundidad.
-3. **Preprocesamiento**: Si buscamos múltiples palabras, podríamos indexar las posiciones de cada letra.
-4. **Verificación de espacio suficiente**: Antes de explorar una dirección, comprobar si la longitud de la palabra cabe en las posiciones restantes hasta el límite de la matriz en esa dirección. Por ejemplo, para la dirección derecha desde [i,j], verificar si `j + palabra.length - 1 < matriz[0].length`.
-
-Sin embargo, para este problema específico, la solución por fuerza bruta es adecuada y clara.
 
 ## Conclusión
 

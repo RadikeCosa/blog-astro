@@ -18,13 +18,12 @@ abbrlink: 'word-search-freecodecamp'
 
 ## Introduction
 
-In this post, we will explore a classic algorithm problem: searching for a specific word in a 2D grid of letters. This type of challenge is common in programming exercises like LeetCode or FreeCodeCamp, allowing us to practice fundamental concepts such as matrix handling, directional traversals, and boundary checking.
-
+In this post, we will explore a classic algorithm problem: searching for a specific word in a 2D grid of letters.
 The challenge is to find the start and end positions of a word that appears in a straight line (horizontal or vertical, including reversed directions) within a grid of lowercase letters.
 
 ## Problem Statement
 
-Given a 2D matrix `matriz` of lowercase letters (a-z) and a target word `palabra`, we must return the start and end positions of that word if it appears exactly once in the matrix. The word can be oriented in any of the four main directions:
+Given a 2D matrix `matrix` of lowercase letters (a-z) and a target word `word`, we must return the start and end positions of that word if it appears exactly once in the matrix. The word can be oriented in any of the four main directions:
 
 - Right (horizontal)
 - Left (horizontal reversed)
@@ -68,29 +67,29 @@ This approach ensures we find the word if it exists, as we cover all possible st
 
 ## Implemented Solution
 
-The JavaScript implementation uses a helper function `verificarDireccion` that, given a starting position and a direction, checks if the word forms completely in that direction.
+The JavaScript implementation uses a helper function `checkDirection` that, given a starting position and a direction, checks if the word forms completely in that direction.
 
 ```javascript
-export default function findWord(matriz, palabra) {
+export default function findWord(matrix, word) {
   // Define the 4 possible directions
-  const direcciones = [
+  const directions = [
     [0, 1], // right
     [0, -1], // left
     [1, 0], // down
     [-1, 0], // up
   ]
 
-  function verificarDireccion(filaInicio, colInicio, deltaFila, deltaCol) {
-    let fila = filaInicio
-    let col = colInicio
+  function checkDirection(startRow, startCol, deltaRow, deltaCol) {
+    let row = startRow
+    let col = startCol
 
-    for (let i = 0; i < palabra.length; i++) {
+    for (let i = 0; i < word.length; i++) {
       if (
-        fila < 0
-        || fila >= matriz.length
+        row < 0
+        || row >= matrix.length
         || col < 0
-        || col >= matriz[0].length
-        || matriz[fila][col] !== palabra[i]
+        || col >= matrix[0].length
+        || matrix[row][col] !== word[i]
       ) {
         return false
       }
@@ -104,11 +103,11 @@ export default function findWord(matriz, palabra) {
   for (let i = 0; i < matriz.length; i++) {
     for (let j = 0; j < matriz[i].length; j++) {
       if (matriz[i][j] === palabra[0]) {
-        for (const [deltaFila, deltaCol] of direcciones) {
-          if (verificarDireccion(i, j, deltaFila, deltaCol)) {
-            const filaFin = i + deltaFila * (palabra.length - 1)
-            const colFin = j + deltaCol * (palabra.length - 1)
-            return [[i, j], [filaFin, colFin]]
+        for (const [deltaRow, deltaCol] of directions) {
+          if (checkDirection(i, j, deltaRow, deltaCol)) {
+            const endRow = i + deltaRow * (word.length - 1)
+            const endCol = j + deltaCol * (word.length - 1)
+            return [[i, j], [endRow, endCol]]
           }
         }
       }
@@ -119,27 +118,16 @@ export default function findWord(matriz, palabra) {
 }
 ```
 
-### Execution Diagram
+### Diagrama de Ejecución
 
-To illustrate the process, let's see how "cat" is found in the example:
+Para ilustrar el proceso, veamos cómo se encuentra "cat" en el ejemplo:
 
 ```mermaid
 graph TD
-  A[Start: [0,1] 'c'] --> B[[1,1] 'a']
-  B --> C[[2,1] 't']
-  C --> D[Success: return [[0,1], [2,1]]]
+  A["Inicio: [0,1] 'c'"] --> B["[1,1] 'a'"]
+  B --> C["[2,1] 't'"]
+  C --> D["Éxito: retornar [[0,1], [2,1]]"]
 ```
-
-## Optimization and Improvements
-
-Although the current solution is efficient for most cases, we can consider some optimizations:
-
-1. **Pre-boundary check**: Before exploring a direction, calculate if there is enough space for the complete word.
-2. **DFS/BFS Search**: For more complex problems allowing direction changes, we could use depth-first or breadth-first search.
-3. **Preprocessing**: If searching for multiple words, we could index the positions of each letter.
-4. **Sufficient space check**: Before exploring a direction, check if the word length fits in the remaining positions to the matrix boundary in that direction. For example, for the right direction from [i,j], check if `j + palabra.length - 1 < matriz[0].length`.
-
-However, for this specific problem, the brute-force solution is adequate and clear.
 
 ## Conclusion
 

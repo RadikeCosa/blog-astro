@@ -26,18 +26,36 @@ if (existsSync(fullPath)) {
 mkdirSync(dirname(fullPath), { recursive: true })
 
 // Prepare file content
+const lowerBaseName = baseName.toLowerCase()
+const abbrlink = lowerBaseName.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+
+const defaultTags = ['algoritmos']
+const detectedTags: string[] = []
+
+if (lowerBaseName.includes('leetcode')) {
+  detectedTags.push('leetcode')
+}
+if (lowerBaseName.includes('freecodecamp')) {
+  detectedTags.push('freecodecamp')
+}
+if (lowerBaseName.includes('daily')) {
+  detectedTags.push('daily')
+}
+
+const tags = [...new Set([...defaultTags, ...detectedTags])]
+
 const content = `---
-title: ${baseName}
+title: '${baseName}'
 published: ${new Date().toISOString()}
 description: ''
 updated: ''
 tags:
-  - Tag
+${tags.map(tag => `  - ${tag}`).join('\n')}
 draft: false
 pin: 0
 toc: ${themeConfig.global.toc}
-lang: ''
-abbrlink: ''
+lang: '${themeConfig.global.locale}'
+abbrlink: '${abbrlink}'
 ---
 `
 
