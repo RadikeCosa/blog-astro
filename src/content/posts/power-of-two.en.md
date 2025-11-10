@@ -31,13 +31,13 @@ An intuitive solution is to repeatedly divide the number by 2 until reaching 1. 
 ```mermaid
 flowchart TD
     A[n] --> B{n > 0?}
-    B -->|No| C[false]
-    B -->|Sí| D{n % 2 == 0?}
-    D -->|No| E[false]
-    D -->|Sí| F[n = n / 2]
-    F --> G{n == 1?}
-    G -->|Sí| H[true]
-    G -->|No| D
+  B -->|No| C[false]
+  B -->|Yes| D{n % 2 == 0?}
+  D -->|No| E[false]
+  D -->|Yes| F[n = n / 2]
+  F --> G{n == 1?}
+  G -->|Yes| H[true]
+  G -->|No| D
 ```
 
 **Complexity**: O(log n) - For a number like 1,000,000 we need ~20 divisions.
@@ -167,5 +167,4 @@ console.log(isPowerOfTwo(-2)) // false (negative numbers)
 
 ## Conclusion
 
-I found this to be an entertaining problem with a solution that isn't intuitive at first glance but turns out to be very efficient using bitwise operations.
-Have you solved this problem in another way? Share your approach in the comments!
+This is a nice problem to start the LeetCode exercise series. The idea is to build confidence by solving a few simple problems to develop the habit, and then move on to the problems in the Top Interview 150 Study Plan, which tend to be more challenging.

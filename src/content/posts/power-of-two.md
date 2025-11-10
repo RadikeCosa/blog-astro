@@ -70,7 +70,9 @@ Los operadores bitwise son operaciones que trabajan directamente con los bits in
 - `^` (XOR): 1 si los bits son diferentes
 - `~` (NOT): Invierte todos los bits
 - `<<` (desplazamiento izquierda)
-- `>>` (desplazamiento derecha)**Disponibilidad:** Están disponibles en la mayoría de lenguajes de programación modernos (JavaScript, Python, Java, C++, Go, Rust, etc.), aunque la sintaxis puede variar ligeramente. En JavaScript se escriben igual que en C/C++.
+- `>>` (desplazamiento derecha)
+
+  **Disponibilidad:** Están disponibles en la mayoría de lenguajes de programación modernos (JavaScript, Python, Java, C++, Go, Rust, etc.), aunque la sintaxis puede variar ligeramente. En JavaScript se escriben igual que en C/C++.
 
 Estos operadores son especialmente eficientes porque operan directamente a nivel de hardware, sin necesidad de conversiones costosas.
 
@@ -165,5 +167,4 @@ console.log(isPowerOfTwo(-2)) // false (números negativos)
 
 ## Conclusión
 
-Me parecio un problema con una solucion entretenida con una solucion que no es intuitiva a primera vista pero que resulta muy eficiente usando operaciones bitwise.
-¿Has resuelto este problema de otra manera? ¡Comparte tu enfoque en los comentarios!
+  Este es un lindo problema para comenzar la serie de ejercicios de LeetCode. La idea es tomar confianza resolviendo algunos problemas simples para desarrollar el habito y luego avanzar a los problemas de la serie top interview 150 Study Plan que parecen mas desafiantes.
