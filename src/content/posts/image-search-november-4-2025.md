@@ -1,13 +1,11 @@
 ---
-title: 'Búsqueda de Imágenes - 4 de Noviembre de 2025'
+title: 'Búsqueda de Imágenes - FreeCodeCamp Daily Challenge'
 published: 2025-11-04T17:03:56.609Z
 description: 'Solución al desafío diario de FreeCodeCamp: implementar una función de búsqueda de imágenes que filtre nombres de archivos por término de búsqueda, ignorando mayúsculas y minúsculas.'
 updated: ''
 tags:
   - freecodecamp
-  - javascript
-  - algoritmos
-  - desafío diario
+  - daily challenge
 draft: false
 pin: 0
 toc: true
@@ -15,13 +13,11 @@ lang: 'es'
 abbrlink: 'image-search-freecodecamp'
 ---
 
-¡Hola! Hoy el desafío diario de FreeCodeCamp es el titulado "Image Search".
-
 ## El Problema
 
 El 4 de noviembre de 2001, Google lanzó su búsqueda de imágenes, permitiendo a las personas encontrar imágenes usando términos de búsqueda. En este desafío, imitaremos esa funcionalidad.
 
-Dada una array de nombres de imágenes y un término de búsqueda, debemos devolver una array de nombres de imágenes que contengan el término de búsqueda.
+Dado un array de nombres de imágenes y un término de búsqueda, debemos devolver un array de nombres de imágenes que contengan el término de búsqueda.
 
 - Ignorar las mayúsculas y minúsculas al hacer coincidir los términos.
 - Devolver las imágenes en el mismo orden en que aparecen en la array de entrada.
@@ -37,7 +33,11 @@ Aquí están los casos de prueba proporcionados:
 
 ## Solución
 
-La solución es bastante directa. Usaremos el método `filter()` para filtrar la array, y `includes()` para verificar si el nombre de la imagen contiene el término de búsqueda. Para ignorar las mayúsculas, convertiremos tanto el nombre de la imagen como el término de búsqueda a minúsculas.
+La solución es bastante directa. Usaremos el método `filter()` para filtrar el array, y `includes()` para verificar si el nombre de la imagen contiene el término de búsqueda. Para ignorar las mayúsculas, convertiremos tanto el nombre de la imagen como el término de búsqueda a minúsculas usando `toLowerCase()`.
+
+- filter es un método de arrays en JavaScript que crea un nuevo array con todos los elementos que pasan una prueba implementada por la función proporcionada. toma una función como argumento que se ejecuta en cada elemento del array original. Si la función devuelve true, el elemento se incluye en el nuevo array; si devuelve false, se excluye.
+- includes es un método de strings en JavaScript que determina si una cadena de texto contiene una secuencia específica de caracteres. Toma una subcadena como argumento y devuelve true si la subcadena se encuentra dentro de la cadena original, y false si no.
+- toLowerCase es un método de strings en JavaScript que convierte todos los caracteres de una cadena a minúsculas. No modifica la cadena original, sino que devuelve una nueva cadena con los caracteres convertidos.
 
 ```javascript
 function imageSearch(images, searchTerm) {
@@ -48,12 +48,12 @@ function imageSearch(images, searchTerm) {
 
 ### Explicación
 
-1. Convertimos el `searchTerm` a minúsculas y lo guardamos en `term`.
-2. Usamos `filter()` para crear una nueva array con solo los elementos que pasan la prueba.
-3. La prueba es: convertir cada `image` a minúsculas y verificar si incluye el `term`.
-4. Devolvemos la array filtrada, que mantiene el orden original.
+La funcion `imageSearch` toma dos parámetros: un array de nombres de imágenes (`images`) y un término de búsqueda (`searchTerm`).
 
-Esta solución es eficiente (O(n) tiempo, donde n es el número de imágenes) y cumple con todos los requisitos.
+1. Convertimos el `searchTerm` a minúsculas y lo almacenamos en la variable `term`.
+2. Usamos el método `filter()` para crear un nuevo array que contiene solo los elementos que pasan la prueba.
+3. La prueba es: convertimos cada `image` a minúsculas y verificamos si incluye el `term`.
+4. Devolvemos el array filtrado, que mantiene el orden original.
 
 ## Solución Alternativa con Regex
 
@@ -107,14 +107,3 @@ flowchart TD
     B --> C[Filter images]
     C --> D[Return filtered array]
 ```
-
-¡Eso es todo por hoy! ¿Hiciste este desafío también? ¿Tienes alguna otra solución o mejora? ¡Comparte en los comentarios!
-
-<!-- TODO: Personalizar el artículo con tu voz
-- Agrega una introducción personal: ¿Por qué te gusta hacer estos desafíos diarios? ¿Cómo encaja en tu rutina?
-- Incluye anécdotas: ¿Encontraste alguna dificultad particular? ¿Qué aprendiste?
-- Conecta con otros temas: Menciona si has hecho desafíos similares en LeetCode o otros.
-- Hazlo conversacional: Usa frases como "Me sorprendió que..." o "En mi experiencia..."
-- Revisa el tono: Asegúrate de que suene como tú, no como un tutorial genérico.
-- Agrega llamadas a acción: Invita a los lectores a intentar el desafío o compartir sus soluciones.
--->

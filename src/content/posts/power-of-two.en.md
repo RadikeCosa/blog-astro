@@ -5,7 +5,6 @@ description: 'Solving the Power of Two problem from LeetCode. Step-by-step analy
 updated: ''
 tags:
 - leetcode
-- algorithms
 - bitwise
 draft: false
 pin: 0

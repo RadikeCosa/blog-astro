@@ -1,12 +1,10 @@
 ---
-title: 'Image Search - November 4, 2025'
+title: 'Image Search - FreeCodeCamp Daily Challenge'
 published: 2025-11-04T17:03:56.609Z
 description: 'Solution to the FreeCodeCamp daily challenge: implement an image search function that filters file names by search term, ignoring case.'
 updated: ''
 tags:
   - freecodecamp
-  - javascript
-  - algorithms
   - daily challenge
 draft: false
 pin: 0
@@ -14,9 +12,6 @@ toc: true
 lang: 'en'
 abbrlink: 'image-search-freecodecamp'
 ---
-
-Hello! Today we're going to solve the FreeCodeCamp daily challenge titled "Image Search". This is a simple but useful problem to practice array and string manipulation in JavaScript.
-
 ## The Problem
 
 On November 4, 2001, Google launched its image search, allowing people to find images using search terms. In this challenge, we will imitate that functionality.
@@ -45,6 +40,12 @@ function imageSearch(images, searchTerm) {
   return images.filter(image => image.toLowerCase().includes(term))
 }
 ```
+
+Below are short explanations of the JavaScript methods used:
+
+- `filter` is an Array method that creates a new array with all elements that pass a test implemented by the provided function. It takes a function executed for each element of the original array; if the function returns `true`, the element is included in the new array.
+- `includes` is a String method that determines whether a string contains a specific sequence of characters. It takes a substring and returns `true` if the substring is found inside the string, otherwise `false`.
+- `toLowerCase` is a String method that converts all characters in a string to lowercase. It does not mutate the original string but returns a new one with characters converted.
 
 ### Explanation
 
