@@ -45,13 +45,13 @@ El algoritmo es simple: encontrar la posición del último punto y extraer lo qu
 
 ```mermaid
 flowchart TD
-    A[Recibir filename] --> B[Buscar último punto con lastIndexOf('.')]
-    B --> C{¿Hay punto?}
+    A[Recibir filename] --> B[Buscar ultimo punto con lastIndexOf('.')]
+    B --> C{Hay punto?}
     C -->|No| D[Retornar 'none']
-    C -->|Sí| E{¿Punto al final?}
-    E -->|Sí| D
+    C -->|Si| E{Punto al final?}
+    E -->|Si| D
     E -->|No| F[Extraer substring desde punto + 1]
-    F --> G[Retornar extensión]
+    F --> G[Retornar extension]
 ```
 
 ## 🛠️ Desarrollo de la Solución
