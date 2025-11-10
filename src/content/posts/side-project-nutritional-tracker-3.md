@@ -11,7 +11,7 @@ tags:
   - desarrollo
   - validaciones
   - modelo-de-datos
-draft: true
+draft: false
 pin: 0
 toc: true
 lang: 'es'
