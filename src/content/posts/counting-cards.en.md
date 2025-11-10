@@ -1,12 +1,11 @@
 ---
-title: 'Counting Cards — November 7, 2025'
+title: 'Counting Cards — FreeCodeCamp Daily Challenge'
 published: 2025-11-07T12:24:45.141Z
 description: 'Solution to FreeCodeCamp daily challenge: Counting Cards. Step-by-step explanation and strategy analysis.'
 updated: ''
 tags:
   - freecodecamp
   - daily-challenge
-  - javascript
 draft: false
 pin: 0
 toc: true
@@ -14,13 +13,13 @@ lang: 'en'
 abbrlink: 'counting-cards-freecodecamp'
 ---
 
-Today’s FreeCodeCamp daily challenge is "Counting Cards." This is a great exercise to review basic combinatorics and practice JavaScript, particularly the handling of numeric types: `Number` (standard arithmetic and decimals) and `BigInt` (very large integers, beyond Number.MAX_SAFE_INTEGER). It’s also a good opportunity to review safe conversions between strings and numbers.
-
 > ### Counting Cards
 >
-> **Problem.** A standard deck of playing cards contains 52 distinct cards. Given an integer `n` representing the number of cards to pick from the deck, return the number of unique combinations of `n` cards.
->
-> Order does not matter: picking card A then B is the same as picking B then A. In combinatorics this is the binomial coefficient $C(52, n)$ ("52 choose n").
+> A standard deck contains 52 distinct cards. Given an integer `n` representing how many cards to pick from the deck, return the number of unique combinations of `n` cards.
+
+Order does not matter: picking card A then card B is the same as picking B then A.
+
+For example, given 52 the result is 1 (there's only one way to choose all 52 cards). Given 2 the result is 1326 — there are 1326 unique 2-card combinations from a 52-card deck.
 
 Examples:
 
@@ -31,38 +30,27 @@ Examples:
 - combinations(10) → 15820024220
 - combinations(50) → 1326  (since C(52,50) = C(52,2))
 
-Constraints:
-
-- Deck size: 52 cards.
-- Input: integer n in the range 0..52 (inclusive).
-
 ## Approach
 
-After a quick review of the math fundamentals, the formula for combinations (the binomial coefficient) is:
+Because order does not matter, we can use the binomial coefficient to compute the number of combinations. The formula is:
 
 $$
 C(52, n) = \frac{52!}{n!\,(52 - n)!}
 $$
 
-Where "!" denotes factorial. This gives the number of ways to choose $n$ items from a set of 52 without regard to order.
-
-In plain terms, computing the number of combinations means calculating 52! divided by (n! × (52 − n)!).
+Where "!" denotes factorial. In plain terms, compute 52! divided by (n! × (52 − n)!).
 
 > **Note — numeric limits**
 >
-> JavaScript `Number` represents integers safely up to `Number.MAX_SAFE_INTEGER` (2^53 − 1, ≈ 9.007×10^15). For much larger values you can use `BigInt`. Example (precision loss with `Number`):
+> Factorials grow very quickly, so it is prudent to consider numeric limits in JavaScript. For that reason we implement an iterative approach that avoids computing full factorials. For the constraints of this exercise (n ≤ 52) results fit comfortably in `Number`, so `BigInt` is not required.
 >
-> ```javascript
-> Number.MAX_SAFE_INTEGER // 9007199254740991
-> Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2 // true  (precision lost)
-> BigInt(Number.MAX_SAFE_INTEGER) + 1n // 9007199254740992n (precise with BigInt)
-> ```
->
-> For this exercise (n ≤ 52) all results fit comfortably in `Number`, so we choose an iterative implementation that avoids computing full factorials and works safely and efficiently with `Number`.
+> JavaScript `Number` represents integers exactly up to `Number.MAX_SAFE_INTEGER` (2^53 − 1, ≈ 9.007×10^15). For larger values consider `BigInt`.
+
+We also exploit symmetry: C(N, k) = C(N, N − k). That allows computing with `m = min(k, N − k)` and reducing the amount of work for k > N/2.
 
 ## Implementation
 
-We start with input validation and quick cases, and we exploit the symmetry of the binomial coefficient to reduce work. The following function implements the multiplicative formula:
+Start with input validation and quick cases. The implementation below uses the multiplicative formula:
 
 ```javascript
 function combinations(cards) {
@@ -94,8 +82,11 @@ function combinations(cards) {
   // As a precaution, round to the nearest integer
   return Math.round(result)
 }
+```
 
-// Examples
+Examples:
+
+```javascript
 console.log(combinations(52)) // 1
 console.log(combinations(1)) // 52
 console.log(combinations(2)) // 1326
@@ -103,13 +94,13 @@ console.log(combinations(5)) // 2598960
 console.log(combinations(10)) // 15820024220
 ```
 
-In this file I chose not to use `BigInt` to keep the implementation straightforward and focused on `Number`. As explained above, for the constraints of this problem (a standard 52-card deck) this implementation is correct and safe; if the problem domain changed to much larger numbers, switching to `BigInt` would be appropriate.
+The implementation intentionally avoids `BigInt` to keep the code focused on `Number`. If the problem domain required much larger N, switching to `BigInt` would be appropriate.
 
 ## Notes and extensions
 
-- Symmetry: C(N, k) = C(N, N − k), hence using `m = min(k, N − k)` reduces computation.
+- Symmetry: C(N, k) = C(N, N − k), so using `m = min(k, N − k)` reduces computation.
 - Performance: the multiplicative formula avoids full factorials and runs in O(k) time with O(1) space.
-- Visualization: consider adding a plot of C(52, n) vs n (log scale) to illustrate growth and the peak near n = 26.
+- Visualization: consider plotting C(52, n) vs n (log scale) to illustrate growth and the peak near n = 26.
 
 ### About rounding (why we use Math.round)
 
@@ -129,7 +120,7 @@ During the multiplicative loop we perform floating-point multiplication and divi
 
 ## Complexity analysis
 
-- Time: O(m) where m = min(k, N − k). In the worst case m ≈ N/2, so we can consider O(k). Each iteration performs one multiplication and one division.
+- Time: O(m) where m = min(k, N − k). In the worst case m ≈ N/2, so we can consider O(k).
 - Space: O(1). We only keep an accumulator `result` and scalar variables.
 - Precision: operations use `Number` (double-precision floating point). The multiplicative strategy reduces the need to handle enormous factorials and, together with `Math.round`, resolves the small final floating-point imprecision.
 
