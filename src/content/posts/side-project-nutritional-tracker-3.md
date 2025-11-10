@@ -1,6 +1,6 @@
 ---
 title: 'Side-Project: Nutritional Tracker: 3'
-published: 2025-11-07T00:00:00.000Z
+published: 2025-11-11T00:00:00.000Z
 description: 'Tercera entrega del desarrollo del proyecto de registro nutricional. En esta parte, abordamos la definición de modelos de datos y las validaciones iniciales.'
 updated: ''
 tags:

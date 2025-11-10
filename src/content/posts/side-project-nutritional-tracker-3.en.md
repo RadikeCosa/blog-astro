@@ -1,6 +1,6 @@
 ---
 title: 'Side-Project: Nutritional Tracker 3'
-published: 2025-11-07T00:00:00.000Z
+published: 2025-11-11T00:00:00.000Z
 description: 'Third installment in the nutritional tracker side project. This part covers data model definition and initial validations.'
 updated: ''
 tags:
