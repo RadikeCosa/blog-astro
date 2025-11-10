@@ -12,7 +12,7 @@ tags:
   - validaciones
   - modelo-de-datos
 draft: false
-pin: 0
+pin: 1
 toc: true
 lang: 'es'
 abbrlink: 'nutritional-tracker-side-project-3'
