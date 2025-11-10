@@ -6,7 +6,7 @@ updated: ''
 tags:
   - algoritmos
 draft: false
-pin: 0
+pin: 99
 toc: true
 lang: "es"
 abbrlink: "side-project-nutritional-tracker-4"
