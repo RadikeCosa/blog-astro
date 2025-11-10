@@ -168,7 +168,7 @@ When creating other types of posts, the initial workflow involves pasting your r
 
 ### Language Workflow
 
-**IMPORTANT**: All posts are initially written in Spanish (`.es.md`). 
+**IMPORTANT**: All posts are initially written in Spanish (`.es.md`).
 
 1. **Write in Spanish first**: Create and complete the post in Spanish with `lang: "es"` in the frontmatter
 2. **Review and finalize**: Ensure the Spanish version is polished and complete
@@ -187,21 +187,21 @@ This ensures consistency across languages and that both versions are available s
 ### Frontmatter Required Fields
 ```yaml
 ---
-title: "Post Title"
+title: Post Title
 pubDate: YYYY-MM-DD
-description: "Brief post description"
-tags: ["tag1", "tag2"]
-category: "category-name"
-lang: "en" # or "es"
+description: Brief post description
+tags: [tag1, tag2]
+category: category-name
+lang: en # or "es"
 ---
 ```
 
 ### Optional Frontmatter Fields
 ```yaml
 draft: false
-image: "/images/post-image.jpg"
-imageAlt: "Image description"
-author: "Author Name"
+image: /images/post-image.jpg
+imageAlt: Image description
+author: Author Name
 ```
 
 ## Code Style Guidelines

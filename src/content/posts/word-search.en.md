@@ -80,7 +80,7 @@ export default function findWord(matrix, word) {
   ]
 
   function checkDirection(startRow, startCol, deltaRow, deltaCol) {
-    let row = startRow
+    const row = startRow
     let col = startCol
 
     for (let i = 0; i < word.length; i++) {
