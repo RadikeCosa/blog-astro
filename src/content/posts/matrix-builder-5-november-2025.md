@@ -1,13 +1,11 @@
 ---
-title: 'Matrix Builder - 5 de Noviembre de 2025'
+title: 'Fabrica de Matrices - FreeCodeCamp Daily Challenge'
 published: 2025-11-05T14:04:58.646Z
 description: 'Solución al desafío diario de FreeCodeCamp: construir matrices con Array.from(). Comparación de enfoques y análisis de cuándo usar cada uno.'
 updated: ''
 tags:
   - freecodecamp
   - daily-challenge
-  - javascript
-  - arrays
 draft: false
 pin: 0
 toc: true
@@ -25,6 +23,8 @@ Necesitamos implementar una función que tome dos parámetros:
 - `cols`: cantidad de columnas (elementos por fila)
 
 Y devuelva una matriz de `rows x cols` llena de ceros.
+
+En otros terminos la funcion recibe dos parametros, y debe devolver un array que contiene "rows" arrays, cada uno con "cols" posiciones llenas de ceros.
 
 ## Ejemplos
 
@@ -46,6 +46,7 @@ Array.from(arrayLike, mapFunction, thisArg)
 ```
 
 **Parámetros:**
+
 1. **`arrayLike`** (requerido): Un objeto iterable o array-like que quieres convertir
 2. **`mapFunction`** (opcional): Función que transforma cada elemento (como `.map()`)
 3. **`thisArg`** (opcional): Valor para usar como `this` en la función de mapeo
@@ -112,9 +113,8 @@ function buildMatrix(rows, cols) {
 
 **❌ Menos conveniente cuando:**
 
-- El código se vuelve verboso (6-8 líneas vs 1)
-- Mayor riesgo de bugs off-by-one con índices manuales
-sición
+- El código se vuelve verboso (6–8 líneas vs 1).
+- Existe mayor riesgo de errores "off-by-one" al manejar índices manualmente — un fallo clásico al confundir índices basados en 0 con la longitud del array.
 
 ## Tabla Comparativa por Escenario
 

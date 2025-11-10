@@ -1,13 +1,11 @@
 ---
-title: 'Matrix Builder - November 5, 2025'
+title: 'Matrix Builder - FreeCodeCamp Daily Challenge'
 published: 2025-11-05T14:04:58.646Z
 description: 'Solution to the FreeCodeCamp daily challenge: building matrices with Array.from(). Comparison of approaches and analysis of when to use each one.'
 updated: ''
 tags:
   - freecodecamp
   - daily-challenge
-  - javascript
-  - arrays
 draft: false
 pin: 0
 toc: true
@@ -113,8 +111,8 @@ function buildMatrix(rows, cols) {
 
 **❌ Less convenient when:**
 
-- Code becomes verbose (6-8 lines vs 1)
-- Higher risk of off-by-one bugs with manual indices
+- The code becomes verbose (6–8 lines vs 1).
+- There's a higher risk of "off-by-one" errors when handling indices manually — a classic bug caused by confusing zero-based indices with an array's length.
 
 ## Comparison Table by Scenario
 
