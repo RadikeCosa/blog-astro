@@ -1,13 +1,11 @@
 ---
-title: 'Character Limit - FreeCodeCamp Challenge'
+title: 'Character Limit - FreeCodeCamp Daily Challenge'
 published: 2025-11-08T09:43:21.101Z
 description: 'Solving the character limit problem from November 7th FreeCodeCamp challenge. Step-by-step analysis with flow diagram.'
 updated: ''
 tags:
   - freecodecamp
-  - javascript
-  - algorithms
-  - beginners
+  - daily-challenge
 draft: false
 pin: 0
 toc: true

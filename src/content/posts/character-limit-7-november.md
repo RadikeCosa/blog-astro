@@ -1,13 +1,11 @@
 ---
-title: 'Límite de Caracteres - Desafío FreeCodeCamp'
+title: 'Límite de Caracteres - FreeCodeCamp Desafío Diario'
 published: 2025-11-08T09:43:21.101Z
 description: 'Resolviendo el problema de límite de caracteres del 7 de noviembre de FreeCodeCamp. Análisis paso a paso con diagrama de flujo.'
 updated: ''
 tags:
   - freecodecamp
-  - javascript
-  - algoritmos
-  - principiantes
+  - daily-challenge
 draft: false
 pin: 0
 toc: true
