@@ -1,11 +1,10 @@
 ---
-title: Get Extension - FreeCodeCamp Daily Challenge 10/11/2025
+title: Get The Extension - FreeCodeCamp Daily Challenge
 published: 2025-11-10T11:43:03.707Z
-description: "Solving the FreeCodeCamp daily challenge: Get the file name extension."
+description: "Solving FreeCodeCamp's daily challenge: Extract the extension from a filename."
 updated: ""
 tags:
-  - algoritmos
-  - daily
+  - daily-challenge
   - freecodecamp
 draft: false
 pin: 0
@@ -16,43 +15,60 @@ abbrlink: "get-extension"
 
 ## Extension Extractor - FreeCodeCamp Daily Challenge
 
-This problem asks us to extract the file extension from a given filename. Let's analyze it step by step and create an efficient solution.
+This problem challenges us to extract the extension from a given filename. We'll explore an efficient step-by-step solution, handling special cases and common edge cases.
+
+---
 
 ## 📋 Problem Statement
 
-**Extension Extractor**
-Given a string representing a filename, return the file extension.
+### Extension Extractor
 
-The extension is the part of the filename that comes after the last dot (`.`).
-If the filename contains no dot or ends with a dot, return `"none"`.
-The extension should be returned as-is, preserving case.
+Given a string representing a filename, return its extension.
+
+**Specifications:**
+
+- The extension is the part of the name that comes after the **last dot** (`.`)
+- If the file contains no dot or ends with a dot, return `"none"`
+- The extension must preserve case sensitivity
 
 ## 🧠 Problem Analysis
 
 ### Understanding the Problem
 
-We need to identify the file extension, which is everything after the last dot. But there are special cases:
+We need to identify and extract a file's extension. However, several special cases must be handled:
 
-- Files without extension: `"README"` → `"none"`
-- Files with extension: `"document.txt"` → `"txt"`
-- Files starting with dot: `".gitignore"` → `"gitignore"`
-- Files with multiple dots: `"archive.tar.gz"` → `"gz"`
-- Files ending with dot: `"final.draft."` → `"none"`
+| File Type | Example | Result | Reason |
+|-----------|---------|--------|--------|
+| No extension | `"README"` | `"none"` | No dot present |
+| Standard extension | `"document.txt"` | `"txt"` | Extension after dot |
+| Starts with dot | `".gitignore"` | `"gitignore"` | Initial dot doesn't count |
+| Multiple dots | `"archive.tar.gz"` | `"gz"` | Only last dot matters |
+| Ends with dot | `"final.draft."` | `"none"` | Nothing after the dot |
 
-### Solution Strategy
+### Resolution Strategy
 
-The algorithm is simple: find the position of the last dot and extract what comes after, with validations.
+The solution is based on three fundamental steps:
+
+1. **Locate** the last dot in the filename
+2. **Validate** that a valid extension exists
+3. **Extract** the corresponding substring
 
 ```mermaid
 flowchart TD
-    A[Receive filename] --> B[Find last dot with lastIndexOf('.')]
-    B --> C{Is there a dot?}
-    C -->|No| D[Return 'none']
-    C -->|Yes| E{Is dot at end?}
-    E -->|Yes| D
-    E -->|No| F[Extract substring from dot + 1]
+    A[Start: Receive filename] --> B[Find last dot]
+    B --> C{Dot exists?}
+    C -->|No dot found| D[Return 'none']
+    C -->|Yes| E{Dot at end?}
+    E -->|Final dot| D
+    E -->|Valid| F[Extract substring after dot]
     F --> G[Return extension]
+
+    style A fill:#e1f5ff
+    style D fill:#ffe1e1
+    style G fill:#e1ffe1
 ```
+
+---
 
 ## 🛠️ Solution Development
 
@@ -60,57 +76,166 @@ flowchart TD
 
 ```javascript
 function getExtension(filename) {
-  const lastDotIndex = filename.lastIndexOf(".");
+  // Find the position of the last dot
+  const lastDotIndex = filename.lastIndexOf('.')
 
+  // Validate cases where there's no valid extension
   if (lastDotIndex === -1 || lastDotIndex === filename.length - 1) {
-    return "none";
+    return 'none'
   }
 
-  return filename.substring(lastDotIndex + 1);
+  // Extract and return the extension
+  return filename.substring(lastDotIndex + 1)
 }
 ```
 
-### Code Explanation
+### Detailed Code Explanation
 
-1. **Find the last dot**: We use `lastIndexOf('.')` to find the position of the last dot.
-2. **Validate invalid cases**:
-   - If no dot exists (`lastDotIndex === -1`)
-   - If the dot is the last character (`lastDotIndex === filename.length - 1`)
-3. **Extract the extension**: `substring(lastDotIndex + 1)` gives us everything from after the dot.
+### 1. Last dot search
+
+```javascript
+const lastDotIndex = filename.lastIndexOf('.')
+```
+
+The `lastIndexOf('.')` method traverses the string from end to beginning, returning the position of the last dot found, or `-1` if it doesn't exist.
+
+### 2. Special case validation
+
+```javascript
+if (lastDotIndex === -1 || lastDotIndex === filename.length - 1) {
+  return 'none';
+}
+```
+
+- `lastDotIndex === -1`: No dot exists in the name
+- `lastDotIndex === filename.length - 1`: The dot is the last character
+
+### 3. Extension extraction
+
+```javascript
+return filename.substring(lastDotIndex + 1);
+```
+`substring(lastDotIndex + 1)` extracts from the position after the dot to the end of the string.
 
 ## 📊 Test Cases
 
-Let's test our function with different cases:
-
-| Case | Input              | Expected Output | Explanation                   |
-| ---- | ------------------ | --------------- | ----------------------------- |
-| 1    | `"document.txt"`   | `"txt"`         | Standard extension            |
-| 2    | `"README"`         | `"none"`        | No extension                  |
-| 3    | `"image.PNG"`      | `"PNG"`         | Preserves uppercase           |
-| 4    | `".gitignore"`     | `"gitignore"`   | File starting with dot        |
-| 5    | `"archive.tar.gz"` | `"gz"`          | Multiple dots, takes the last |
-| 6    | `"final.draft."`   | `"none"`        | Ends with dot                 |
+### Complete Test Suite
 
 ```javascript
-console.log(getExtension("document.txt")); // "txt"
-console.log(getExtension("README")); // "none"
-console.log(getExtension("image.PNG")); // "PNG"
-console.log(getExtension(".gitignore")); // "gitignore"
-console.log(getExtension("archive.tar.gz")); // "gz"
-console.log(getExtension("final.draft.")); // "none"
+// Case 1: Standard extension
+console.log(getExtension('document.txt')) // 'txt'
+
+// Case 2: No extension
+console.log(getExtension('README')) // 'none'
+
+// Case 3: Case preservation
+console.log(getExtension('image.PNG')) // 'PNG'
+
+// Case 4: File starting with dot (Unix hidden file)
+console.log(getExtension('.gitignore')) // 'gitignore'
+
+// Case 5: Multiple dots in name
+console.log(getExtension('archive.tar.gz')) // 'gz'
+
+// Case 6: Ends with dot
+console.log(getExtension('final.draft.')) // 'none'
+
+// Case 7: Single character extension
+console.log(getExtension('script.c')) // 'c'
+
+// Case 8: Long extension
+console.log(getExtension('backup.backup')) // 'backup'
 ```
 
-## 📈 Complexity Analysis
+### Results Table
 
-- **Time**: O(n) where n is the string length
-- **Space**: O(1) additional
-
-## 🤔 Final Thoughts
-
-This problem teaches us efficient string manipulation. The `lastIndexOf` and `substring` methods are powerful tools in JavaScript.
-
-Have you solved this challenge? Did you use a different approach? Share in the comments!
+| # | Input | Output | Explanation |
+|:-:|-------|:------:|-------------|
+| 1 | `"document.txt"` | `"txt"` | Standard 3-character extension |
+| 2 | `"README"` | `"none"` | No dot present |
+| 3 | `"image.PNG"` | `"PNG"` | Preserves original case |
+| 4 | `".gitignore"` | `"gitignore"` | Unix/Linux hidden file |
+| 5 | `"archive.tar.gz"` | `"gz"` | Only considers last dot |
+| 6 | `"final.draft."` | `"none"` | Dot at end, no valid extension |
+| 7 | `"script.c"` | `"c"` | Single character extension |
+| 8 | `"backup.backup"` | `"backup"` | Extension can repeat the name |
 
 ---
 
-_This post is part of my FreeCodeCamp daily challenges series. Keep learning!_ 🚀
+## 📈 Complexity Analysis
+
+### Time Complexity: **O(n)**
+
+- `lastIndexOf('.')`: O(n) - traverses the string once
+- `substring()`: O(k) where k is the extension length
+- Worst case: O(n)
+
+### Space Complexity: **O(k)**
+
+- Where k is the extension length
+- `substring()` creates a new string
+- Worst case: O(n) if the entire string is the extension
+
+### Optimization
+
+This solution is already optimal. We cannot improve time complexity because we need to examine the string at least once to find the last dot.
+
+## 🎯 Alternative Solutions
+
+### Alternative 1: Using `split()`
+
+```javascript
+function getExtensionAlt1(filename) {
+  const parts = filename.split('.')
+
+  if (parts.length === 1 || filename.endsWith('.')) {
+    return 'none'
+  }
+
+  return parts[parts.length - 1]
+}
+```
+
+**Advantages:** More declarative code
+**Disadvantages:** Less efficient (O(n) additional space)
+
+### Alternative 2: Using Regular Expressions
+
+```javascript
+function getExtensionAlt2(filename) {
+  const match = filename.match(/\.([^.]+)$/)
+  return match ? match[1] : 'none'
+}
+```
+
+**Advantages:** Compact and expressive
+**Disadvantages:** May be less readable for some developers
+
+---
+
+## 💡 Key Concepts Learned
+
+1. **`lastIndexOf()`** is ideal for searching from the end
+2. **Early validation** prevents errors and simplifies logic
+3. **`substring()`** is efficient for extracting string parts
+4. **Edge cases** are crucial in string manipulation problems
+
+---
+
+## 🤔 Final Reflections
+
+This problem illustrates the importance of:
+
+- **Identifying special cases** before implementing
+- **Choosing the right tools** (`lastIndexOf` vs `split`)
+- **Writing defensive code** that handles all scenarios
+
+String manipulation is fundamental in programming. Mastering methods like `lastIndexOf()`, `substring()`, and understanding when to use them makes the difference between robust and fragile code.
+
+---
+
+## 🔗 Additional Resources
+
+- [MDN: String.prototype.lastIndexOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
+- [MDN: String.prototype.substring()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring)
+- [FreeCodeCamp JavaScript Algorithms](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/)
