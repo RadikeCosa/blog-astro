@@ -5,10 +5,7 @@ description: 'Implementation of an algorithm to search for words in a 2D matrix,
 updated: ''
 tags:
 - freecodecamp
-- data-structures
-- matrix
-- daily
-- javascript
+- daily-challenged
 draft: false
 pin: 0
 toc: true
