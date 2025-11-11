@@ -170,27 +170,6 @@ function compareVersionRegex(version1, version2) {
 }
 ```
 
-## Optimizaciones Avanzadas
-
-### Micro-optimización con charCodeAt
-
-```javascript
-// En lugar de parseInt(char) para un solo dígito
-num1 = num1 * 10 + (version1[p1].charCodeAt(0) - 48)
-```
-
-**Explicación**: Los dígitos ASCII '0'-'9' tienen códigos 48-57, por lo que restar 48 convierte directamente a número.
-
-### Manejo Defensivo de Punteros
-
-```javascript
-// Evitar incrementar más allá del final
-if (p1 < version1.length)
-  p1++
-if (p2 < version2.length)
-  p2++
-```
-
 ## Casos de Prueba Críticos
 
 ```javascript

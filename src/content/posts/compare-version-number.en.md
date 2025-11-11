@@ -5,9 +5,6 @@ description: 'Solving the Compare Version Number problem from LeetCode. Step-by-
 updated: ''
 tags:
   - leetcode
-  - algorithms
-  - two-pointers
-  - strings
   - medium
 draft: false
 pin: 0
@@ -22,7 +19,7 @@ This LeetCode Medium problem presents a common software development challenge: *
 
 ## Problem Statement
 
-**LeetCode 165: Compare Version Numbers**
+**LeetCode 165:** Compare Version Numbers
 **Difficulty:** Medium
 **Topics:** Two Pointers, String
 
@@ -110,13 +107,12 @@ function compareVersion(version1, version2) {
 2. **On-demand processing**: We only extract numbers when we need them
 3. **Automatic length handling**: No need for manual padding
 
-:::tip Digit-by-Digit Number Construction
-The technique `num = num * 10 + digit` builds numbers incrementally:
-
-- For "123": `0 → 1 → 12 → 123`
-- Automatically handles leading zeros
-
-:::
+> **Digit-by-Digit Number Construction**
+>
+> The technique `num = num * 10 + digit` builds numbers incrementally:
+>
+> - For "123": `0 → 1 → 12 → 123`
+> - Automatically handles leading zeros
 
 ## Alternative Implementations
 
@@ -168,27 +164,6 @@ function compareVersionRegex(version1, version2) {
 
   return 0
 }
-```
-
-## Advanced Optimizations
-
-### Micro-optimization with charCodeAt
-
-```javascript
-// Instead of parseInt(char) for a single digit
-num1 = num1 * 10 + (version1[p1].charCodeAt(0) - 48)
-```
-
-**Explanation**: ASCII digits '0'-'9' have codes 48-57, so subtracting 48 converts directly to number.
-
-### Defensive Pointer Handling
-
-```javascript
-// Avoid incrementing beyond the end
-if (p1 < version1.length)
-  p1++
-if (p2 < version2.length)
-  p2++
 ```
 
 ## Critical Test Cases
