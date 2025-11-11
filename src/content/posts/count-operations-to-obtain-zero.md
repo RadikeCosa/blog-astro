@@ -1,5 +1,5 @@
 ---
-title: Cantidad de operaciones para obtener cero - LeetCode #2169
+title: Cantidad de Operaciones para Obtener Cero - LeetCode #2169
 published: 2025-11-09T03:15:17.698Z
 description: 'Resolviendo el problema de LeetCode: Cantidad de operaciones para obtener cero.'
 updated: ''
