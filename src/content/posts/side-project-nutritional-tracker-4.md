@@ -1,10 +1,11 @@
 ---
-title: "side-project-nutritional-tracker-4"
+title: "Side Project: Nutritional Tracker - Part 4"
 published: 2025-11-10T17:18:33.385Z
 description: ''
 updated: ''
 tags:
-  - algoritmos
+  - side-project
+  - nutritional-tracker
 draft: false
 pin: 99
 toc: true

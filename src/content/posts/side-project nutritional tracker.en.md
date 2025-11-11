@@ -1,226 +1,289 @@
 ---
-title: 'Side-Project: Nutritional Tracker 2'
+title: 'Building a Nutritional Tracker: Part 1 - Data Model Design'
 published: 2025-11-05T16:53:16.913Z
-description: 'Documentation of the design and development process for a React app to log and track nutrition, from initial setup to data model architecture decisions.'
-updated: ''
+description: 'Designing the core data model for a React-based nutrition tracker: architecture decisions, entity relationships, and MVP scope definition.'
+series: 'nutritional-tracker'
+seriesOrder: 1
 tags:
-  - side-project
   - nutritional-tracker
-  - react
-  - vite
-  - development
+  - react-project
   - data-modeling
-
+  - architecture
 draft: false
 pin: 0
 toc: true
 lang: 'en'
-abbrlink: 'nutritional-tracker-side-project'
+abbrlink: 'nutritional-tracker-part-1'
 ---
 
 ## Introduction
 
-In this post I'll document the step-by-step process of a side project I started to keep nutritional records and help make better daily food choices. I chose to start from a blank React project using Vite as the bundler because I wanted to try some new tools and avoid a full framework like Next.js or Remix. I also wanted fast, simple development without worrying about server configuration or routing, and the ability to reuse pieces in other projects.
+I started this side project to track nutritional intake and improve daily food choices. Instead of reaching for a full framework like Next.js or Remix, I chose React with Vite as the bundler. This approach allows for rapid iteration, minimal configuration overhead, and the flexibility to reuse components in other projects.
 
-## Initial setup
+This first article documents the data model design process—the foundation that will drive the entire application's architecture.
 
-The first step was to create the project with the following command:
+## Project Setup
+
+The initial setup was straightforward using Vite's scaffolding tool:
 
 ```bash
 npm create vite@latest playground -- --template react
 ```
 
-Once the environment was set up, I decided the first practical step would be defining the data model to drive the input form. For the initial stage I chose to use `localStorage` for persistence.
+With the development environment ready, the logical first step was defining the data model. This would inform the input form structure and establish clear boundaries for what data we need to capture. For the MVP, I decided to use `localStorage` for persistence—simple, fast, and requiring no backend infrastructure.
 
-## Initial data model
+## Data Model Design
 
-The initial data model I designed looks like this:
+### Core Structure
+
+The data model centers around a single `Register` entity that captures each consumption event. Here's the complete structure:
 
 ```javascript
 const consumptionRecord = {
-  id: 'generated-uuid', // unique record ID
-  userId: 'user123', // ID of the user who logs the record
-  userName: 'UserName', // user's display name
+  // Unique identifiers
+  id: 'generated-uuid',
+  userId: 'user123',
+  userName: 'UserName',
 
   // What was consumed
-  food: 'Red apple', // free text
-  amount: 2, // numeric
-  unit: 'unit', // options: "g", "ml", "portion", "unit", "small-portion", "large-portion"
+  food: 'Red apple',
+  amount: 2,
+  unit: 'unit', // Options: "g", "ml", "portion", "unit", "small-portion", "large-portion"
 
   // When it was consumed
   date: '2025-11-05', // ISO YYYY-MM-DD
   time: '09:30', // 24h HH:MM
-  mealType: 'breakfast', // options: "breakfast", "lunch", "snack", "dinner", "between-meals"
+  mealType: 'breakfast', // Options: "breakfast", "lunch", "snack", "dinner", "between-meals"
 
   // Additional characteristics
-  sweetener: null, // options: "sugar", "sweetener", null (unsweetened)
-  notes: '', // optional free text
+  sweetener: null, // Options: "sugar", "sweetener", null
+  notes: '',
 
   // Metadata
-  createdAt: '2025-11-05T09:35:00Z' // ISO timestamp when the record was created
+  createdAt: '2025-11-05T09:35:00Z'
 }
 ```
 
-### Entity-Relationship diagram
+### Design Decisions
 
-The following ER diagram illustrates the data model:
+Every data modeling choice affects the application's usability, extensibility, and maintainability. Here's the reasoning behind each key decision.
+
+#### Why Unify Foods and Beverages?
+
+**Decision:** Use a single "consumption record" concept instead of separate entities for food and drinks.
+
+**Reasoning:**
+
+- Simplifies the model significantly
+- The main difference is the unit (g vs ml)—easily handled with an enum
+- Avoids duplicating common fields (date, time, user, meal type)
+- Makes queries and future reports much simpler
+- Users don't think in terms of "food vs drink"—they think "I consumed X"
+
+**Alternative considered:** Separate `FoodRecord` and `BeverageRecord` entities
+**Why rejected:** Added complexity with minimal benefit; most fields would be identical
+
+#### Why Free-text Food Field?
+
+**Decision:** Keep the food field unstructured (free text) without predefined categories.
+
+**Reasoning:**
+
+- Enables fast iteration without over-engineering
+- Real usage patterns will guide future categorization
+- More flexible for users in the MVP stage
+- Avoids the "your food isn't in our list" frustration
+- Categories can be added later based on actual data analysis
+
+**Future path:** Once we have real data, we can:
+
+- Identify common patterns
+- Implement autocomplete suggestions
+- Add optional tags or categories
+- Maintain backward compatibility
+
+#### Meal Type + Time: Both Required
+
+**Decision:** Keep both fields independent and mandatory.
+
+**Reasoning:**
+
+- Allows analysis by meal type: "At what times do I typically have breakfast?"
+- Doesn't assume fixed schedules (breakfast at 2 PM is perfectly valid)
+- Added "between-meals" category for snacks that don't fit main meals
+- Provides richer data for time distribution charts
+- Meal type is semantic, time is factual—both add value
+
+**Example use case:** A user who works night shifts can track "dinner" at 6 AM without the system fighting their input.
+
+#### Flexible Unit System
+
+**Decision:** Support units: g, ml, unit, portion, small-portion, large-portion.
+
+**Unit Types and Use Cases:**
+
+| Unit Type | Use Case | Example |
+|-----------|----------|---------|
+| g / ml | Precise measurements | 150ml milk, 80g cheese |
+| unit | Countable items | 2 apples, 1 cookie |
+| portion | Standard serving | 1 portion rice |
+| small-portion / large-portion | Subjective sizes | 1 large-portion pasta |
+
+**Reasoning:**
+
+- Covers real-world scenarios: weighed items, liquids, countable objects, and subjective portions
+- Portions are inherently subjective—acknowledging this is better than forcing precision
+- Lets users choose their preferred level of granularity
+- Supports both careful trackers and casual users
+
+**Caveat:** Portions can't be directly compared across users, but that's acceptable for personal tracking.
+
+#### Sweetener as Ternary Field
+
+**Decision:** Use `null | "sugar" | "sweetener"` instead of a boolean.
+
+**Reasoning:**
+
+- `null` represents "not applicable" or "unsweetened"
+- Explicitly distinguishes natural sugar from artificial sweeteners
+- Enables tracking sugar intake trends over time
+- Not mandatory because most foods aren't sweetened
+- Supports future features like "sugar-free days" tracking
+
+**Why not boolean:** A boolean can't represent three distinct states without awkward naming.
+
+### Entity-Relationship Diagram
 
 ```mermaid
 erDiagram
-    REGISTRO_CONSUMO {
-        string id
-        string userId
-        string userName
-        string alimento
-        int cantidad
-        string unidad
-        string fecha
-        string hora
-        string tipoComida
-        string endulzante
-        string notas
-        string fechaCreacion
-    }
+    USER ||--o{ CONSUMPTION_RECORD : creates
 
     USER {
-        string userId
+        string userId PK
         string userName
     }
 
-    USER ||--o{ REGISTRO_CONSUMO : "registra"
+    CONSUMPTION_RECORD {
+        string id PK
+        string userId FK
+        string userName
+        string food
+        number amount
+        enum unit
+        date date
+        time time
+        enum mealType
+        enum sweetener
+        string notes
+        timestamp createdAt
+    }
 ```
 
-This diagram shows how each consumption record is linked to a user via `userId` and lists the main attributes of the model.
+This diagram illustrates the one-to-many relationship between users and their consumption records, with all key attributes labeled.
 
-## Design process documentation
+### Decision Flow Diagram
 
-### Initial need
+This flowchart shows the thought process behind the unified model:
 
-Build an app to log food consumption with the ability to analyze the data later using charts.
+```mermaid
+graph TD
+    A[Need to track nutrition] --> B{Separate foods/drinks?}
+    B -->|No| C[Single Register entity]
+    B -->|Yes| D[Complex dual model]
+    C --> E[Simple queries & reports]
+    C --> F[Easy to extend]
+    D --> G[Duplicated fields]
+    D --> H[Complex join logic]
 
-### Identified requirements
+    style C fill:#90EE90
+    style E fill:#90EE90
+    style F fill:#90EE90
+    style D fill:#FFB6C6
+    style G fill:#FFB6C6
+    style H fill:#FFB6C6
+```
 
-#### Mandatory
+## Metadata and Technical Fields
 
-- User (ID and name)
-- Food consumed
-- Amount and unit
-- Date and time
-- Meal type
+### Identifiers
 
-#### Optional
-
-- Sweetener (sugar/sweetener/none)
-- Additional notes
-
-### Key design decisions
-
-#### Unifying foods and beverages
-
-**Decision**: Use a single "consumption record" concept instead of separate entities for food and drinks.
-
-**Reasoning**:
-
-- Simplifies the model.
-- The difference is mainly the unit (g vs ml).
-- Avoids duplicating common fields.
-- Makes queries and reports simpler.
-
-#### Food as free text
-
-**Decision**: Keep the food field unstructured initially (free text).
-
-**Reasoning**:
-
-- Enables fast iteration without over-engineering.
-- Real usage patterns will guide future categorization.
-- More flexible for users in the MVP.
-- Categories can be added later based on real data.
-
-#### Meal type + time (both required)
-
-**Decision**: Keep both fields independent and required.
-
-**Reasoning**:
-
-- Allows analysis by meal type (for example: "at what times do we have breakfast?").
-- Does not assume fixed times (breakfast at 2 PM is allowed).
-- Added "between-meals" for consumptions that don't fit main meals.
-- Provides richer data for time distribution charts.
-
-#### Flexible unit system
-
-**Decision**: Units: g, ml, unit, portion (with size variants).
-
-**Reasoning**:
-
-- Covers real cases: weighed items, liquids, countable items, subjective portions.
-- Portions are inherently subjective and kept as a concept.
-- Lets the user choose the granularity they prefer.
-
-#### Sweetener as a ternary field
-
-**Decision**: `null | "sugar" | "sweetener"`
-
-**Reasoning**:
-
-- `null` represents "not applicable" or "unsweetened".
-- Explicitly distinguishes sugar from artificial sweeteners.
-- Enables tracking sugar intake over time.
-- Not mandatory because not all foods are sweetened.
-
-## Metadata fields
-
-### IDs
-
-- `id`: Unique identifier for the record (enables future edit/delete).
-- `userId`: User identifier (multi-user support from the start).
+- **`id`:** Unique identifier (UUID) for each record. Enables future edit/delete operations and ensures no collisions.
+- **`userId`:** User identifier for multi-user support from day one. Even though the MVP might be single-user, building this in early avoids painful migrations later.
 
 ### Timestamps
 
-- `date + time`: When the consumption happened (domain data).
-- `createdAt`: When the record was logged (technical metadata useful for auditing).
+- **`date + time`:** When the consumption actually happened (domain data). This is what users care about and what we'll analyze.
+- **`createdAt`:** When the record was logged in the system (technical metadata). Useful for auditing, debugging sync issues, and detecting late entries.
 
-## Future considerations (not implemented in MVP)
+**Why both?** You might eat breakfast at 8 AM but log it at 10 AM. Both timestamps tell different, valuable stories.
+
+## Future Considerations
+
+These features are deliberately excluded from the MVP but inform the current design:
 
 ### Categorization
 
-- Once real data is collected, patterns can be identified.
-- Possible migration to a suggested list with autocomplete.
-- Tags or multiple categories (fruits, vegetables, proteins, etc.).
+- Identify patterns from real usage data
+- Migrate to suggested list with autocomplete
+- Implement tags or multiple categories (fruits, vegetables, proteins, etc.)
+- Maintain free-text as fallback option
 
 ### Validations
 
-- Valid time ranges.
-- Positive amounts.
-- Logical unit combinations (`ml` only for liquids).
+- Time range validation (0:00-23:59)
+- Positive amount constraints
+- Logical unit combinations (ml restricted to liquids)
+- Date reasonableness checks
 
-### Planned reports
+### Planned Reports
 
-- Distribution by meal type.
-- Heatmap of consumption times.
-- Sugar/sweetener tracking.
-- Food frequency.
-- Dietary variety over periods.
-- Per-user analysis (if multi-user).
+- Distribution by meal type
+- Consumption time heatmaps
+- Sugar vs sweetener tracking
+- Food frequency analysis
+- Dietary variety over time periods
+- Per-user comparative analysis
 
-## Technology
+## Technology Stack
 
-For the MVP we use `localStorage`, allowing quick development without a backend and keeping data in the user's browser.
+For the MVP, we're using `localStorage` as the persistence layer. This choice offers:
 
-## Next step
+**Advantages:**
 
-The immediate next step in development is to define the base architecture and prepare the development environment. This includes:
+- Zero backend infrastructure needed
+- Instant reads/writes
+- Works offline by default
+- Perfect for prototyping
 
-- Establishing the project structure (scaffolding) to organize code efficiently.
-- Installing required dependencies such as state management or validation libraries.
-- Configuring development tools like linters, formatters and automation scripts.
+**Limitations:**
 
-With these foundations, the project will be ready to move into implementing key features.
+- ~5-10MB storage limit (sufficient for thousands of records)
+- No cross-device sync
+- Vulnerable to browser data clearing
+
+**Migration path:** The abstracted storage layer makes future migration to IndexedDB or a backend API straightforward.
+
+## What's Next?
+
+With the data model defined, the immediate next steps are:
+
+1. **Set up the testing environment** (Vitest + Testing Library)
+2. **Configure development tools** (linters, formatters, automation)
+3. **Implement the validation layer** (Zod schemas)
+4. **Build the persistence layer** (localStorage wrapper)
+
+These foundations will enable confident, test-driven development of the core features.
+
+## Continue Reading
+
+In [Part 2: Testing Setup](/posts/nutritional-tracker-part-2), we configure Vitest, implement mocks for localStorage, and establish a robust testing workflow.
+
+**Coming in this series:**
+
+- Part 2: Testing Environment Setup ✓
+- Part 3: Data Validation with Zod ✓
+- Part 4: Persistence Layer Implementation ✓
 
 ---
 
-<!-- Author notes:
-1. Do you want to add example charts or diagrams to illustrate future reports?
-2. Consider adding a "Next steps" checklist that details subsequent development phases.
-3. Would you like to include a table with sample consumption records for clarity? -->
+*Have questions or suggestions about the data model? The design is intentionally flexible—feedback welcome as we build this out.*
