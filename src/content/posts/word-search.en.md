@@ -1,5 +1,5 @@
 ---
-title: 'Word Search: FreeCodeCamp Daily Challenge November 9, 2025'
+title: 'Word Search: FreeCodeCamp Daily Challenge'
 published: 2025-11-09T00:00:00.000Z
 description: 'Implementation of an algorithm to search for words in a 2D matrix, exploring in the four main directions.'
 updated: ''
