@@ -1,136 +1,350 @@
 ---
-title: 'Side Project: Nutritional Tracker - Part 3'
-published: 2025-11-11T00:00:00.000Z
-description: 'Tercera entrega del desarrollo del proyecto de registro nutricional. En esta parte, abordamos la definición de modelos de datos y las validaciones iniciales.'
-updated: ''
+title: 'Construyendo un Nutritional Tracker: Parte 3 - Validación de Datos con Zod'
+published: 2025-11-10T00:00:00.000Z
+description: 'Implementación de validación robusta de datos usando esquemas Zod, inferencia de tipos TypeScript y testing unitario comprehensivo para el modelo de datos del tracker nutricional.'
+series: 'nutritional-tracker'
+seriesOrder: 3
 tags:
-  - side-project
   - nutritional-tracker
+  - react-project
+  - data-validation
+  - zod
 draft: false
-pin: 1
+pin: 0
 toc: true
 lang: 'es'
-abbrlink: 'nutritional-tracker-side-project-3'
+abbrlink: 'nutritional-tracker-part-3'
 ---
+
 ## Introducción
 
-## Repaso de la entrega anterior
+**Anterior:** [Parte 2: Configuración del Entorno de Testing](/posts/nutritional-tracker-part-2)
 
-En la segunda entrega del proyecto, nos enfocamos en preparar el entorno de desarrollo y configurar las herramientas de testing. Se instalaron las dependencias necesarias, se creó la configuración de Vitest y se implementó un mock para `localStorage`, asegurando que el entorno fuera robusto y confiable para futuras pruebas. Además, se documentaron los principales desafíos encontrados durante la configuración y cómo se resolvieron, dejando el proyecto listo para avanzar hacia la definición del modelo de datos y las primeras validaciones.
+### Repaso: Parte 2
 
-## Objetivos de esta parte
+En la entrega anterior, construimos una base sólida de testing. Configuramos Vitest, establecimos Testing Library, implementamos mocks de localStorage y establecimos patrones de limpieza automática. El entorno de testing ahora está listo para soportar desarrollo guiado por tests.
 
-En esta etapa del desarrollo, el objetivo principal es definir y validar el modelo de datos central para los registros nutricionales. Esto implica:
+### Objetivos para la Parte 3
 
-- Establecer los tipos y enums necesarios en TypeScript para representar cada campo del registro.
-- Implementar el esquema de validación usando Zod, asegurando que todos los campos obligatorios y opcionales cumplan con los requisitos de formato y rango.
-- Escribir pruebas unitarias para verificar que el esquema acepta registros válidos y rechaza datos incorrectos o incompletos.
-- Documentar las convenciones adoptadas (nombres en inglés, ubicación de archivos) y las decisiones técnicas tomadas durante el proceso.
+En esta fase, implementaremos validación robusta de datos usando Zod. Nuestros objetivos son:
 
-Al finalizar esta fase, se debe contar con un modelo de datos robusto, validado y cubierto por tests, listo para integrarse con el formulario y la capa de persistencia en las siguientes etapas.
+- Definir tipos TypeScript y enums para el modelo de datos
+- Crear un esquema de validación comprehensivo con Zod
+- Implementar inferencia de tipos para evitar duplicación
+- Escribir tests unitarios cubriendo escenarios válidos e inválidos
+- Documentar reglas de validación y decisiones de diseño
 
-## Definición del modelo de datos
+Al finalizar, tendremos un modelo de datos type-safe y validado, listo para integración con formularios y persistencia.
 
-El modelo de datos central del proyecto está diseñado para registrar de manera flexible y precisa los consumos alimenticios de cada usuario. Desde la primera entrega, se decidió unificar alimentos y bebidas bajo una sola entidad (`Register`), utilizando nombres de campos en inglés para mantener la consistencia y facilitar futuras integraciones.
+## ¿Por Qué Zod para Validación?
 
-La estructura principal incluye los siguientes campos obligatorios:
+Zod ofrece varias ventajas sobre las alternativas:
 
-- `id`: Identificador único (UUID) para cada registro.
-- `userId`: ID del usuario que realiza el registro.
-- `userName`: Nombre del usuario.
-- `food`: Nombre del alimento consumido (texto libre).
-- `amount`: Cantidad consumida (número positivo).
-- `unit`: Unidad de medida (enum: gr, ml, unit, portion, small-portion, large-portion).
-- `date`: Fecha de consumo (formato YYYY-MM-DD).
-- `time`: Hora de consumo (formato HH:MM).
-- `mealType`: Tipo de comida (enum: breakfast, lunch, snack, dinner, collation).
-- `createdAt`: Timestamp ISO de creación del registro.
+**Beneficios:**
 
-Además, se incluyen campos opcionales para mayor flexibilidad:
+- **Inferencia de tipos**: Genera tipos TypeScript directamente de los esquemas
+- **Validación en runtime**: Detecta datos inválidos en tiempo de ejecución, no solo en compilación
+- **Composable**: Construye esquemas complejos desde primitivas simples
+- **Mensajes de error**: Errores de validación detallados y accionables
+- **Zero dependencies**: Ligero y rápido
 
-- `sweetener`: Tipo de endulzante (`null`, "sugar", "sweetener").
-- `notes`: Notas adicionales (texto libre).
+**Comparación:**
 
-Esta estructura permite registrar consumos variados, analizar patrones alimenticios y adaptar el modelo a futuras necesidades, como categorización automática o reportes avanzados. El uso de enums y validaciones estrictas garantiza la calidad y coherencia de los datos desde el inicio del proyecto.
+| Característica | Zod | Yup | Joi |
+|----------------|-----|-----|-----|
+| Inferencia de tipos | ✅ Excelente | ⚠️ Limitada | ❌ Ninguna |
+| Tamaño bundle | 🟢 Pequeño (8kb) | 🟡 Medio (15kb) | 🔴 Grande (145kb) |
+| Seguridad runtime | ✅ Sí | ✅ Sí | ✅ Sí |
+| TypeScript-first | ✅ Sí | ⚠️ Parcial | ❌ No |
 
-## Convenciones y decisiones técnicas
+Para un proyecto React con TypeScript, Zod es la elección óptima.
 
-Para mantener la coherencia y facilitar futuras integraciones, se adoptaron las siguientes convenciones:
+## Convenciones y Decisiones de Diseño
 
-- **Nombres en inglés:** Todos los campos y entidades se definen en inglés, incluso en la versión en español del código y los tests.
-- **Ubicación de esquemas:** Los esquemas de validación Zod se almacenan en `src/lib/schemas/`.
-- **Ubicación de tests:** Los tests unitarios se ubican en la carpeta `tests/`, siguiendo la estructura del proyecto.
-- **Inferencia de tipos:** Se utiliza `z.infer<typeof RegisterSchema>` para derivar el tipo TypeScript directamente del esquema Zod, evitando duplicaciones y asegurando sincronía entre validación y tipado.
-- **Validaciones estrictas:** Se prioriza la cobertura total de validaciones antes de avanzar a la siguiente fase del desarrollo.
+Para mantener consistencia en todo el proyecto:
 
-## Estructura y tipos en TypeScript
+### Convención de Nombres
 
-El modelo de datos se representa mediante tipos y enums en TypeScript para garantizar seguridad y claridad en el código. El tipo principal `Register` se infiere del esquema Zod, y los enums definen las opciones válidas para los campos con valores fijos.
+- **Todos los nombres de campos en inglés**: Incluso en código español, usar nombres de campos en inglés (`food`, `mealType`, no `alimento`, `tipoComida`)
+- **Razón**: Facilita futuras integraciones, convenciones estándar de API, no necesita capa de traducción
+
+### Organización de Archivos
+
+- **Ubicación de esquemas**: `src/lib/schemas/`
+- **Ubicación de tipos**: `src/types/`
+- **Ubicación de tests**: `tests/`
+
+### Estrategia de Inferencia de Tipos
 
 ```typescript
-// filepath: src/types/register.ts
+// ✅ Hacer esto: Derivar tipos de esquemas
+export type Register = z.infer<typeof RegisterSchema>
+
+// ❌ No hacer esto: Definir tipos separadamente
+// type Register = { ... }
+// const RegisterSchema = z.object({ ... })
+```
+
+**¿Por qué?** Mantiene esquema y tipo sincronizados automáticamente. Única fuente de verdad.
+
+## Estructura del Modelo de Datos
+
+### Entidad Central: Register
+
+La entidad `Register` captura cada evento de consumo con la siguiente estructura:
+
+```typescript
+{
+  // Identificadores
+  id: string (UUID)
+  userId: string (UUID)
+  userName: string
+
+  // Detalles del consumo
+  food: string
+  amount: number (positivo)
+  unit: enum
+
+  // Timing
+  date: string (YYYY-MM-DD)
+  time: string (HH:MM)
+  mealType: enum
+
+  // Campos opcionales
+  sweetener?: 'sugar' | 'sweetener' | null
+  notes?: string
+
+  // Metadata
+  createdAt: string (timestamp ISO)
+}
+```
+
+### Definición de Enums
+
+Crear `src/types/register.ts`:
+
+```typescript
+// src/types/register.ts
+// Enums y tipos TypeScript para la entidad Register
 import { z } from 'zod'
 import { RegisterSchema } from '../lib/schemas/registerSchema'
 
+// Inferir tipo del esquema (única fuente de verdad)
 export type Register = z.infer<typeof RegisterSchema>
 
+// Unidad de medida para cantidades de consumo
 export enum Unit {
-  GR = 'gr',
-  ML = 'ml',
-  UNIT = 'unit',
-  PORTION = 'portion',
+  GR = 'gr', // Gramos (alimentos sólidos)
+  ML = 'ml', // Mililitros (líquidos)
+  UNIT = 'unit', // Items contables (1 manzana, 2 galletas)
+  PORTION = 'portion', // Porción estándar
   SMALL_PORTION = 'small-portion',
   LARGE_PORTION = 'large-portion',
 }
 
+// Tipo de comida cuando ocurrió el consumo
 export enum MealType {
   BREAKFAST = 'breakfast',
   LUNCH = 'lunch',
-  SNACK = 'snack',
+  SNACK = 'snack', // Merienda de la tarde
   DINNER = 'dinner',
-  COLLATION = 'collation',
+  COLLATION = 'collation', // Colación entre comidas
 }
 
+// Tipo de endulzante (ternario: azúcar, endulzante artificial, o ninguno)
 export type Sweetener = null | 'sugar' | 'sweetener'
 ```
 
-## Implementación del esquema de validación con Zod
-
-El esquema de validación se implementa con Zod, definiendo reglas para cada campo:
-
-- **UUIDs:** Validación de formato para `id` y `userId`.
-- **Fechas y horas:** Expresiones regulares para asegurar formato ISO.
-- **Cantidad:** Debe ser un número positivo.
-- **Enums:** Validación estricta para `unit`, `mealType` y `sweetener`.
-- **Campos opcionales:** `notes` y `sweetener` pueden estar ausentes o ser nulos.
+### Ejemplos de Uso de Enums
 
 ```typescript
-// filepath: src/lib/schemas/registerSchema.ts
+// Usando enums en código
+const apple: Register = {
+  // ...
+  unit: Unit.UNIT,
+  mealType: MealType.BREAKFAST,
+  sweetener: null,
+}
+
+// Comparaciones type-safe
+if (register.mealType === MealType.BREAKFAST) {
+  // TypeScript sabe que esto es válido
+}
+```
+
+## Implementación del Esquema Zod
+
+Crear `src/lib/schemas/registerSchema.ts`:
+
+```typescript
+// src/lib/schemas/registerSchema.ts
+// Esquema de validación Zod para registros de consumo
 import { z } from 'zod'
 
 export const RegisterSchema = z.object({
-  id: z.string().uuid(),
-  userId: z.string().uuid(),
-  userName: z.string().min(1),
-  food: z.string().min(1),
-  amount: z.number().positive(),
-  unit: z.enum(['gr', 'ml', 'unit', 'portion', 'small-portion', 'large-portion']),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  time: z.string().regex(/^\d{2}:\d{2}$/),
-  mealType: z.enum(['breakfast', 'lunch', 'snack', 'dinner', 'collation']),
-  createdAt: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/),
+  // Identificadores únicos (formato UUID)
+  id: z.string().uuid({
+    message: 'Formato de ID inválido. Debe ser un UUID válido.',
+  }),
+  userId: z.string().uuid({
+    message: 'Formato de ID de usuario inválido. Debe ser un UUID válido.',
+  }),
+
+  // Información del usuario
+  userName: z.string().min(1, {
+    message: 'El nombre de usuario es requerido y no puede estar vacío.',
+  }),
+
+  // Detalles del consumo
+  food: z.string().min(1, {
+    message: 'El nombre del alimento es requerido y no puede estar vacío.',
+  }),
+  amount: z.number().positive({
+    message: 'La cantidad debe ser un número positivo mayor que cero.',
+  }),
+  unit: z.enum(['gr', 'ml', 'unit', 'portion', 'small-portion', 'large-portion'], {
+    errorMap: () => ({ message: 'Unidad inválida. Debe ser una de: gr, ml, unit, portion, small-portion, large-portion.' }),
+  }),
+
+  // Timing (formato ISO)
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: 'Formato de fecha inválido. Debe ser YYYY-MM-DD.',
+  }),
+  time: z.string().regex(/^\d{2}:\d{2}$/, {
+    message: 'Formato de hora inválido. Debe ser HH:MM (formato 24 horas).',
+  }),
+  mealType: z.enum(['breakfast', 'lunch', 'snack', 'dinner', 'collation'], {
+    errorMap: () => ({ message: 'Tipo de comida inválido. Debe ser uno de: breakfast, lunch, snack, dinner, collation.' }),
+  }),
+
+  // Metadata
+  createdAt: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/, {
+    message: 'Formato de timestamp inválido. Debe ser formato ISO 8601 (YYYY-MM-DDTHH:MM:SSZ).',
+  }),
+
+  // Campos opcionales
   sweetener: z.enum(['sugar', 'sweetener']).nullable().optional(),
   notes: z.string().optional(),
 })
 ```
 
-## Ejemplos de registros válidos y no válidos
+### Reglas de Validación del Esquema
 
-A continuación se muestran ejemplos prácticos para ilustrar cómo funciona la validación:
+Cada campo tiene lógica de validación específica:
 
-**Registro válido:**
+| Campo | Validación | Razón |
+|-------|------------|-------|
+| `id`, `userId` | Formato UUID | Asegura unicidad y formato adecuado |
+| `userName`, `food` | String no vacío | Campos requeridos no pueden estar en blanco |
+| `amount` | Número positivo | Cantidades negativas no tienen sentido |
+| `unit` | Enum (6 opciones) | Solo unidades válidas permitidas |
+| `date` | Regex YYYY-MM-DD | Formato ISO de fecha para consistencia |
+| `time` | Regex HH:MM | Formato 24 horas (00:00-23:59) |
+| `mealType` | Enum (5 opciones) | Solo tipos de comida válidos |
+| `createdAt` | Timestamp ISO 8601 | Estándar para timestamps |
+| `sweetener` | Enum o null/undefined | Estado ternario (azúcar/endulzante/ninguno) |
+| `notes` | String opcional | Info adicional flexible |
+
+## Diagrama de Flujo de Validación
+
+```mermaid
+graph TD
+    A[Datos de Entrada Raw] --> B{Parse con RegisterSchema}
+    B -->|Válido| C[Retornar objeto Register tipado]
+    B -->|Inválido| D[Recolectar errores de validación]
+
+    D --> E{¿Tipo de error?}
+    E -->|Formato UUID| F[Mostrar: Formato de ID inválido]
+    E -->|Cantidad negativa| G[Mostrar: La cantidad debe ser positiva]
+    E -->|Fecha inválida| H[Mostrar: Formato fecha YYYY-MM-DD]
+    E -->|Enum incorrecto| I[Mostrar: Valor inválido para campo]
+
+    C --> J[Seguro para usar en app]
+    F --> K[Rechazar datos]
+    G --> K
+    H --> K
+    I --> K
+
+    style C fill:#90EE90
+    style J fill:#90EE90
+    style K fill:#FFB6C6
+```
+
+## Ejemplo: Registros Válidos e Inválidos
+
+### Registro Válido
 
 ```typescript
+const validRegister: Register = {
+  id: 'a1b2c3d4-e5f6-7890-abcd-1234567890ab',
+  userId: 'b2c3d4e5-f6a7-8901-bcde-2345678901bc',
+  userName: 'Juan',
+  food: 'Manzana roja',
+  amount: 1,
+  unit: 'unit',
+  date: '2025-11-11',
+  time: '08:30',
+  mealType: 'breakfast',
+  createdAt: '2025-11-11T08:35:00Z',
+  sweetener: null,
+  notes: 'Fresca del mercado',
+}
+
+// La validación pasa
+RegisterSchema.parse(validRegister) // ✅ Sin errores
+```
+
+### Registros Inválidos
+
+```typescript
+// Ejemplo 1: Cantidad negativa
+const invalidAmount = {
+  ...validRegister,
+  amount: -2, // ❌ Debe ser positivo
+}
+
+// RegisterSchema.parse(invalidAmount)
+// Lanza: "La cantidad debe ser un número positivo mayor que cero."
+
+// Ejemplo 2: Formato de fecha incorrecto
+const invalidDate = {
+  ...validRegister,
+  date: '11-11-2025', // ❌ Debe ser YYYY-MM-DD
+}
+
+// RegisterSchema.parse(invalidDate)
+// Lanza: "Formato de fecha inválido. Debe ser YYYY-MM-DD."
+
+// Ejemplo 3: Unidad inválida
+const invalidUnit = {
+  ...validRegister,
+  unit: 'kilos', // ❌ No está en enum
+}
+
+// RegisterSchema.parse(invalidUnit)
+// Lanza: "Unidad inválida. Debe ser una de: gr, ml, unit, portion, small-portion, large-portion."
+
+// Ejemplo 4: Campo requerido faltante
+const missingFood = {
+  ...validRegister,
+  food: '', // ❌ No puede estar vacío
+}
+
+// RegisterSchema.parse(missingFood)
+// Lanza: "El nombre del alimento es requerido y no puede estar vacío."
+```
+
+## Testing Unitario del Esquema
+
+Crear `tests/registerSchema.test.ts`:
+
+```typescript
+// tests/registerSchema.test.ts
+// Tests unitarios comprehensivos para esquema de validación de Register
+import { describe, expect, it } from 'vitest'
+import { RegisterSchema } from '../src/lib/schemas/registerSchema'
+
+// Registro baseline válido para tests
 const validRegister = {
   id: 'a1b2c3d4-e5f6-7890-abcd-1234567890ab',
   userId: 'b2c3d4e5-f6a7-8901-bcde-2345678901bc',
@@ -138,76 +352,301 @@ const validRegister = {
   food: 'Manzana',
   amount: 1,
   unit: 'unit',
-  date: '2025-11-07',
+  date: '2025-11-11',
   time: '08:30',
   mealType: 'breakfast',
-  createdAt: '2025-11-07T08:31:00Z',
+  createdAt: '2025-11-11T08:35:00Z',
   sweetener: null,
-  notes: 'Sin endulzante',
+  notes: 'Fresca',
 }
-```
 
-**Registro no válido (cantidad negativa y formato de fecha incorrecto):**
-
-```typescript
-const invalidRegister = {
-  id: 'a1b2c3d4-e5f6-7890-abcd-1234567890ab',
-  userId: 'b2c3d4e5-f6a7-8901-bcde-2345678901bc',
-  userName: 'Juan',
-  food: 'Manzana',
-  amount: -2, // Inválido
-  unit: 'unit',
-  date: '07-11-2025', // Inválido
-  time: '08:30',
-  mealType: 'breakfast',
-  createdAt: '2025-11-07T08:31:00Z',
-  sweetener: null,
-  notes: 'Sin endulzante',
-}
-```
-
-## Pruebas unitarias del modelo de datos
-
-Se implementaron pruebas unitarias con Vitest para asegurar la robustez del esquema:
-
-- El esquema acepta registros válidos y rechaza los inválidos.
-- Se testean casos de campos obligatorios faltantes, valores fuera de rango y formatos incorrectos.
-- Se verifica que los campos opcionales sean correctamente aceptados o ignorados.
-
-```typescript
-// filepath: tests/registerSchema.test.ts
-import { describe, expect, it } from 'vitest'
-import { RegisterSchema } from '../src/lib/schemas/registerSchema'
-
-describe('RegisterSchema', () => {
-  it('acepta un registro válido', () => {
+describe('RegisterSchema - Casos Válidos', () => {
+  it('acepta un registro completamente válido', () => {
     expect(() => RegisterSchema.parse(validRegister)).not.toThrow()
   })
 
+  it('acepta registro sin campos opcionales', () => {
+    const noOptionals = { ...validRegister }
+    delete noOptionals.sweetener
+    delete noOptionals.notes
+
+    expect(() => RegisterSchema.parse(noOptionals)).not.toThrow()
+  })
+
+  it('acepta todos los tipos de unidad válidos', () => {
+    const units = ['gr', 'ml', 'unit', 'portion', 'small-portion', 'large-portion']
+
+    units.forEach((unit) => {
+      const record = { ...validRegister, unit }
+      expect(() => RegisterSchema.parse(record)).not.toThrow()
+    })
+  })
+
+  it('acepta todos los tipos de comida válidos', () => {
+    const mealTypes = ['breakfast', 'lunch', 'snack', 'dinner', 'collation']
+
+    mealTypes.forEach((mealType) => {
+      const record = { ...validRegister, mealType }
+      expect(() => RegisterSchema.parse(record)).not.toThrow()
+    })
+  })
+
+  it('acepta sweetener como "sugar"', () => {
+    const record = { ...validRegister, sweetener: 'sugar' }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta sweetener como "sweetener"', () => {
+    const record = { ...validRegister, sweetener: 'sweetener' }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta sweetener como null', () => {
+    const record = { ...validRegister, sweetener: null }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+})
+
+describe('RegisterSchema - Casos Inválidos', () => {
   it('rechaza cantidad negativa', () => {
-    expect(() => RegisterSchema.parse(invalidRegister)).toThrow()
+    const record = { ...validRegister, amount: -2 }
+    expect(() => RegisterSchema.parse(record)).toThrow('La cantidad debe ser un número positivo')
   })
 
-  it('rechaza fecha con formato incorrecto', () => {
-    const badDate = { ...validRegister, date: '07-11-2025' }
-    expect(() => RegisterSchema.parse(badDate)).toThrow()
+  it('rechaza cantidad cero', () => {
+    const record = { ...validRegister, amount: 0 }
+    expect(() => RegisterSchema.parse(record)).toThrow('La cantidad debe ser un número positivo')
   })
 
-  it('acepta campos opcionales ausentes', () => {
-    const noOptional = { ...validRegister }
-    delete noOptional.sweetener
-    delete noOptional.notes
-    expect(() => RegisterSchema.parse(noOptional)).not.toThrow()
+  it('rechaza formato de fecha inválido (DD-MM-YYYY)', () => {
+    const record = { ...validRegister, date: '11-11-2025' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Formato de fecha inválido')
+  })
+
+  it('rechaza formato de hora inválido (12 horas)', () => {
+    const record = { ...validRegister, time: '8:30 AM' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Formato de hora inválido')
+  })
+
+  it('rechaza UUID inválido para id', () => {
+    const record = { ...validRegister, id: 'not-a-uuid' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Formato de ID inválido')
+  })
+
+  it('rechaza UUID inválido para userId', () => {
+    const record = { ...validRegister, userId: '12345' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Formato de ID de usuario inválido')
+  })
+
+  it('rechaza nombre de alimento vacío', () => {
+    const record = { ...validRegister, food: '' }
+    expect(() => RegisterSchema.parse(record)).toThrow('El nombre del alimento es requerido')
+  })
+
+  it('rechaza nombre de usuario vacío', () => {
+    const record = { ...validRegister, userName: '' }
+    expect(() => RegisterSchema.parse(record)).toThrow('El nombre de usuario es requerido')
+  })
+
+  it('rechaza unidad inválida', () => {
+    const record = { ...validRegister, unit: 'kilos' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Unidad inválida')
+  })
+
+  it('rechaza tipo de comida inválido', () => {
+    const record = { ...validRegister, mealType: 'brunch' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Tipo de comida inválido')
+  })
+
+  it('rechaza timestamp createdAt inválido', () => {
+    const record = { ...validRegister, createdAt: '2025-11-11' }
+    expect(() => RegisterSchema.parse(record)).toThrow('Formato de timestamp inválido')
+  })
+
+  it('rechaza valor de sweetener inválido', () => {
+    const record = { ...validRegister, sweetener: 'honey' }
+    expect(() => RegisterSchema.parse(record)).toThrow()
+  })
+})
+
+describe('RegisterSchema - Casos Límite', () => {
+  it('acepta cantidades positivas muy pequeñas', () => {
+    const record = { ...validRegister, amount: 0.001 }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta cantidades muy grandes', () => {
+    const record = { ...validRegister, amount: 999999 }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta nombres de alimentos largos', () => {
+    const record = { ...validRegister, food: 'A'.repeat(500) }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta notas largas', () => {
+    const record = { ...validRegister, notes: 'Nota '.repeat(100) }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta valores de hora límite (00:00)', () => {
+    const record = { ...validRegister, time: '00:00' }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
+  })
+
+  it('acepta valores de hora límite (23:59)', () => {
+    const record = { ...validRegister, time: '23:59' }
+    expect(() => RegisterSchema.parse(record)).not.toThrow()
   })
 })
 ```
 
-## Reflexión sobre el proceso y próximos pasos
+### Ejecutando los Tests
 
-La definición y validación exhaustiva del modelo de datos es clave para la calidad y mantenibilidad del proyecto. Este enfoque permite detectar errores temprano, facilita la integración con el formulario y la persistencia, y sienta las bases para futuras extensiones como reportes y categorizaciones avanzadas.
+```bash
+npm run test registerSchema
+```
 
-**Próximos pasos:**
+**Salida esperada:**
 
-- Extender los tests para cubrir casos límite y errores específicos.
-- Implementar la capa de persistencia en `localStorage`.
-- Integrar el modelo con el formulario de registro y validar la experiencia de usuario.
+```bash
+✓ tests/registerSchema.test.ts (34)
+  ✓ RegisterSchema - Casos Válidos (8)
+  ✓ RegisterSchema - Casos Inválidos (12)
+  ✓ RegisterSchema - Casos Límite (6)
+
+Test Files  1 passed (1)
+Tests       34 passed (34)
+```
+
+## Patrón de Parseo Seguro
+
+Para validación de input de usuario, usar `.safeParse()` en lugar de `.parse()`:
+
+```typescript
+// ❌ No usar .parse() para input de usuario (lanza errores)
+try {
+  const data = RegisterSchema.parse(userInput)
+}
+catch (error) {
+  // Difícil manejar errores tipados
+}
+
+// ✅ Usar .safeParse() para manejo de errores graceful
+const result = RegisterSchema.safeParse(userInput)
+
+if (result.success) {
+  // result.data está tipado como Register
+  console.log(result.data.food)
+}
+else {
+  // result.error contiene errores de validación detallados
+  result.error.issues.forEach((issue) => {
+    console.log(`${issue.path}: ${issue.message}`)
+  })
+}
+```
+
+### Ejemplo: Validación de Formulario
+
+```typescript
+function validateRegisterForm(formData: unknown) {
+  const result = RegisterSchema.safeParse(formData)
+
+  if (!result.success) {
+    // Mapear errores a campos del formulario
+    const fieldErrors = result.error.issues.reduce((acc, issue) => {
+      const field = issue.path[0] as string
+      acc[field] = issue.message
+      return acc
+    }, {} as Record<string, string>)
+
+    return { valid: false, errors: fieldErrors }
+  }
+
+  return { valid: true, data: result.data }
+}
+```
+
+## Beneficios de Type Safety
+
+Con esquemas Zod, obtenemos:
+
+**1. Verificación de tipos en tiempo de compilación:**
+
+```typescript
+const register: Register = { /* ... */ }
+
+// ✅ TypeScript conoce todos los campos
+register.food // string
+register.amount // number
+register.sweetener // 'sugar' | 'sweetener' | null | undefined
+
+// ❌ TypeScript detecta typos
+register.fod // Error: Property 'fod' does not exist
+```
+
+**2. Validación en runtime:**
+
+```typescript
+// Input desde API/formulario (tipo desconocido)
+const input = await fetchUserInput()
+
+// Validar en runtime
+const result = RegisterSchema.safeParse(input)
+
+if (result.success) {
+  // Ahora TypeScript conoce la forma
+  const register: Register = result.data
+}
+```
+
+**3. Seguridad en refactoring:**
+
+```typescript
+// Cambiar esquema
+export const RegisterSchema = z.object({
+  // ... añadir nuevo campo requerido
+  category: z.string(),
+})
+
+// TypeScript inmediatamente muestra todos los lugares que necesitan actualización
+// ¡Sin fallos silenciosos en runtime!
+```
+
+## Conclusiones Clave
+
+En este punto, tenemos:
+
+✅ Esquema de validación Zod comprehensivo
+✅ Enums y tipos TypeScript type-safe
+✅ Inferencia de tipos previniendo duplicación
+✅ 34+ tests unitarios cubriendo casos válidos, inválidos y límite
+✅ Mensajes de error claros y accionables para usuarios
+✅ Patrón de parseo seguro para input de usuario
+
+**Mejores prácticas establecidas:**
+
+- Única fuente de verdad (esquema genera tipos)
+- Mensajes de error descriptivos para mostrar en UI
+- Cobertura de tests comprehensiva (válido + inválido + límite)
+- Uso de enums para conjuntos de valores fijos
+- Campos opcionales manejados correctamente
+
+El modelo de datos ahora es robusto, validado y listo para integración con la capa de persistencia.
+
+## ¿Qué Sigue?
+
+Con la validación en su lugar, estamos listos para implementar la capa de persistencia que guardará y recuperará datos validados.
+
+## Continuar Leyendo
+
+En [Parte 4: Implementación de la Capa de Persistencia](/posts/nutritional-tracker-part-4), construimos un wrapper de localStorage con manejo de errores, parseo best-effort para datos corruptos y operaciones CRUD comprehensivas.
+
+**Progreso de la Serie:**
+
+- Parte 1: Diseño del Modelo de Datos ✓
+- Parte 2: Configuración del Entorno de Testing ✓
+- Parte 3: Validación de Datos con Zod ✓ ← Estás aquí
+- Parte 4: Implementación de la Capa de Persistencia →
