@@ -1,52 +1,71 @@
 ---
-title: 'Side-Project: Nutritional Tracker 2'
+title: 'Building a Nutritional Tracker: Part 2 - Testing Environment Setup'
 published: 2025-11-06T00:00:00.000Z
-description: 'Continuation of the development of the side project for nutritional tracking. In this installment, we explore the implementation of persistent storage and validations.'
-updated: ''
+description: 'Configuring Vitest, Testing Library, and development tooling for a robust test-driven workflow in a React + Vite application.'
+series: 'nutritional-tracker'
+seriesOrder: 2
 tags:
-  - side-project
   - nutritional-tracker
-  - react
-  - vite
-  - development
-  - validations
-  - storage
-
+  - react-project
+  - testing
+  - vitest
 draft: false
 pin: 0
 toc: true
 lang: 'en'
-abbrlink: 'nutritional-tracker-side-project-2'
+abbrlink: 'nutritional-tracker-part-2'
 ---
 
 ## Introduction
 
-In this second part of the project, we will get our hands dirty and start building the foundation. We will prepare the development environment, configure the testing tools, and get everything ready to move forward with confidence.
+**Previous:** [Part 1: Data Model Design](/posts/nutritional-tracker-part-1)
 
-In the previous article, we defined the project's goal, the main functionalities, and the general structure we will follow. Now, with a React project using Vite and a defined data structure, it's time to take the next step: setting up the testing environment.
+### Recap: Part 1
 
-## Why is testing important?
+In the previous installment, we designed the core data model for our nutrition tracker. We defined the `Register` entity structure, made key architectural decisions (unified foods/beverages, flexible units, ternary sweetener field), and established the technical foundation using React + Vite with localStorage persistence.
 
-Testing not only helps us detect errors but also gives us the confidence that our code works as expected. Additionally, writing tests from the beginning forces us to think about how to structure the code in a cleaner and more modular way.
+### Goals for Part 2
 
-## Tools we will use
+In this installment, we'll build the testing foundation that will ensure code quality throughout development. Specifically, we'll:
 
-For our testing environment, we chose the following tools:
+- Configure Vitest as our test runner
+- Set up Testing Library for React component testing
+- Implement mocks for browser APIs (localStorage)
+- Establish automated test cleanup patterns
+- Create verification tests to confirm everything works
 
-| Package                  | Purpose                                           |
-|--------------------------|---------------------------------------------------|
-| `vitest`                | Fast and modern test runner (alternative to Jest). |
-| `@vitejs/plugin-react`  | Allows Vitest to understand JSX/TSX.              |
-| `@testing-library/react`| Facilitates testing React components.             |
-| `@testing-library/jest-dom` | Adds additional matchers like `toBeInTheDocument`. |
-| `@testing-library/user-event` | Simulates user interactions.                     |
-| `jsdom`                 | Simulates the browser DOM in Node.js.             |
+By the end, we'll have a robust testing environment ready for test-driven development.
 
-These tools will allow us to write unit and integration tests efficiently.
+## Why Testing Matters
 
-## Installing dependencies
+Testing provides three critical benefits:
 
-Open your terminal at the project's root and run:
+1. **Confidence**: Know your code works before deploying
+2. **Documentation**: Tests serve as living examples of how code should behave
+3. **Refactoring safety**: Change code fearlessly knowing tests will catch breaks
+
+Without tests, every change becomes risky. With tests, development accelerates.
+
+Additionally, writing tests from the start forces us to structure code in cleaner, more modular ways. Components become easier to reason about and maintain.
+
+## Testing Stack Overview
+
+We'll use modern, fast testing tools optimized for Vite projects:
+
+| Package | Purpose | Why This Tool? |
+|---------|---------|----------------|
+| `vitest` | Test runner | Fast, modern, Vite-native (no config conflicts) |
+| `@vitejs/plugin-react` | JSX support | Allows Vitest to parse React components |
+| `@testing-library/react` | Component testing | Best practices for user-centric tests |
+| `@testing-library/jest-dom` | Enhanced matchers | Readable assertions like `toBeInTheDocument()` |
+| `@testing-library/user-event` | User simulation | Realistic interaction testing |
+| `jsdom` | DOM simulation | Run browser tests in Node.js |
+
+## Installation and Setup
+
+### Installing Dependencies
+
+Open your terminal at the project root and install the testing stack:
 
 ```bash
 npm install -D vitest @vitejs/plugin-react
@@ -54,19 +73,27 @@ npm install -D @testing-library/react @testing-library/jest-dom @testing-library
 npm install -D jsdom
 ```
 
-## Note on installing dependencies
+### Understanding Development Dependencies
 
-When installing testing dependencies, we use the `-D` (or `--save-dev`) flag. This indicates that these dependencies are only needed for the development environment and not for the production application. It's a good practice to separate development dependencies from production ones to keep the project organized and optimize the final package size.
+Notice we use the `-D` (or `--save-dev`) flag. This marks these packages as **development dependencies**—required only during development, not in production.
 
-## Configuring Vitest
+**Benefits:**
 
-With the dependencies ready, we will configure Vitest to integrate it correctly into the project. This step is key to ensuring our tests run smoothly.
+- Keeps production bundle smaller
+- Separates concerns (dev tools vs app code)
+- Makes dependencies easier to manage
 
-### Create the configuration file
+This is a best practice: testing tools, linters, and build tools should always be dev dependencies.
 
-Create a file named `vitest.config.ts` at the project's root with this content:
+## Vitest Configuration
+
+### Creating the Config File
+
+This configuration tells Vitest how to run tests in a React environment. Create `vitest.config.ts` at the project root:
 
 ```typescript
+// vitest.config.ts
+// Configures Vitest to work with React and simulate browser environment
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
@@ -77,9 +104,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'jsdom', // Simulates the browser
-    globals: true, // Allows using describe/it/expect without importing them
-    setupFiles: './tests/setup.ts',
+    environment: 'jsdom', // Simulates browser DOM
+    globals: true, // No need to import describe/it/expect
+    setupFiles: './tests/setup.ts', // Runs before each test file
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -99,32 +126,39 @@ export default defineConfig({
 })
 ```
 
-### Why this configuration?
+### Configuration Breakdown
 
-- `globals: true` → Avoids importing `describe`, `it`, `expect` in every file.
-- `setupFiles` → Centralizes common configuration.
-- `coverage` → Enables coverage reports.
-- `alias` → Simplifies absolute imports like `@/components/X`.
+**Each option explained:**
 
-## Configuring the setup file
+- `plugins: [react()]` → Enables JSX/TSX parsing in test files
+- `environment: 'jsdom'` → Simulates browser APIs (document, window, localStorage)
+- `globals: true` → Use `describe`, `it`, `expect` without importing them
+- `setupFiles` → Runs setup code before each test file (matchers, mocks)
+- `coverage` → Tracks which lines of code are tested
+  - `provider: 'v8'` → Fast native coverage tool
+  - `reporter` → Output formats (terminal, JSON, HTML report)
+  - `exclude` → Ignore these paths in coverage
+- `alias: { '@': './src' }` → Import like `@/components/Button` instead of `../../components/Button`
 
-Now we will create a configuration file to prepare the testing environment. It will extend the matchers, clean the DOM between tests, and mock `localStorage`.
+## Test Setup File
 
-### Create the setup file
+### Creating the Setup File
 
-Create the `tests/` folder at the project's root and inside it, a `setup.ts` file with this content:
+The setup file prepares the testing environment. Create `tests/setup.ts`:
 
 ```typescript
+// tests/setup.ts
+// Runs before each test file to prepare the environment
 import { cleanup } from '@testing-library/react'
-import { afterEach, expect } from 'vitest'
+import { afterEach, beforeEach } from 'vitest'
 import '@testing-library/jest-dom'
 
-// Cleans the DOM after each test
+// Clean up DOM after each test to prevent side effects
 afterEach(() => {
   cleanup()
 })
 
-// Mock localStorage
+// Mock localStorage for Node.js environment
 const localStorageMock = (() => {
   let store: Record<string, string> = {}
 
@@ -144,22 +178,60 @@ const localStorageMock = (() => {
 
 globalThis.localStorage = localStorageMock as Storage
 
-// Cleans localStorage before each test
+// Reset localStorage before each test
 beforeEach(() => {
   localStorage.clear()
 })
 ```
 
-### What does this file do?
+### Setup Components Explained
 
-- Extends `expect` with matchers like `toBeInTheDocument()` and `toHaveValue()`.
-- Cleans the DOM after each test to avoid side effects.
-- Mocks `localStorage` to work in Node.js.
-- Restores its state before each test.
+### 1. Automatic Cleanup
 
-## Update `package.json` with testing scripts
+```typescript
+afterEach(() => {
+  cleanup()
+})
+```
 
-Add these scripts to your `package.json`:
+Removes all rendered components from the DOM after each test. Prevents tests from affecting each other.
+
+### 2. Extended Matchers
+
+```typescript
+import '@testing-library/jest-dom'
+```
+
+Adds readable assertions like:
+
+- `expect(element).toBeInTheDocument()`
+- `expect(input).toHaveValue('text')`
+- `expect(button).toBeDisabled()`
+
+### 3. localStorage Mock
+
+```typescript
+const localStorageMock = (() => {
+  let store: Record<string, string> = {}
+  return { getItem, setItem, removeItem, clear }
+})()
+```
+
+Node.js doesn't have `localStorage` (it's a browser API). This mock simulates it with an in-memory object.
+
+### 4. Storage Reset
+
+```typescript
+beforeEach(() => {
+  localStorage.clear()
+})
+```
+
+Each test starts with empty storage. Ensures tests are isolated and repeatable.
+
+## Package Scripts
+
+Add these scripts to `package.json` for convenient test execution:
 
 ```json
 {
@@ -172,23 +244,28 @@ Add these scripts to your `package.json`:
 }
 ```
 
-### What does each script do?
+### Script Reference
 
-- `test` → Runs the tests in interactive mode (reruns on save).
-- `test:ui` → Opens Vitest's visual interface in the browser.
-- `test:coverage` → Generates the coverage report.
-- `test:watch` → Forces watch mode explicitly.
+| Script | Behavior | Use Case |
+|--------|----------|----------|
+| `test` | Interactive mode (reruns on save) | Primary development workflow |
+| `test:ui` | Opens visual interface in browser | Debugging, exploring test results |
+| `test:coverage` | Generates coverage report | CI/CD, checking test completeness |
+| `test:watch` | Explicit watch mode | Alternative to `test` |
 
-## Verify the testing environment works correctly
+## Verification
 
-To confirm everything is set up correctly, create an example test in `tests/example.test.ts`:
+### Creating a Test Suite
+
+Let's verify everything works. Create `tests/example.test.ts`:
 
 ```typescript
 // tests/example.test.ts
+// Verification tests to confirm setup is working correctly
 import { describe, expect, it } from 'vitest'
 
-describe('Testing setup', () => {
-  it('should pass this basic test', () => {
+describe('Testing setup verification', () => {
+  it('should pass basic arithmetic test', () => {
     expect(1 + 1).toBe(2)
   })
 
@@ -203,65 +280,91 @@ describe('Testing setup', () => {
   it('should have mocked localStorage', () => {
     localStorage.setItem('test', 'value')
     expect(localStorage.getItem('test')).toBe('value')
+
+    localStorage.clear()
+    expect(localStorage.getItem('test')).toBeNull()
   })
 })
 ```
 
-Then, run the tests:
+### Running Tests
+
+Execute the test suite:
 
 ```bash
 npm run test
 ```
 
-If everything is working, you should see a result like this:
+### Expected Output
+
+You should see:
 
 ```bash
-✓ tests/example.test.ts (3)
-  ✓ Testing setup (3)
-    ✓ should pass this basic test
+✓ tests/example.test.ts (3) 450ms
+  ✓ Testing setup verification (3)
+    ✓ should pass basic arithmetic test
     ✓ should have access to jest-dom matchers
     ✓ should have mocked localStorage
 
 Test Files  1 passed (1)
 Tests       3 passed (3)
+Start at    10:30:15
+Duration    892ms
+
+PASS  Waiting for file changes...
 ```
 
-✅ With this confirmed, the testing environment is officially ready. The next step will be to install libraries for form handling and validations, and prepare the initial scaffolding.
+**What each line means:**
 
-## Configuration flow diagram
+- `✓ tests/example.test.ts (3)` → Test file with 3 passing tests
+- `450ms` → Execution time for this file
+- `Duration 892ms` → Total test suite duration
+- `PASS  Waiting...` → Watch mode active, will rerun on file changes
 
-To better visualize the testing environment setup process, here is a flow diagram:
+**If tests fail**, Vitest shows:
+
+- Expected vs actual values
+- Stack traces pointing to the failure
+- Code snippets with context
+
+✅ **Success!** The testing environment is fully operational.
+
+## Configuration Flow
+
+This diagram visualizes the complete setup process:
 
 ```mermaid
 graph TD
     A[Start] --> B[Install dependencies]
     B --> C[Create vitest.config.ts]
     C --> D[Create tests/setup.ts]
-    D --> E[Update package.json]
-    E --> F[Create example test]
-    F --> G[Run tests]
-    G --> H[Environment ready]
+    D --> E[Update package.json scripts]
+    E --> F[Create verification test]
+    F --> G[Run npm run test]
+    G --> H{All tests pass?}
+    H -->|Yes| I[Environment ready ✓]
+    H -->|No| J[Check troubleshooting guide]
+    J --> G
+
+    style I fill:#90EE90
+    style J fill:#FFB6C6
 ```
 
-This diagram summarizes the key steps to configure the testing environment clearly and visually.
+## Troubleshooting Guide
 
-## Lessons Learned and Problem Solving
+During setup, several challenges may emerge. Here's how to solve them:
 
-During the testing environment setup, several challenges arose that required adjustments and solutions. Here is the process, the errors encountered, and how they were resolved.
+### Problem 1: ES Modules Compatibility
 
-### Problem 1: Compatibility with ES Modules
+**Symptom:**
 
-#### Problem Context (ES Modules)
+```text
+ReferenceError: __dirname is not defined
+```
 
-The project uses `"type": "module"` in `package.json`, which disables the use of variables like `__dirname`.
+**Cause:** Project uses `"type": "module"` in `package.json`, which disables CommonJS globals like `__dirname`.
 
-#### Error Encountered (ES Modules)
-
-When trying to configure `vitest.config.ts`, the use of `__dirname` caused errors because it is not available in ES Modules environments.
-
-#### Solution Implemented (ES Modules)
-
-`import.meta.url` was used along with `fileURLToPath` to obtain absolute paths:
+**Solution:**
 
 ```typescript
 import path from 'node:path'
@@ -270,95 +373,167 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 ```
 
-### Problem 2: Changes in the `@testing-library/jest-dom` API
+**Why it works:** `import.meta.url` provides the current file's URL in ES modules. We convert it to a path and extract the directory.
 
-#### Problem Context (jest-dom)
+---
 
-The `@testing-library/jest-dom` library updated its API, causing incompatibilities when extending the matchers.
+### Problem 2: jest-dom Matcher Types
 
-#### Error Encountered (jest-dom)
-
-The direct use of `expect.extend(matchers)` did not work as expected.
-
-#### Solution Implemented (jest-dom)
-
-A more consistent automatic import was used:
+**Symptom:**
 
 ```typescript
-import '@testing-library/jest-dom'
+Property 'toBeInTheDocument' does not exist on type 'Assertion'
 ```
 
-### Problem 3: Type Conflicts with Vitest and TypeScript
+**Cause:** Breaking changes in `@testing-library/jest-dom` v6+ modified how matchers are extended.
 
-#### Problem Context (TypeScript)
+**Solution:**
 
-Vitest has subtle differences with Jest in global types, which caused conflicts when using `jest-dom` matchers.
+```typescript
+// ❌ Don't use this (old API)
+import * as matchers from '@testing-library/jest-dom/matchers'
 
-#### Error Encountered (TypeScript)
+// ✅ Use automatic import instead
+import '@testing-library/jest-dom'
 
-Type errors when compiling the project with TypeScript.
+expect.extend(matchers)
+```
 
-#### Solution Implemented (TypeScript)
+**Why it works:** The automatic import handles type declarations correctly and is the recommended approach.
 
-A custom type declaration file was created:
+---
+
+### Problem 3: TypeScript Type Conflicts
+
+**Symptom:**
+
+```text
+Type 'Assertion' is not assignable to type 'Matchers'
+```
+
+**Cause:** Vitest has subtle differences from Jest in global types.
+
+**Solution:**
+Create `tests/vitest.d.ts`:
 
 ```typescript
 // tests/vitest.d.ts
+// Extends Vitest types to include jest-dom matchers
 declare global {
   namespace Vi {
-    interface Assertion extends jest.Matchers<string> {}
-    interface AsymmetricMatchers extends jest.Matchers<string> {}
+    interface Assertion extends jest.Matchers<void> {}
+    interface AsymmetricMatchers extends jest.Matchers<void> {}
   }
 }
+
 export {}
 ```
 
-### Problem 4: Mocking `localStorage`
+**Why it works:** This declaration file merges jest-dom types into Vitest's assertion interface.
 
-#### Problem Context (localStorage)
+---
 
-The `localStorage` mock did not work correctly in some modern environments.
+### Problem 4: localStorage Mock Issues
 
-#### Error Encountered (localStorage)
+**Symptom:**
 
-The use of `global.localStorage` caused warnings.
+```text
+localStorage is not defined
+```
 
-#### Solution Implemented (localStorage)
+or warnings about `global.localStorage`.
 
-`globalThis.localStorage` was used for better compatibility:
+**Cause:** Node.js doesn't have browser APIs. Mock must be attached correctly.
+
+**Solution:**
 
 ```typescript
-const localStorageMock = (() => {
-  let store: Record<string, string> = {}
+// ❌ Don't use this
+global.localStorage = localStorageMock
 
-  return {
-    getItem: (key: string) => store[key] || null,
-    setItem: (key: string, value: string) => {
-      store[key] = value.toString()
-    },
-    removeItem: (key: string) => {
-      delete store[key]
-    },
-    clear: () => {
-      store = {}
-    },
-  }
-})()
-
+// ✅ Use this for better compatibility
 globalThis.localStorage = localStorageMock as Storage
 ```
 
-### Lessons Learned
+**Why it works:** `globalThis` is the standardized way to access the global object in all JavaScript environments (browser, Node, workers).
 
-1. **Verify Library Compatibility**:
-   - Review changelogs and breaking changes before implementing.
-2. **Incremental Configuration**:
-   - Implement and verify each step before moving forward.
-3. **Document Problems**:
-   - Keep a record of the errors encountered and their solutions.
-4. **Testing the Testing**:
-   - Verify that the testing environment works correctly before using it.
+---
 
-### Current State
+### Problem 5: Tests Not Running
 
-The development environment is fully functional and ready for the next phase: **Data Models and Validations**.
+**Symptom:**
+
+```text
+No test files found
+```
+
+**Cause:** Vitest can't find your test files.
+
+**Solution:**
+
+- Verify test files match the pattern: `*.test.ts`, `*.test.tsx`, `*.spec.ts`
+- Check they're in the correct location (`tests/` or `src/`)
+- Ensure file extensions are included in `include` pattern (default covers most cases)
+
+---
+
+## Test Execution Flow
+
+This diagram shows what happens when you run tests:
+
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant V as Vitest
+    participant S as setup.ts
+    participant J as jsdom
+    participant T as Test File
+
+    Dev->>V: npm run test
+    V->>S: Load setup file
+    S->>J: Configure jsdom environment
+    S->>S: Extend expect matchers
+    S->>S: Mock localStorage
+    V->>T: Execute test suite
+    T->>J: Query DOM elements
+    T->>S: Use extended matchers
+    T->>V: Return results
+    V->>Dev: Display pass/fail ✓
+
+    Note over V,T: Cleanup runs after each test
+```
+
+## Key Takeaways
+
+At this point, you have:
+
+✅ A fully configured Vitest environment
+✅ Mock implementation for localStorage
+✅ Extended matchers from jest-dom
+✅ Automated test cleanup between runs
+✅ Multiple test execution modes (watch, UI, coverage)
+
+**Best practices established:**
+
+- Always clean up after tests to avoid side effects
+- Mock browser APIs that aren't available in Node
+- Use descriptive test names that explain behavior
+- Separate test setup from test execution
+- Keep tests isolated and repeatable
+
+The testing foundation is now solid enough to support **Test-Driven Development (TDD)** for the rest of the project.
+
+## What's Next?
+
+With a robust testing environment in place, we're ready to implement the core data layer.
+
+## Continue Reading
+
+In [Part 3: Data Validation with Zod](/posts/nutritional-tracker-part-3), we implement robust validation schemas, define TypeScript types, and write comprehensive unit tests for the data model.
+
+**Series Progress:**
+
+- Part 1: Data Model Design ✓
+- Part 2: Testing Environment Setup ✓ ← You are here
+- Part 3: Data Validation with Zod →
+- Part 4: Persistence Layer Implementation
