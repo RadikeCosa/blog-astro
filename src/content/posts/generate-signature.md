@@ -74,6 +74,8 @@ graph LR
 
 ### Implementación en JavaScript
 
+Primero creamos una variable y guardamos en ella la primera letra del nombre convertida a mayuscula. Luego inicializamos una variable con string vacio llamada 'prefix' que guardar el prefijo correspondiente segun la letra inicial del nombre, pasando por una serie de condicionales if-else if para asignarle el valor correcto. Finalmente retornamos la firma formateada usando template literals.
+
 ```javascript
 function generateSignature(name, title, company) {
   const firstNameLetter = name[0].toUpperCase()
@@ -126,25 +128,6 @@ mindmap
 ## 📊 Análisis de Complejidad
 
 ### Complejidad Temporal: O(1)
-
-```mermaid
-graph LR
-    A["Access name[0]"] -->|O1| B["toUpperCase<br>conversion"]
-    B -->|O1| C["Conditional<br>comparisons"]
-    C -->|O1| D["String<br>concatenation"]
-    D -->|O1| E["Return result"]
-
-    %% Estilos con fuente más grande
-    style A fill:#e1f5ff, stroke:#333, stroke-width:2px, font-size:16px, font-weight:bold
-    style B fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
-    style C fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
-    style D fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
-    style E fill:#e1f5ff, stroke:#333, stroke-width:2px, font-size:16px, font-weight:bold
-
-    %% Clase para nodos intermedios (opcional)
-    classDef step fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
-    class B,C,D step
-```
 
 - **Acceso al primer carácter:** O(1)
 - **Conversión a mayúscula:** O(1)
@@ -287,21 +270,6 @@ testCases.forEach(({ input, expected }, index) => {
 ## 🔗 Recursos y Referencias
 
 - [String.prototype.toUpperCase() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase)
-- [String.prototype.charAt() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
 - [Template Literals - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals)
-- [Expresiones regulares en JS - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions)
-
-## 💭 Reflexiones Finales
-
-Este ejercicio, aunque simple en apariencia, nos permite practicar conceptos fundamentales:
-
-- **Lógica condicional clara y mantenible**
-- **Manejo de strings de forma eficiente**
-- **Consideración de casos edge desde el inicio**
-- **Optimización sin sobre-ingeniería**
-
-La solución propuesta es directa y legible, con complejidad temporal y espacial constante, lo que la hace ideal para producción.
 
 ---
-
-**¿Te gustó este artículo?** Compártelo y sígueme para más soluciones de desafíos de programación. 🚀
