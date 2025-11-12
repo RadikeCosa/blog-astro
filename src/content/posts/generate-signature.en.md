@@ -96,27 +96,6 @@ function generateSignature(name, title, company) {
 }
 ```
 
-### TypeScript Implementation
-
-```typescript
-function generateSignature(name: string, title: string, company: string): string {
-  const firstNameLetter = name[0].toUpperCase()
-  let prefix = ''
-
-  if (firstNameLetter >= 'A' && firstNameLetter <= 'I') {
-    prefix = '>>'
-  }
-  else if (firstNameLetter >= 'J' && firstNameLetter <= 'R') {
-    prefix = '--'
-  }
-  else if (firstNameLetter >= 'S' && firstNameLetter <= 'Z') {
-    prefix = '::'
-  }
-
-  return `${prefix}${name}, ${title} at ${company}`
-}
-```
-
 ## 🎯 Edge Cases and Considerations
 
 ### Special Cases Table
@@ -153,12 +132,16 @@ mindmap
 
 ```mermaid
 graph LR
-    A[Access name[0]] -->|O1| B[toUpperCase conversion]
-    B -->|O1| C[Conditional comparisons]
-    C -->|O1| D[String concatenation]
-    D -->|O1| E[Return]
-    style A fill:#e1f5ff
-    style E fill:#e1f5ff
+    A["Access name[0]"] -->|O1| B["toUpperCase conversion"]
+    B -->|O1| C["Conditional comparisons"]
+    C -->|O1| D["String concatenation"]
+    D -->|O1| E["Return result"]
+
+    style A fill:#e1f5ff, stroke:#333, stroke-width:1px
+    style B fill:#fff2e8, stroke:#333, stroke-width:1px
+    style C fill:#fff2e8, stroke:#333, stroke-width:1px
+    style D fill:#fff2e8, stroke:#333, stroke-width:1px
+    style E fill:#e1f5ff, stroke:#333, stroke-width:1px
 ```
 
 - **First character access:** O(1)
