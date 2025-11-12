@@ -129,16 +129,21 @@ mindmap
 
 ```mermaid
 graph LR
-    A["Access name[0]"] -->|O1| B["toUpperCase conversion"]
-    B -->|O1| C["Conditional comparisons"]
-    C -->|O1| D["String concatenation"]
+    A["Access name[0]"] -->|O1| B["toUpperCase<br>conversion"]
+    B -->|O1| C["Conditional<br>comparisons"]
+    C -->|O1| D["String<br>concatenation"]
     D -->|O1| E["Return result"]
 
-    style A fill:#e1f5ff, stroke:#333, stroke-width:1px
-    style B fill:#fff2e8, stroke:#333, stroke-width:1px
-    style C fill:#fff2e8, stroke:#333, stroke-width:1px
-    style D fill:#fff2e8, stroke:#333, stroke-width:1px
-    style E fill:#e1f5ff, stroke:#333, stroke-width:1px
+    %% Estilos con fuente más grande
+    style A fill:#e1f5ff, stroke:#333, stroke-width:2px, font-size:16px, font-weight:bold
+    style B fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
+    style C fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
+    style D fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
+    style E fill:#e1f5ff, stroke:#333, stroke-width:2px, font-size:16px, font-weight:bold
+
+    %% Clase para nodos intermedios (opcional)
+    classDef step fill:#fff2e8, stroke:#333, stroke-width:1px, font-size:15px
+    class B,C,D step
 ```
 
 - **Acceso al primer carácter:** O(1)
