@@ -5,7 +5,7 @@ description: 'Solution to the FreeCodeCamp daily challenge: implement an image s
 updated: ''
 tags:
   - freecodecamp
-  - daily challenge
+  - dailyc-challenge
 draft: false
 pin: 0
 toc: true

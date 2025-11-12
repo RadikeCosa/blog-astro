@@ -1,14 +1,11 @@
 ---
-title: Comparar Versiones - LeetCode #165
+title: 'Comparar Versiones - LeetCode #165'
 published: 2025-11-08T14:09:53.484Z
 description: 'Resolviendo el problema Compare Version Number de LeetCode. Análisis paso a paso, múltiples soluciones y optimizaciones en JavaScript.'
 updated: ''
 tags:
   - leetcode
-  - algoritmos
-  - two-pointers
-  - strings
-  - medium
+
 draft: false
 pin: 0
 toc: true

@@ -5,7 +5,7 @@ description: 'Solución al desafío diario de FreeCodeCamp: implementar una func
 updated: ''
 tags:
   - freecodecamp
-  - daily challenge
+  - daily-challenge
 draft: false
 pin: 0
 toc: true
