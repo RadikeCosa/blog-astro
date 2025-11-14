@@ -27,11 +27,11 @@ Write a function that, given an array and a number $n$, returns the array **shif
 ### Examples
 
 ```javascript
-shiftArray([1, 2, 3], 1); // → [2, 3, 1]
-shiftArray([1, 2, 3], -1); // → [3, 1, 2]
-shiftArray(["alpha", "bravo", "charlie"], 5); // → ["charlie", "alpha", "bravo"]
-shiftArray(["alpha", "bravo", "charlie"], -11); // → ["bravo", "charlie", "alpha"]
-shiftArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 15); // → [5, 6, 7, 8, 9, 0, 1, 2, 3, 4]
+shiftArray([1, 2, 3], 1) // → [2, 3, 1]
+shiftArray([1, 2, 3], -1) // → [3, 1, 2]
+shiftArray(['alpha', 'bravo', 'charlie'], 5) // → ["charlie", "alpha", "bravo"]
+shiftArray(['alpha', 'bravo', 'charlie'], -11) // → ["bravo", "charlie", "alpha"]
+shiftArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 15) // → [5, 6, 7, 8, 9, 0, 1, 2, 3, 4]
 ```
 
 ### Shift Visualization
@@ -109,8 +109,9 @@ flowchart TD
 
 ```javascript
 function shiftArray(arr, n) {
-  const length = arr.length;
-  if (length === 0) return arr;
+  const length = arr.length
+  if (length === 0)
+    return arr
 } // Empty array
 ```
 
@@ -118,11 +119,11 @@ function shiftArray(arr, n) {
 
 ```javascript
 // Normalize n to be within array bounds
-n = n % length;
+n = n % length
 
 // Convert negative shifts to positive equivalent
 if (n < 0) {
-  n += length;
+  n += length
 }
 ```
 
@@ -192,22 +193,23 @@ graph TB
  * @returns {Array} The shifted array
  */
 function shiftArray(arr, n) {
-  const length = arr.length;
-  if (length === 0) return arr;
+  const length = arr.length
+  if (length === 0)
+    return arr
 
   // Normalize n within array bounds
-  n = n % length;
+  n = n % length
   if (n < 0) {
-    n += length; // Convert negative shifts to positive equivalent
+    n += length // Convert negative shifts to positive equivalent
   }
 
   // Split and concatenate the array
-  const part1 = arr.slice(n);
-  const part2 = arr.slice(0, n);
-  return part1.concat(part2);
+  const part1 = arr.slice(n)
+  const part2 = arr.slice(0, n)
+  return part1.concat(part2)
 }
 
-export default shiftArray;
+export default shiftArray
 ```
 
 ## 📊 Complexity Analysis
@@ -262,31 +264,31 @@ graph TD
 ### Test Cases
 
 ```javascript
-describe("Shift Array - Edge Cases", () => {
-  it("Empty array", () => {
-    expect(shiftArray([], 5)).toEqual([]);
-  });
+describe('Shift Array - Edge Cases', () => {
+  it('Empty array', () => {
+    expect(shiftArray([], 5)).toEqual([])
+  })
 
-  it("Zero shift", () => {
-    expect(shiftArray([1, 2, 3], 0)).toEqual([1, 2, 3]);
-  });
+  it('Zero shift', () => {
+    expect(shiftArray([1, 2, 3], 0)).toEqual([1, 2, 3])
+  })
 
-  it("Shift equal to length", () => {
-    expect(shiftArray([1, 2, 3], 3)).toEqual([1, 2, 3]);
-  });
+  it('Shift equal to length', () => {
+    expect(shiftArray([1, 2, 3], 3)).toEqual([1, 2, 3])
+  })
 
-  it("Shift larger than length", () => {
-    expect(shiftArray([1, 2, 3], 7)).toEqual([2, 3, 1]); // 7 % 3 = 1
-  });
+  it('Shift larger than length', () => {
+    expect(shiftArray([1, 2, 3], 7)).toEqual([2, 3, 1]) // 7 % 3 = 1
+  })
 
-  it("Large negative shift", () => {
-    expect(shiftArray([1, 2, 3], -11)).toEqual([2, 3, 1]); // -11 % 3 = -2, -2 + 3 = 1
-  });
+  it('Large negative shift', () => {
+    expect(shiftArray([1, 2, 3], -11)).toEqual([2, 3, 1]) // -11 % 3 = -2, -2 + 3 = 1
+  })
 
-  it("Single element array", () => {
-    expect(shiftArray([42], 100)).toEqual([42]);
-  });
-});
+  it('Single element array', () => {
+    expect(shiftArray([42], 100)).toEqual([42])
+  })
+})
 ```
 
 ## 🚀 Optimizations and Alternatives
@@ -301,24 +303,25 @@ $$
 
 ```javascript
 function shiftArrayInPlace(arr, n) {
-  const length = arr.length;
-  if (length === 0) return arr;
+  const length = arr.length
+  if (length === 0)
+    return arr
 
-  n = ((n % length) + length) % length;
+  n = ((n % length) + length) % length
 
   // Triple reversal
-  reverse(arr, 0, n - 1); // Reverse first part
-  reverse(arr, n, length - 1); // Reverse second part
-  reverse(arr, 0, length - 1); // Reverse entire array
+  reverse(arr, 0, n - 1) // Reverse first part
+  reverse(arr, n, length - 1) // Reverse second part
+  reverse(arr, 0, length - 1) // Reverse entire array
 
-  return arr;
+  return arr
 }
 
 function reverse(arr, start, end) {
   while (start < end) {
-    [arr[start], arr[end]] = [arr[end], arr[start]];
-    start++;
-    end--;
+    [arr[start], arr[end]] = [arr[end], arr[start]]
+    start++
+    end--
   }
 }
 ```
@@ -329,17 +332,18 @@ function reverse(arr, start, end) {
 
 ```javascript
 function shiftArrayDeque(arr, n) {
-  const length = arr.length;
-  if (length === 0) return arr;
+  const length = arr.length
+  if (length === 0)
+    return arr
 
-  n = ((n % length) + length) % length;
+  n = ((n % length) + length) % length
 
-  const deque = [...arr];
+  const deque = [...arr]
   for (let i = 0; i < n; i++) {
-    deque.unshift(deque.pop()); // Move last to first
+    deque.unshift(deque.pop()) // Move last to first
   }
 
-  return deque;
+  return deque
 }
 ```
 
