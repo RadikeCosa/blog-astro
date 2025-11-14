@@ -1,5 +1,5 @@
 ---
-title: "Days Until Weekend - FreeCodeCamp Daily Challenge"
+title: "Dias Hasta El Fin de Semana- FreeCodeCamp Daily Challenge"
 published: 2025-11-14T13:10:00.000Z
 description: "Análisis de solución al problema Days Until Weekend, con calendario visual, explicación paso a paso y uso eficiente de fechas en JS."
 tags:
