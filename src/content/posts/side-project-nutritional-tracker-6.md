@@ -1,8 +1,8 @@
 ---
-title: "Construyendo un Nutritional Tracker: Parte 6 - Arquitectura Visual y Accesibilidad"
+title: "Construyendo un Nutritional Tracker: Parte 6 — Arquitectura Visual y Accesibilidad"
 published: 2025-11-17T20:58:05.580Z
 description: "Cómo diseñar una UI mobile-first, accesible y escalable usando TailwindCSS v4, componentes reutilizables y testing visual con Storybook."
-updated: ''
+updated: 2025-11-17T22:38:20Z
 tags:
   - nutritional-tracker
   - react-project
@@ -18,233 +18,200 @@ lang: "es"
 abbrlink: "side-project-nutritional-tracker-6"
 ---
 
-## Construyendo la UI Visual y Accesibilidad — Nutrition Tracker
+## Construyendo un Nutritional Tracker: Parte 6 — Arquitectura Visual y Accesibilidad
 
-Este capítulo es el relato de las decisiones: qué problema resolvió cada cambio, qué alternativas descarté y qué señales usé para saber que íbamos por buen camino.
+## Introducción
+
+Tras completar un formulario con validación y persistencia, surgió la pregunta inevitable: ¿cómo se ve esto en manos del usuario?
+
+La respuesta rápida fue honesta: mal. HTML sin estilos produce interfaces frustrantes: elementos táctiles pequeños, contraste bajo y navegación poco clara. En esta entrega documenté cómo llevé la UI desde "cruda" a una capa visual consistente, mobile-first, accesible y fácil de mantener.
+
+Aquí encontrarás las decisiones clave, fragmentos de implementación y pruebas que me dieron confianza para entregar una experiencia usable en móviles y escritorio.
+
+(Coloca aquí la captura del formulario ANTES de aplicar estilos — HTML crudo, desalineado)
+
+(Coloca aquí la captura del formulario DESPUÉS — móvil, limpio y moderno)
 
 ---
 
-## Objetivos (y el motivo detrás)
+## Mis lineamientos de diseño (mi biblia)
 
-- Mobile-first: porque el uso real ocurre en pantallas pequeñas. Un dedo, poca paciencia, y sesiones de segundos. Los targets táctiles de 48px+ no son un capricho: evitan toques fallidos y fatiga.
-- Accesibilidad práctica: readers, teclado, contraste. No para “cumplir”, sino porque los errores más costosos ocurren cuando alguien no puede completar una tarea simple.
-- Consistencia visual: mismo lenguaje en colores, tipografías y espaciados. La UI es un sistema; si cada pieza “habla” distinto, la carga cognitiva aumenta.
-- Documentación ligera: para que el yo del futuro (o cualquier colaborador) pueda continuar sin romper lo que ya funciona.
+Antes de tocar una clase de Tailwind, definí principios que guiaron todas las decisiones. Los tengo en un archivo llamado `lineamientos-estilos.md` y resumo lo esencial:
+
+### Principios fundamentales
+
+- Mobile‑first por defecto (alto % de uso móvil).
+- Targets táctiles ≥ 48 px (mejor usabilidad y accesibilidad).
+- Contraste mínimo WCAG AA.
+- Labels siempre visibles — nunca usar placeholder como única etiqueta.
+- Feedback inmediato: validación inline y mensajes claros.
+
+### Decisiones específicas para inputs
+
+- Formularios cortos: ideal 3–5 campos por pantalla.
+- Evitar selects para listas muy cortas → preferir radios.
+- Aprovechar tipos nativos: `type="number"`, `type="date"`, etc.
+- En móvil: layout de columna única para facilitar el scroll y foco.
+
+(Coloca aquí un fragmento o captura del documento `lineamientos-estilos.md`)
 
 ---
 
-## Decisión 1: TailwindCSS v4
+## Por qué TailwindCSS v4
 
-Problema: necesitaba velocidad para iterar y una forma de mantener decisiones de diseño en un solo lugar.
+La elección fue pragmática: rapidez de prototipado y consistencia sin sobresalto de CSS personalizado.
 
-Por qué Tailwind v4: la nueva sintaxis con `@import "tailwindcss"` simplifica el arranque, el plugin `@tailwindcss/postcss` funciona bien con Vite, y el theme centraliza colores, tipografías y breakpoints. Pasé de “¿dónde estaba ese estilo?” a “está en el theme”.
+Comparación rápida:
 
-Señales de que funcionó:
+- CSS Modules: control total, pero mucho boilerplate.
+- Styled Components: integración con React, pero añade peso.
+- CSS vanilla: cero dependencias, pero lento para iterar.
+- Tailwind v4: iteración ultrarrápida, pequeño bundle y mentalidad mobile-first.
 
-- Reduje CSS ad hoc en componentes.
-- Pude ajustar espaciados y tipografías de forma global sin side effects.
+### Configuración esencial (tailwind.config.cjs)
 
-Ejemplo base en `src/styles/tailwind.css`:
-
-```css
-@import "tailwindcss";
-
-@layer base {
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-```
-
-```js
-/** @type {import('tailwindcss').Config} */
+```javascript
+// tailwind.config.cjs (extracto)
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#0ea5e9', // azul principal
-          light: '#38bdf8', // azul claro
-          dark: '#0369a1', // azul oscuro
-        },
-        secondary: {
-          DEFAULT: '#f59e42', // naranja secundario
-          light: '#fbbf24',
-          dark: '#b45309',
-        },
-        error: {
-          DEFAULT: '#ef4444', // rojo error
-          bg: '#fee2e2', // fondo error
-        },
-        success: {
-          DEFAULT: '#22c55e', // verde éxito
-          bg: '#dcfce7', // fondo éxito
-        },
-        neutral: {
-          50: '#f9fafb',
-          100: '#f3f4f6',
-          200: '#e5e7eb',
-          300: '#d1d5db',
-          400: '#9ca3af',
-          500: '#6b7280',
-          600: '#4b5563',
-          700: '#374151',
-          800: '#1f2937',
-          900: '#111827',
-        },
+        primary: { DEFAULT: '#0ea5e9', light: '#38bdf8', dark: '#0369a1' },
+        secondary: { DEFAULT: '#f59e42', light: '#fbbf24', dark: '#b45309' },
+        error: { DEFAULT: '#ef4444', bg: '#fee2e2' },
+        success: { DEFAULT: '#22c55e', bg: '#dcfce7' },
       },
       fontFamily: {
-        sans: [
-          'Inter',
-          'system-ui',
-          'Avenir',
-          'Helvetica',
-          'Arial',
-          'sans-serif',
-        ],
-        heading: ['Montserrat', 'Inter', 'system-ui', 'sans-serif'],
-      },
-      spacing: {
-        xs: '0.5rem', // 8px
-        sm: '1rem', // 16px
-        md: '1.5rem', // 24px
-        lg: '2rem', // 32px
-        xl: '3rem', // 48px
-      },
-      borderRadius: {
-        sm: '0.375rem', // 6px
-        md: '0.5rem', // 8px
-        lg: '1rem', // 16px
-      },
-      screens: {
-        'xs': '400px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px',
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        heading: ['Montserrat', 'Inter', 'sans-serif'],
       },
     },
   },
-  plugins: [],
 }
 ```
 
-### Cómo leer este config (rápido)
-
-- Paleta: `theme.extend.colors` define colores de marca y estados (`primary`, `secondary`, `error`, `success`, `neutral`). Úsalos con utilidades como `text-primary`, `bg-primary-light`, `border-error` y la escala `neutral` para fondos/separadores.
-- Tipografías: `theme.extend.fontFamily` fija `sans` (texto base) y `heading` (títulos). En la UI se aplica `font-sans` al cuerpo y la familia `heading` en componentes de encabezado.
-- Breakpoints: `theme.extend.screens` centraliza los cortes (`xs` → `2xl`). Aplica estilos responsivos con prefijos como `sm:`, `md:`, `lg:` para mantener el enfoque mobile-first.
+(Coloca aquí una captura del `tailwind.config.cjs` abierto en el editor)
 
 ---
 
-## Decisión 2: Componentes UI reutilizables
+## Componentes UI reutilizables
 
-Problema: cada campo tenía microvariaciones de estilo y validación. Eso se vuelve inmanejable cuando crecen los formularios.
+El problema más repetido era: repetir 7 veces el mismo patrón label + input + error. La solución fue crear componentes con responsabilidad única.
 
-Por qué extraer componentes: encapsular patrones (“label encima”, `aria-invalid`, bordes de error, focus states) y dejar que la lógica del formulario se enfoque en datos.
-
-Qué cambió en la práctica:
-
-- `Input`, `Select`, `Textarea` y `RadioGroup` comparten convenciones.
-- `Label` agrega el asterisco accesible cuando es requerido.
-- `ErrorMessage` y `FeedbackMessage` estandarizan cómo mostramos problemas y éxitos.
-
-Fragmento real del formulario:
+Antes: duplicación y riesgo de inconsistencias
 
 ```tsx
-<div>
-  <Label htmlFor="food" required>Alimento</Label>
-  <Input id="food" placeholder="Ej. Manzana" hasError={!!errors.food} {...register('food')} />
-  <ErrorMessage message={errors.food?.message} />
-</div>
+<label className="block text-sm font-medium text-gray-700">
+  Alimento <span className="text-red-600">*</span>
+</label>
+<input className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md" />
+<span className="text-sm text-red-600">Campo requerido</span>
 ```
+
+Después: componentes con API clara
+
+- Label.tsx — muestra el label, el asterisco accesible y el sr-only para lectores de pantalla:
+
+```tsx
+<label className="block text-sm text-gray-700 font-medium">
+  {children}
+  {required && (
+    <>
+      <span aria-hidden="true" className="text-red-600"> *</span>
+      <span className="sr-only"> requerido</span>
+    </>
+  )}
+</label>
+```
+
+(Coloca aquí captura de Storybook → Label → Required)
+
+- Input.tsx — con forwardRef, manejo de estados (default, error, focus) y clases compartidas:
+(Coloca aquí captura de Storybook → Input → Default / Error / Focus)
+
+- RadioGroup — sustituyó selects en muchos casos; mejor para móviles por targets grandes:
+
+```tsx
+<RadioGroup
+  name="mealType"
+  options={mealTypeOptions.map(type => ({
+    value: type,
+    label: MEAL_TYPE_LABELS[type],
+  }))}
+  layout="grid"
+/>
+```
+
+(Coloca aquí dos capturas lado a lado: select nativo en móvil vs RadioGroup en grid)
+
+(Coloca aquí captura de Storybook → RadioGroup → Grid layout + estado error)
 
 ---
 
-## Decisión 3: Accesibilidad desde el inicio
+## Accesibilidad: teoría aplicada y pruebas automáticas
 
-Problema: la accesibilidad suele postergarse y luego cuesta el doble. Quise evitar deuda técnica.
+No basta con pensar “es accesible”; hay que medirlo. Integré axe-core en los tests unitarios para mantener regresiones lejos.
 
-Qué hice: añadí axe-core a la suite y diseñé casos reales (errores visibles, loading, disabled, radiogroups sin selección, etc.).
-
-Señales de que funcionó:
-
-- Cero violaciones tras activar reglas de contraste.
-- Las etiquetas están asociadas a controles; hay foco visible y navegación por teclado.
-
-Ejemplo de helper de test:
+Ejemplo de test (Jest + Testing Library + axe):
 
 ```ts
-async function runAxe(container: HTMLElement) {
-  return await axe.run(container)
-}
-```
-
-### Snippets de tests (axe-core)
-
-```tsx
-// Helper reutilizable
-async function runAxe(container: HTMLElement) {
-  return await axe.run(container)
-}
-
-// Registro inicial sin violaciones (incluye contraste)
-it('no violations on initial render (including contrast)', async () => {
-  // const { container } = render(<RegistrationForm />)
+it('formulario con errores visibles sigue accesible', async () => {
+  // ... simular submit vacío y mostrar errores
   const results = await runAxe(container)
   expect(results.violations).toHaveLength(0)
 })
 ```
 
-```tsx
-// Estados dinámicos: loading y error vinculado
-it('Loading Button state has no violations', async () => {
-  // const { container } = render(<Button isLoading>Guardar registro</Button>)
-  const results = await runAxe(container)
-  expect(results.violations).toHaveLength(0)
-})
+Resultado real en CI: 0 violaciones incluso con errores visibles.
 
-it('Input with aria-invalid + linked ErrorMessage has no violations', async () => {
-  // const { container } = render(
-  //   <div>
-  //     <label htmlFor="food">Alimento</label>
-  //     <Input id="food" aria-invalid="true" aria-describedby="food-error" />
-  //     <ErrorMessage id="food-error" message="Alimento requerido" />
-  //   </div>
-  // )
-  const results = await runAxe(container)
-  expect(results.violations).toHaveLength(0)
-})
-```
+(Coloca aquí captura del reporte de axe-core o del test en CI en verde)
+
+También probé navegación por teclado y foco visible en DevTools:
+
+(Coloca aquí captura de Chrome DevTools → Accessibility → focus order correcto)
 
 ---
 
-## Decisión 4: Storybook para ver lo que no dicen los tests
+## Storybook: QA visual y documentación viva
 
-Problema: los tests unitarios no muestran “cómo se ve” un estado. Y los edge cases aparecen tarde.
+Storybook me permitió explorar estados concretos y automatizar interacciones:
 
-Por qué Storybook: documenta estados (error, disabled, loading) y variantes (primary/secondary, vertical/grid) en aislamiento. Ideal para QA visual y feedback rápido.
+- addons: a11y y interactions.
+- stories útiles que mantengo activas:
+  - Button: Primary / Secondary / Loading / Disabled
+  - Input: Default / Error / Typing (con play function)
+  - RadioGroup: Vertical / Grid / Error
+  - RegistrationForm: MinimalSubmit (flujo feliz automatizado)
+
+(Coloca aquí collages o capturas de Storybook: Canvas con estados, Interactions panel, RegistrationForm → MinimalSubmit)
+
+(Coloca aquí captura de Storybook completo con la lista de componentes)
+
+---
+
+## Estado actual del proyecto
+
+Lo que ya está implementado:
+
+- ✅ Formulario 100% mobile-first con targets táctiles adecuados
+- ✅ Contraste validado automáticamente (axe-core = 0 violaciones)
+- ✅ Componentes documentados y testeados en Storybook
+- ✅ Sistema de diseño centralizado en Tailwind config
+- ✅ Opciones de MealType derivadas del schema Zod (sin hardcode)
+
+Próximos pasos:
+
+- Visualización de datos (gráficos y reportes)
+- Búsqueda y filtros en el historial
+- Exportación CSV/PDF
+- PWA + cache offline
+
+(Coloca aquí captura final del formulario en móvil y escritorio — responsive)
 
 ---
 
-## Próximos pasos
+## Reflexión final
 
-- Visualización de datos y reportes (gráficos simples primero, utilidad antes que sofisticación).
-- Búsqueda y filtros para el historial.
+Esta parte no fue “poner bonito” el proyecto; fue construir una arquitectura visual sostenible. Tailwind me dio velocidad para iterar; Storybook redujo la fricción de QA; los tests de accesibilidad me hicieron pensar en estados dinámicos. Un side project es un laboratorio ideal para aprender y equivocarse sin presión.
 
----
-
-## Referencias
-
-- [TailwindCSS v4](https://tailwindcss.com)
-- [axe-core](https://github.com/dequelabs/axe-core)
-- [Storybook](https://storybook.js.org)
-- [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
-- [React Hook Form](https://react-hook-form.com)
-
-> **Nota**: Las capturas mencionadas son placeholders. Las agregaré cuando estén listas.
-
----
+Próxima parte → Parte 7: Visualización de datos y reportes.
