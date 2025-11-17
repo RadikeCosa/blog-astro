@@ -67,9 +67,6 @@ Minimal base in `src/styles/tailwind.css`:
 }
 ```
 
-> ![Placeholder: Tailwind configuration](../../assets/images/nutrition-tracker-fase4-tailwind-config.jpg)
-> Extended theme view (colors, fonts, breakpoints).
-
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -175,9 +172,6 @@ Real form snippet:
 </div>
 ```
 
-> ![Placeholder: Form with components](../../assets/images/nutrition-tracker-fase4-form-components.jpg)
-> The form “speaks” one visual language.
-
 ---
 
 ## Decision 3: Accessibility from day one
@@ -198,9 +192,6 @@ async function runAxe(container: HTMLElement) {
   return await axe.run(container)
 }
 ```
-
-> ![Placeholder: Accessibility tests](../../assets/images/nutrition-tracker-fase4-a11y-tests.jpg)
-> Accessibility is verified on every run, not just pre‑release.
 
 ### Test snippets (axe-core)
 
@@ -244,9 +235,6 @@ it('Input with aria-invalid + linked ErrorMessage has no violations', async () =
 Problem: unit tests don’t show “how it looks.” Edge cases surface late.
 
 Why Storybook: documents states (error, disabled, loading) and variants (primary/secondary, vertical/grid) in isolation. Great for visual QA and quick feedback.
-
-> ![Placeholder: Storybook](../../assets/images/nutrition-tracker-fase4-storybook.jpg)
-> Lightweight stories with interactions to validate styles and states.
 
 ---
 
@@ -313,4 +301,3 @@ graph TD
 **Author:** Ramiro Miranda
 **Date:** November 17, 2025
 **Series:** Nutrition Tracker - Part 6/N
-> ![Placeholder: Accessibility tests screenshot](../../assets/images/nutrition-tracker-fase4-a11y-tests.jpg)

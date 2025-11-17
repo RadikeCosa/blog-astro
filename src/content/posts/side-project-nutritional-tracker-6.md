@@ -57,9 +57,6 @@ Ejemplo base en `src/styles/tailwind.css`:
 }
 ```
 
-> ![Placeholder: Configuración de Tailwind](../../assets/images/nutrition-tracker-fase4-tailwind-config.jpg)
-> Vista del theme extendido (colores, fuentes, breakpoints).
-
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -165,9 +162,6 @@ Fragmento real del formulario:
 </div>
 ```
 
-> ![Placeholder: Formulario con componentes](../../assets/images/nutrition-tracker-fase4-form-components.jpg)
-> El formulario habla “un mismo idioma” visual.
-
 ---
 
 ## Decisión 3: Accesibilidad desde el inicio
@@ -188,9 +182,6 @@ async function runAxe(container: HTMLElement) {
   return await axe.run(container)
 }
 ```
-
-> ![Placeholder: Tests de accesibilidad](../../assets/images/nutrition-tracker-fase4-a11y-tests.jpg)
-> La accesibilidad se valida en cada ejecución, no solo antes de publicar.
 
 ### Snippets de tests (axe-core)
 
@@ -236,9 +227,6 @@ it('Input with aria-invalid + linked ErrorMessage has no violations', async () =
 Problema: los tests unitarios no muestran “cómo se ve” un estado. Y los edge cases aparecen tarde.
 
 Por qué Storybook: documenta estados (error, disabled, loading) y variantes (primary/secondary, vertical/grid) en aislamiento. Ideal para QA visual y feedback rápido.
-
-> ![Placeholder: Storybook de componentes](../../assets/images/nutrition-tracker-fase4-storybook.jpg)
-> Historias con interacciones mínimas para validar estilos y estados.
 
 ---
 
