@@ -138,34 +138,6 @@ return differences * 10 <= len1;
 
 Esto elimina cualquier posible problema de redondeo.
 
-## Diagrama de flujo
-
-```mermaid
-flowchart TD
-    Start([Inicio]) --> Input[/fingerprint1, fingerprint2/]
-    Input --> CheckLen{¿len1 = len2?}
-    CheckLen -- No --> ReturnFalse1[Retornar false]
-    CheckLen -- Sí --> Init[d = 0<br/>i = 0]
-    Init --> Loop{i < n?}
-    Loop -- Sí --> Compare{fingerprint1[i] ≠ fingerprint2[i]?}
-    Compare -- Sí --> Inc[d = d + 1]
-    Compare -- No --> Next[i = i + 1]
-    Inc --> Next
-    Next --> Loop
-    Loop -- No --> CheckThreshold{d ≤ 0.1 × n?}
-    CheckThreshold -- Sí --> ReturnTrue[Retornar true]
-    CheckThreshold -- No --> ReturnFalse2[Retornar false]
-    ReturnTrue --> End([Fin])
-    ReturnFalse1 --> End
-    ReturnFalse2 --> End
-
-    style Start fill:#e1f5e1
-    style End fill:#ffe1e1
-    style ReturnTrue fill:#90EE90
-    style ReturnFalse1 fill:#FFB6C1
-    style ReturnFalse2 fill:#FFB6C1
-```
-
 ## Consideraciones de implementación
 
 - Precisión: la comparación actual usa punto flotante (`differences <= len1 * 0.1`), que está bien en la práctica; si quieres evitarlo, usa la variante entera (`differences * 10 <= len1`) o calcula `Math.floor`/`Math.ceil` según las reglas de negocio.

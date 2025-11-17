@@ -136,34 +136,6 @@ return differences * 10 <= len1;
 
 This removes rounding concerns.
 
-## Flowchart
-
-```mermaid
-flowchart TD
-    Start([Start]) --> Input[/fingerprint1, fingerprint2/]
-    Input --> CheckLen{len1 = len2?}
-    CheckLen -- No --> ReturnFalse1[Return false]
-    CheckLen -- Yes --> Init[d = 0<br/>i = 0]
-    Init --> Loop{i < n?}
-    Loop -- Yes --> Compare{fingerprint1[i] ≠ fingerprint2[i]?}
-    Compare -- Yes --> Inc[d = d + 1]
-    Compare -- No --> Next[i = i + 1]
-    Inc --> Next
-    Next --> Loop
-    Loop -- No --> CheckThreshold{d ≤ 0.1 × n?}
-    CheckThreshold -- Yes --> ReturnTrue[Return true]
-    CheckThreshold -- No --> ReturnFalse2[Return false]
-    ReturnTrue --> End([End])
-    ReturnFalse1 --> End
-    ReturnFalse2 --> End
-
-    style Start fill:#e1f5e1
-    style End fill:#ffe1e1
-    style ReturnTrue fill:#90EE90
-    style ReturnFalse1 fill:#FFB6C1
-    style ReturnFalse2 fill:#FFB6C1
-```
-
 ## Implementation notes
 
 - Precision: Using `differences <= len1 * 0.1` is acceptable; alternatively use `differences * 10 <= len1` to stay in integers.
