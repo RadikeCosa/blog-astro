@@ -53,8 +53,6 @@ Antes de tocar una clase de Tailwind, definí principios que guiaron todas las d
 - Aprovechar tipos nativos: `type="number"`, `type="date"`, etc.
 - En móvil: layout de columna única para facilitar el scroll y foco.
 
-(Coloca aquí un fragmento o captura del documento `lineamientos-estilos.md`)
-
 ---
 
 ## Por qué TailwindCSS v4
@@ -90,8 +88,6 @@ module.exports = {
 }
 ```
 
-(Coloca aquí una captura del `tailwind.config.cjs` abierto en el editor)
-
 ---
 
 ## Componentes UI reutilizables
@@ -124,8 +120,6 @@ Después: componentes con API clara
 </label>
 ```
 
-(Coloca aquí captura de Storybook → Label → Required)
-
 - Input.tsx — con forwardRef, manejo de estados (default, error, focus) y clases compartidas:
 (Coloca aquí captura de Storybook → Input → Default / Error / Focus)
 
@@ -142,15 +136,12 @@ Después: componentes con API clara
 />
 ```
 
-(Coloca aquí dos capturas lado a lado: select nativo en móvil vs RadioGroup en grid)
-
-(Coloca aquí captura de Storybook → RadioGroup → Grid layout + estado error)
-
 ---
 
 ## Accesibilidad: teoría aplicada y pruebas automáticas
 
-No basta con pensar “es accesible”; hay que medirlo. Integré axe-core en los tests unitarios para mantener regresiones lejos.
+No basta con pensar “es accesible”; hay que medirlo. Integré axe-core en los tests unitarios
+para validar accesibilidad en estados dinámicos.
 
 Ejemplo de test (Jest + Testing Library + axe):
 
@@ -164,11 +155,7 @@ it('formulario con errores visibles sigue accesible', async () => {
 
 Resultado real en CI: 0 violaciones incluso con errores visibles.
 
-(Coloca aquí captura del reporte de axe-core o del test en CI en verde)
-
 También probé navegación por teclado y foco visible en DevTools:
-
-(Coloca aquí captura de Chrome DevTools → Accessibility → focus order correcto)
 
 ---
 
@@ -184,8 +171,6 @@ Storybook me permitió explorar estados concretos y automatizar interacciones:
   - RegistrationForm: MinimalSubmit (flujo feliz automatizado)
 
 (Coloca aquí collages o capturas de Storybook: Canvas con estados, Interactions panel, RegistrationForm → MinimalSubmit)
-
-(Coloca aquí captura de Storybook completo con la lista de componentes)
 
 ---
 
