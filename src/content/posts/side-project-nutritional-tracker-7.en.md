@@ -17,17 +17,14 @@ abbrlink: "side-project-nutritional-tracker-7"
 
 ## Introduction
 
-The decision to migrate arose from the natural evolution of the project. Initially, Vite offered speed and simplicity for prototyping and frontend MVPs. However, as the application grew, typical needs of more complex systems emerged: robust routing, database interactions, server-side page generation, component documentation, and a more maintainable structure.
-
-Next.js stands out as an "all-terrain" solution for these challenges, making the developer's life easier and allowing focus on business logic and user experience.
+The decision to migrate arose from the natural evolution of the project. Initially, Vite offered speed and simplicity for prototyping and frontend MVPs. However, as the application grew, typical needs of more complex systems emerged: simple routing, database interactions, server-side page generation.
 
 ## Why migrate to Next.js?
 
 Next.js offers significant technical advantages and scalability capabilities that align perfectly with the project's emerging needs:
 
-- **Server-Side Rendering (SSR) and Static Site Generation (SSG):** Improves app performance and SEO.
 - **File-based routing system:** Simplifies route management without extra configuration.
-- **API Routes:** Allows you to create backend endpoints directly in the project.
+- **API Routes and Server Actions:** Allows you to create backend endpoints and database calls directly in the frontend.
 - **Automatic optimizations:** From images to code splitting, Next.js optimizes the bundle without manual configuration.
 - **Mature ecosystem:** Extensive documentation, active community, and compatibility with modern tools.
 

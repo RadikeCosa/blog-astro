@@ -104,7 +104,7 @@ The iterative version avoids recursion and uses a while loop. It works just as w
 ```javascript
 function gcdIterative(x, y) {
   while (y !== 0) {
-    let temp = y
+    const temp = y
     y = x % y
     x = temp
   }

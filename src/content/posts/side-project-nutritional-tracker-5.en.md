@@ -117,7 +117,7 @@ Here are examples and concepts from the test suite that validate the real-world 
 
 ### Test: The form blocks invalid data
 
-**Why?**  
+**Why?**
 This prevents unwanted saves and displays clear error messages to the user.
 
 ```typescript
@@ -133,7 +133,7 @@ it("prevents submit if required fields are empty", async () => {
 
 ### Test: Visual feedback on save
 
-**Why?**  
+**Why?**
 The user needs to know whether their data was saved or if there was an error.
 
 ```typescript
@@ -149,7 +149,7 @@ it("shows a success message on save", async () => {
 
 ### Test: Persistence and field reset
 
-**Why?**  
+**Why?**
 Avoids duplicate entries, improves UX, and ensures storage works properly with the form.
 
 ```typescript
@@ -166,7 +166,7 @@ it("saves a record and resets fields while keeping user", async () => {
 
 ### Test: Data arrives correctly in storage
 
-**Why?**  
+**Why?**
 Verifies integration between frontend and persistence.
 
 ```typescript
@@ -215,5 +215,5 @@ it("persists correctly in localStorage", async () => {
 
 So far we’ve focused on robustness, validation, and persistence. The next chapter will be all about transforming the form and the app into a modern, friendly visual experience—building on the technical foundation we’ve just solidified.
 
-**Continue reading:**  
+**Continue reading:**
 _Part 6: Styles and UX in Nutrition Tracker_ → Guide to styling, accessibility, and creating an attractive interface.
