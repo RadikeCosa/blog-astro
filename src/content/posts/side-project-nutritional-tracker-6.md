@@ -34,7 +34,7 @@ Aquí encontrarás las decisiones clave, fragmentos de implementación y pruebas
 
 ---
 
-## Mis lineamientos de diseño (mi biblia)
+## Mis lineamientos de diseño
 
 Antes de tocar una clase de Tailwind, definí principios que guiaron todas las decisiones. Los tengo en un archivo llamado `lineamientos-estilos.md` y resumo lo esencial:
 
@@ -121,7 +121,6 @@ Después: componentes con API clara
 ```
 
 - Input.tsx — con forwardRef, manejo de estados (default, error, focus) y clases compartidas:
-(Coloca aquí captura de Storybook → Input → Default / Error / Focus)
 
 - RadioGroup — sustituyó selects en muchos casos; mejor para móviles por targets grandes:
 
@@ -170,8 +169,6 @@ Storybook me permitió explorar estados concretos y automatizar interacciones:
   - RadioGroup: Vertical / Grid / Error
   - RegistrationForm: MinimalSubmit (flujo feliz automatizado)
 
-(Coloca aquí collages o capturas de Storybook: Canvas con estados, Interactions panel, RegistrationForm → MinimalSubmit)
-
 ---
 
 ## Estado actual del proyecto
@@ -181,22 +178,14 @@ Lo que ya está implementado:
 - ✅ Formulario 100% mobile-first con targets táctiles adecuados
 - ✅ Contraste validado automáticamente (axe-core = 0 violaciones)
 - ✅ Componentes documentados y testeados en Storybook
-- ✅ Sistema de diseño centralizado en Tailwind config
-- ✅ Opciones de MealType derivadas del schema Zod (sin hardcode)
 
 Próximos pasos:
 
 - Visualización de datos (gráficos y reportes)
 - Búsqueda y filtros en el historial
-- Exportación CSV/PDF
-- PWA + cache offline
-
-(Coloca aquí captura final del formulario en móvil y escritorio — responsive)
 
 ---
 
 ## Reflexión final
-
-Esta parte no fue “poner bonito” el proyecto; fue construir una arquitectura visual sostenible. Tailwind me dio velocidad para iterar; Storybook redujo la fricción de QA; los tests de accesibilidad me hicieron pensar en estados dinámicos. Un side project es un laboratorio ideal para aprender y equivocarse sin presión.
 
 Próxima parte → Parte 7: Visualización de datos y reportes.
