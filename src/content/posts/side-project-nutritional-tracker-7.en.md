@@ -80,3 +80,9 @@ I removed everything related to Vite and its plugins, adding the scripts recomme
 ```
 
 It
+
+---
+
+## Series Navigation
+
+- [← Part 6: Visual Architecture & Accessibility](./side-project-nutritional-tracker-6.en.md)

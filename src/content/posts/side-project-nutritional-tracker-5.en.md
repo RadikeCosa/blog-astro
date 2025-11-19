@@ -217,3 +217,10 @@ So far we’ve focused on robustness, validation, and persistence. The next chap
 
 **Continue reading:**
 _Part 6: Styles and UX in Nutrition Tracker_ → Guide to styling, accessibility, and creating an attractive interface.
+
+---
+
+## Series Navigation
+
+- [← Part 4: Persistence Layer Implementation](./side-project-nutritional-tracker-4.en.md)
+- [Part 6: Visual Architecture & Accessibility →](./side-project-nutritional-tracker-6.en.md)

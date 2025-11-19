@@ -189,3 +189,10 @@ Próximos pasos:
 ## Reflexión final
 
 Próxima parte → Parte 7: Visualización de datos y reportes.
+
+---
+
+## Navegación de la serie
+
+- [← Parte 5: El Formulario de Registro](./side-project-nutritional-tracker-5.md)
+- [Parte 7: Migración a Next.js, Storybook y Accesibilidad →](./side-project-nutritional-tracker-7.md)

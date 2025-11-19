@@ -215,3 +215,10 @@ Next steps:
 This chapter was not about "making it pretty" — it was about building a maintainable visual architecture. Tailwind shortened iteration loops, Storybook reduced manual QA time, and accessibility tests forced me to consider dynamic states. Side projects are great laboratories: experiment, fail, learn and iterate.
 
 Next part → Part 7: Data visualization and reports (simple charts, aggregations and trends).
+
+---
+
+## Series Navigation
+
+- [← Part 5: The Registration Form](./side-project-nutritional-tracker-5.en.md)
+- [Part 7: Migration to Next.js, Storybook, and Accessibility →](./side-project-nutritional-tracker-7.en.md)

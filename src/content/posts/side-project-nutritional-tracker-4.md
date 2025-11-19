@@ -253,3 +253,10 @@ Ya tienes una capa de persistencia robusta y segura. El próximo paso será mont
 
 **Continúa leyendo:**
 _Parte 5: Implementación del Formulario_ → Cómo armar el componente visual principal y unir todos los conceptos previos.
+
+---
+
+## Navegación de la serie
+
+- [← Parte 3: Validación de Datos con Zod](./side-project-nutritional-tracker-3.md)
+- [Parte 5: El Formulario de Registro →](./side-project-nutritional-tracker-5.md)

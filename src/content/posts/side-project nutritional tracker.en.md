@@ -122,3 +122,9 @@ $$
 
 **Continue reading:**
 _Part 2: Testing Setup_ → Vitest, localStorage mocks, and tests to ensure confidence with every change.
+
+---
+
+## Series Navigation
+
+- [Part 2: Testing Environment Setup →](./side-project-nutritional-tracker-2.en.md)

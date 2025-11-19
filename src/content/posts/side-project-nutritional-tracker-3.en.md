@@ -191,5 +191,9 @@ Using Zod and unit tests means that if you modify the data model, TypeScript and
 
 You now have robust validation on your model. The next step is to build the persistence layer: save and retrieve validated records, handling errors and edge cases.
 
-**Continue reading:**
-_Part 4: Persistence Layer Implementation_ → How to save to localStorage, retrieve data, and maintain error tolerance.
+---
+
+## Series Navigation
+
+- [← Part 2: Testing Environment Setup](./side-project-nutritional-tracker-2.en.md)
+- [Part 4: Persistence Layer Implementation →](./side-project-nutritional-tracker-4.en.md)

@@ -253,3 +253,10 @@ You now have a robust, safe persistence layer. Next step: build the registration
 
 **Continue reading:**
 _Part 5: Form Implementation_ → How to build the main visual component and tie all previous concepts together.
+
+---
+
+## Series Navigation
+
+- [← Part 3: Data Validation with Zod](./side-project-nutritional-tracker-3.en.md)
+- [Part 5: The Registration Form →](./side-project-nutritional-tracker-5.en.md)

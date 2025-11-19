@@ -252,3 +252,10 @@ graph TD
 
 **Continúa leyendo:**
 _Parte 3: Validación de Datos con Zod_ → Implementación de tipos type-safe, reglas y tests de validación.
+
+---
+
+## Navegación de la serie
+
+- [← Parte 1: Diseño del Modelo de Datos](./side-project%20nutritional%20tracker.md)
+- [Parte 3: Validación de Datos con Zod →](./side-project-nutritional-tracker-3.md)

@@ -218,3 +218,10 @@ El foco hasta ahora fue robustez, validación y persistencia. El siguiente capí
 
 **Continúa leyendo:**
 _Parte 6: Estilos y UX en Nutrition Tracker_ → Guía para aplicar estilos, mejorar accesibilidad y crear una interfaz atractiva.
+
+---
+
+## Navegación de la serie
+
+- [← Parte 4: Implementación de la Capa de Persistencia](./side-project-nutritional-tracker-4.md)
+- [Parte 6: Arquitectura Visual y Accesibilidad →](./side-project-nutritional-tracker-6.md)

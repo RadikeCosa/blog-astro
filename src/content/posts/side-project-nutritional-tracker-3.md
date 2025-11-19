@@ -187,3 +187,10 @@ Ya tienes validación robusta en tu modelo. El próximo paso es crear la capa de
 
 **Continúa leyendo:**
 _Parte 4: Implementación de la Capa de Persistencia_ → Cómo guardar en localStorage, recuperar datos y mantener tolerancia a errores.
+
+---
+
+## Navegación de la serie
+
+- [← Parte 2: Configuración del Entorno de Testing](./side-project-nutritional-tracker-2.md)
+- [Parte 4: Implementación de la Capa de Persistencia →](./side-project-nutritional-tracker-4.md)

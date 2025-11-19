@@ -216,3 +216,9 @@ Este test renderiza el componente `Button` y ejecuta axe sobre el resultado. Si 
 - **Estados dinámicos:** Los componentes informan correctamente sus estados (activo, deshabilitado, error) tanto visualmente como a través de atributos accesibles (`aria-*`).
 
 Estas prácticas, junto con los tests automáticos, ayudan a garantizar que la aplicación sea usable y accesible para todos los usuarios.
+
+---
+
+## Navegación de la serie
+
+- [← Parte 6: Arquitectura Visual y Accesibilidad](./side-project-nutritional-tracker-6.md)

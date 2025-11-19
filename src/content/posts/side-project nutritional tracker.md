@@ -120,5 +120,8 @@ $$
 - Validación robusta con Zod.
 - Wrapper de localStorage con parsing tolerante y manejo de errores.
 
-**Continúa leyendo:**
-_Parte 2: Configuración de Testing_ → Vitest, localStorage mock y tests para garantizar confianza en cada cambio.
+---
+
+## Navegación de la serie
+
+- [Parte 2: Configuración del Entorno de Testing →](./side-project-nutritional-tracker-2.md)

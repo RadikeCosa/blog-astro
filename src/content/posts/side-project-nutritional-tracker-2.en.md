@@ -251,4 +251,10 @@ graph TD
 You now have a solid foundation for TDD. Next step: define validation schemas with Zod and write unit tests for the data model.
 
 **Continue reading:**
-_Part 3: Data Validation with Zod_ → Implementation of type-safe types, rules, and validation tests.
+
+- [Part 3: Data Validation with Zod →](./side-project-nutritional-tracker-3.en.md)- [← Part 1: Data Model Design](./side-project%20nutritional%20tracker.en.md)## Series Navigation------
+
+## Series Navigation
+
+- [← Part 1: Data Model Design](./side-project%20nutritional%20tracker.en.md)
+- [Part 3: Data Validation with Zod →](./side-project-nutritional-tracker-3.en.md)
