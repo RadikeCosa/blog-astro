@@ -4,6 +4,7 @@ published: 2025-11-15T19:18:08.890Z
 description: "Explicación didáctica de la solución in-place al problema Remove Element (LeetCode 27) usando Two Pointers, con ejemplos, tests y visualizaciones."
 updated: ""
 tags:
+  - leetCode
   - top-interview-150
 draft: false
 pin: 0
