@@ -124,4 +124,10 @@ $$
 
 ## Navegación de la serie
 
-- [Parte 2: Configuración del Entorno de Testing →](./side-project-nutritional-tracker-2.md)
+- [Parte 2: Configuración del Entorno de Testing →](/posts/nutritional-tracker-part2/)
+
+### Recursos adicionales
+
+- [Documentación de Vite](https://vitejs.dev/)
+- [React con TypeScript](https://reactjs.org/docs/static-type-checking.html#typescript)
+- [Mermaid.js para diagramas](https://mermaid-js.github.io/mermaid/#/)

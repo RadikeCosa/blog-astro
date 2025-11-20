@@ -223,5 +223,10 @@ _Parte 6: Estilos y UX en Nutrition Tracker_ → Guía para aplicar estilos, mej
 
 ## Navegación de la serie
 
-- [← Parte 4: Implementación de la Capa de Persistencia](./side-project-nutritional-tracker-4.md)
-- [Parte 6: Arquitectura Visual y Accesibilidad →](./side-project-nutritional-tracker-6.md)
+- [← Parte 4: Implementación de la Capa de Persistencia](/posts/nutritional-tracker-part4/)
+- [Parte 6: Arquitectura Visual y Accesibilidad →](/posts/nutritional-tracker-part6/)
+
+### Recursos adicionales
+
+- [Repositorio completo del proyecto Nutrition Tracker](https://github.com/RadikeCosa/nutrition-tracker)
+- [Documentación de React Hook Form](https://react-hook-form.com/)

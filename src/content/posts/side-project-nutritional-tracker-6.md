@@ -5,17 +5,14 @@ description: "Cómo diseñar una UI mobile-first, accesible y escalable usando T
 updated: 2025-11-17T22:38:20Z
 tags:
   - nutritional-tracker
-  - react-project
   - tailwindcss
-  - accesibilidad
-  - ui-components
 series: "nutritional-tracker"
 seriesOrder: 6
 draft: false
 pin: 0
 toc: true
 lang: "es"
-abbrlink: "side-project-nutritional-tracker-6"
+abbrlink: "nutritional-tracker-part6"
 ---
 
 ## Construyendo un Nutritional Tracker: Parte 6 — Arquitectura Visual y Accesibilidad
@@ -194,5 +191,12 @@ Próxima parte → Parte 7: Visualización de datos y reportes.
 
 ## Navegación de la serie
 
-- [← Parte 5: El Formulario de Registro](./side-project-nutritional-tracker-5.md)
-- [Parte 7: Migración a Next.js, Storybook y Accesibilidad →](./side-project-nutritional-tracker-7.md)
+- [← Parte 5: El Formulario de Registro](/posts/nutritional-tracker-part5/)
+- [Parte 7: Migración a Next.js, Storybook y Accesibilidad →](/posts/nutritional-tracker-part7/)
+
+### Recursos adicionales
+
+- [Documentación oficial de TailwindCSS v4](https://tailwindcss.com/docs/installation)
+- [Guía de accesibilidad WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [Storybook para componentes UI](https://storybook.js.org/docs/react/get-started/introduction)
+- [Axe-core para pruebas de accesibilidad](https://github.com/dequelabs/axe-core)

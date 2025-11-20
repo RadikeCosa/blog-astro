@@ -258,5 +258,10 @@ _Parte 5: Implementación del Formulario_ → Cómo armar el componente visual p
 
 ## Navegación de la serie
 
-- [← Parte 3: Validación de Datos con Zod](./side-project-nutritional-tracker-3.md)
-- [Parte 5: El Formulario de Registro →](./side-project-nutritional-tracker-5.md)
+- [← Parte 3: Validación de Datos con Zod](/posts/nutritional-tracker-part3/)
+- [Parte 5: El Formulario de Registro →](/posts/nutritional-tracker-part5/)
+
+### Recursos adicionales
+
+- [Documentación de localStorage](https://developer.mozilla.org/es/docs/Web/API/Window/localStorage)
+- [Zod: Validación de esquemas en TypeScript](https://zod.dev/)

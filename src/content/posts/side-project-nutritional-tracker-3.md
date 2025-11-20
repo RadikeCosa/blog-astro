@@ -192,5 +192,10 @@ _Parte 4: Implementación de la Capa de Persistencia_ → Cómo guardar en local
 
 ## Navegación de la serie
 
-- [← Parte 2: Configuración del Entorno de Testing](./side-project-nutritional-tracker-2.md)
-- [Parte 4: Implementación de la Capa de Persistencia →](./side-project-nutritional-tracker-4.md)
+- [← Parte 2: Configuración del Entorno de Testing](/posts/nutritional-tracker-part2/)
+- [Parte 4: Implementación de la Capa de Persistencia →](/posts/nutritional-tracker-part4/)
+
+### Recursos adicionales
+
+- [Documentación oficial de Zod](https://zod.dev/)
+- [Guía de TypeScript sobre tipos e interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)

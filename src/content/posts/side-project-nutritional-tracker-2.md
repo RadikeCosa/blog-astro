@@ -257,5 +257,12 @@ _Parte 3: Validación de Datos con Zod_ → Implementación de tipos type-safe, 
 
 ## Navegación de la serie
 
-- [← Parte 1: Diseño del Modelo de Datos](./side-project%20nutritional%20tracker.md)
-- [Parte 3: Validación de Datos con Zod →](./side-project-nutritional-tracker-3.md)
+- [← Parte 1: Diseño del Modelo de Datos](/posts/nutritional-tracker-part1/)
+- [Parte 3: Validación de Datos con Zod →](/posts/nutritional-tracker-part3/)
+
+### Recursos adicionales
+
+- [Vitest Documentation](https://vitest.dev/)
+- [Testing Library Docs](https://testing-library.com/docs/)
+- [Jest-DOM Matchers](https://github.com/testing-library/jest-dom)
+- [Mocking localStorage en tests](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#mocking_localstorage_in_tests)

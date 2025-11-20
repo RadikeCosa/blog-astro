@@ -10,7 +10,7 @@ draft: false
 pin: 0
 toc: true
 lang: "es"
-abbrlink: "side-project-nutritional-tracker-7"
+abbrlink: "nutritional-tracker-part7"
 ---
 
 ## Construyendo un Nutritional Tracker: Parte 7 — Migración a Next.js, Storybook y Accesibilidad
@@ -221,4 +221,11 @@ Estas prácticas, junto con los tests automáticos, ayudan a garantizar que la a
 
 ## Navegación de la serie
 
-- [← Parte 6: Arquitectura Visual y Accesibilidad](./side-project-nutritional-tracker-6.md)
+- [← Parte 6: Arquitectura Visual y Accesibilidad](/posts/nutritional-tracker-part6/)
+
+### Recursos adicionales
+
+- [Documentación oficial de Next.js](https://nextjs.org/docs)
+- [Storybook para componentes UI](https://storybook.js.org/docs/react/get-started/introduction)
+- [Axe-core para pruebas de accesibilidad](https://github.com/dequelabs/axe-core)
+- [Repositorio del proyecto en GitHub](https://github.com/RadikeCosa/nutritional-tracker)

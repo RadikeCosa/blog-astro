@@ -6,6 +6,7 @@ series: "nutritional-tracker"
 seriesOrder: 5
 tags:
   - nutritional-tracker
+  - react-project
   - registration-form
 draft: false
 pin: 0
@@ -18,16 +19,16 @@ abbrlink: "nutritional-tracker-part5"
 
 ## Introduction
 
-At this point, our app is validating data, persisting it in the browser, and automatically testing that everything works. The next challenge was to bring all the pieces together in the **main registration form**, where users log their daily nutritional intake.
+Up to this point, our app validates data, persists it in the browser, and tests it automatically. The next challenge was to connect all the pieces in the **main registration form**, where the user enters their daily nutritional intake.
 
 ---
 
 ## What does the form integrate?
 
-- **Validation:** Uses the Zod schema and TypeScript, never accepting invalid data.
+- **Validation:** Uses the Zod schema and TypeScript to never accept invalid data.
 - **Persistence:** Automatically saves records in localStorage.
-- **React UI:** Componentization, state management, and visual feedback.
-- **React Hook Form:** Efficiently handles the form lifecycle and validator communication.
+- **React UI:** Componentization, states, visual feedback.
+- **React Hook Form:** Manages the form lifecycle and efficient communication with validators.
 
 ---
 
@@ -71,15 +72,15 @@ function RegistrationForm() {
 export default RegistrationForm;
 ```
 
-**Explanation:**
+**Explanations:**
 
-- The form receives ready-to-use functions from `react-hook-form`.
+- The form receives pre-configured functions from `react-hook-form`.
 - On submit, it validates with Zod and saves to localStorage only if the data is valid.
-- Feedback shows error messages on invalid fields and a global message after saving.
+- Feedback shows messages for incorrect fields and a global message on save.
 
 ---
 
-## Interaction Diagram: Form Submission
+## Interaction diagram: Form Submission
 
 ```mermaid
 sequenceDiagram
@@ -87,16 +88,16 @@ sequenceDiagram
     participant Form
     participant Zod
     participant Storage
-    User->>Form: Fills out fields and submits
+    User->>Form: Fills fields and submits
     Form->>Zod: Validates data
     Zod-->>Form: Valid?
     alt success
-        Form->>Storage: Save record
+        Form->>Storage: Saves record
         Storage-->>Form: status success/error
         Form-->>User: Shows success feedback
     else error
         Zod-->>Form: Returns errors
-        Form-->>User: Shows field and general error feedback
+        Form-->>User: Shows field and general feedback
     end
 ```
 
@@ -104,26 +105,26 @@ sequenceDiagram
 
 ## Advantages of this design
 
-- **Scalable:** Changes to the data model automatically update the form.
-- **Type safe:** All data is strictly typed and validated, with no duplication.
+- **Scalable:** Changes in the data model are automatically reflected in the form.
+- **Type safe:** All data is strictly typed and validated without duplication.
 - **Clear UX:** The user gets clear feedback and invalid fields are highlighted.
-- **Modular:** Separating validation, persistence, and UI logic increases maintainability.
+- **Modularity:** Separating validation, persistence, and UI logic increases maintainability.
 
 ---
 
-## How do we ensure the form works? Practical tests and examples
+## How do we ensure the form works? Tests and practical examples
 
-Here are examples and concepts from the test suite that validate the real-world behavior of the form:
+Here are some examples and concepts from the test suite that validate the real behavior of the form:
 
 ### Test: The form blocks invalid data
 
 **Why?**
-This prevents unwanted saves and displays clear error messages to the user.
+This prevents unwanted saves and shows clear errors to the user.
 
 ```typescript
-it("prevents submit if required fields are empty", async () => {
+it("prevents submission if required fields are empty", async () => {
   render(<RegistrationForm />);
-  fireEvent.click(screen.getByRole("button", { name: /save/i }));
+  fireEvent.click(screen.getByRole("button", { name: /save record/i }));
   await waitFor(() => {
     expect(screen.getByText(/user.*required/i)).toBeInTheDocument();
     expect(screen.getByText(/food.*required/i)).toBeInTheDocument();
@@ -134,13 +135,13 @@ it("prevents submit if required fields are empty", async () => {
 ### Test: Visual feedback on save
 
 **Why?**
-The user needs to know whether their data was saved or if there was an error.
+The user needs to know if their data was saved or if there was an error.
 
 ```typescript
-it("shows a success message on save", async () => {
+it("shows success message on save", async () => {
   render(<RegistrationForm />);
   // ...fill and submit...
-  fireEvent.click(screen.getByRole("button", { name: /save/i }));
+  fireEvent.click(screen.getByRole("button", { name: /save record/i }));
   await waitFor(() => {
     expect(screen.getByRole("alert")).toHaveTextContent(/saved/i);
   });
@@ -150,13 +151,13 @@ it("shows a success message on save", async () => {
 ### Test: Persistence and field reset
 
 **Why?**
-Avoids duplicate entries, improves UX, and ensures storage works properly with the form.
+Prevents duplicate entries, helps UX, and ensures storage works with the form.
 
 ```typescript
-it("saves a record and resets fields while keeping user", async () => {
+it("saves record and resets fields keeping user", async () => {
   render(<RegistrationForm />);
   // ...fill data, select user...
-  fireEvent.click(screen.getByRole("button", { name: /save/i }));
+  fireEvent.click(screen.getByRole("button", { name: /save record/i }));
   await waitFor(() => {
     expect(screen.getByLabelText(/food/i).value).toBe("");
     expect(screen.getByLabelText(/user/i).value).not.toBe("");
@@ -164,7 +165,7 @@ it("saves a record and resets fields while keeping user", async () => {
 });
 ```
 
-### Test: Data arrives correctly in storage
+### Test: Correct data reaches storage
 
 **Why?**
 Verifies integration between frontend and persistence.
@@ -173,7 +174,7 @@ Verifies integration between frontend and persistence.
 it("persists correctly in localStorage", async () => {
   render(<RegistrationForm />);
   // ...fill data and submit...
-  fireEvent.click(screen.getByRole("button", { name: /save/i }));
+  fireEvent.click(screen.getByRole("button", { name: /save record/i }));
   await waitFor(() => {
     const raw = localStorage.getItem("nutrition-tracker-registers");
     expect(raw).toBeTruthy();
@@ -186,41 +187,8 @@ it("persists correctly in localStorage", async () => {
 
 ---
 
-## Why test like this?
+## Why test this way?
 
-- Prevents user frustration due to unexpected errors.
-- Guarantees that storage **always** receives correct data.
-- On-screen feedback and form state always reflect the real situation.
-
-## State of the application at this point
-
-- The main form works: model, validation, and storage are connected.
-- Data can be displayed visually or processed for reporting.
-- The next big opportunity for improvement is **visual experience and styling**: the form works, but it's minimal and basic.
-- The tests cover almost every possible flow (errors, success, reset, persistence).
-
----
-
-## Next step: Styles and visual experience
-
-- Define a strategy: CSS Modules, Tailwind, Styled Components, etc.
-- Separate styles into dedicated files or systems.
-- Improve visual feedback (colors, icons, animations).
-- Make the app responsive.
-- Apply global variables (theme, colors, fonts).
-
----
-
-## Summary
-
-So far we’ve focused on robustness, validation, and persistence. The next chapter will be all about transforming the form and the app into a modern, friendly visual experience—building on the technical foundation we’ve just solidified.
-
-**Continue reading:**
-_Part 6: Styles and UX in Nutrition Tracker_ → Guide to styling, accessibility, and creating an attractive interface.
-
----
-
-## Series Navigation
-
-- [← Part 4: Persistence Layer Implementation](./side-project-nutritional-tracker-4.en.md)
-- [Part 6: Visual Architecture & Accessibility →](./side-project-nutritional-tracker-6.en.md)
+- Prevents user frustration from unexpected errors.
+- Ensures storage **always** receives correct data.
+- On-screen feedback and

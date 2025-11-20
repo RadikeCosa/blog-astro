@@ -1,74 +1,69 @@
 ---
 title: "Building a Nutritional Tracker: Part 6 — Visual Architecture & Accessibility"
 published: 2025-11-17T20:58:05.580Z
-description: "How to design a mobile-first, accessible, and scalable UI using TailwindCSS v4, reusable components and visual testing with Storybook."
+description: "How to design a mobile-first, accessible, and scalable UI using TailwindCSS v4, reusable components, and visual testing with Storybook."
 updated: 2025-11-17T22:38:20Z
 tags:
   - nutritional-tracker
-  - react-project
   - tailwindcss
-  - accessibility
-  - ui-components
 series: "nutritional-tracker"
 seriesOrder: 6
 draft: false
 pin: 0
 toc: true
 lang: "en"
-abbrlink: "side-project-nutritional-tracker-6"
+abbrlink: "nutritional-tracker-part6"
 ---
 
 ## Building a Nutritional Tracker: Part 6 — Visual Architecture & Accessibility
 
 ## Introduction
 
-After completing a robust form with validation and persistence, the inevitable question emerged: how does this look and feel for users?
+After completing a form with validation and persistence, the inevitable question arose: how does this look in the user's hands?
 
-Short answer: not great. Raw HTML without styles yields frustrating UX: small touch targets, low contrast, and confusing navigation. In this chapter I document how I transformed the UI into a consistent, mobile-first, accessible and maintainable layer.
+The honest answer: not great. Raw HTML produces frustrating interfaces—small touch targets, low contrast, and unclear navigation. In this chapter, I document how I took the UI from "barebones" to a consistent, mobile-first, accessible, and maintainable visual layer.
 
-Below are the key decisions, implementation snippets and tests that gave me confidence to ship a usable experience on mobile and desktop.
+Here you'll find key decisions, implementation snippets, and tests that gave me confidence to deliver a usable experience on mobile and desktop.
 
-(Place capture here: form BEFORE styling — raw HTML)
+(Place here screenshot of the form BEFORE styling — raw, misaligned HTML)
 
-(Place capture here: form AFTER styling — mobile, clean and modern)
+(Place here screenshot of the form AFTER styling — mobile, clean, and modern)
 
 ---
 
-## My design guidelines (the style bible)
+## My Design Guidelines
 
-Before touching Tailwind, I defined guiding principles stored in `style-guidelines.md`:
+Before touching a Tailwind class, I defined guiding principles that informed every decision. These are summarized from my `style-guidelines.md` file:
 
-### Core principles
+### Core Principles
 
-- Mobile-first by default (majority of traffic)
-- Touch targets ≥ 48 px
-- WCAG AA minimum contrast
-- Labels always visible — never use placeholder as the only label
-- Immediate feedback: inline validation and clear messages
+- Mobile-first by default (high % of mobile usage).
+- Touch targets ≥ 48 px (better usability and accessibility).
+- Minimum WCAG AA contrast.
+- Labels always visible—never use placeholder as the only label.
+- Immediate feedback: inline validation and clear messages.
 
-### Input-specific decisions
+### Input-Specific Decisions
 
-- Keep forms short: ideal 3–5 fields per screen
-- Avoid selects for short lists → prefer radio buttons
-- Use native input types: `type="number"`, `type="date"`, etc.
-- Single-column layout on mobile for easier scrolling and focus
-
-(Place a snippet or screenshot of `style-guidelines.md` here)
+- Short forms: ideally 3–5 fields per screen.
+- Avoid selects for very short lists → prefer radios.
+- Use native types: `type="number"`, `type="date"`, etc.
+- On mobile: single-column layout for easier scrolling and focus.
 
 ---
 
 ## Why TailwindCSS v4
 
-This was a pragmatic choice: fast prototyping with consistent utilities.
+The choice was pragmatic: rapid prototyping and consistency without the overhead of custom CSS.
 
-Quick tradeoffs:
+Quick comparison:
 
-- CSS Modules: full control, lots of boilerplate
-- Styled Components: clean API, adds runtime weight
-- Plain CSS: no deps, slow iteration
-- Tailwind v4: super-fast iteration, small bundle, mobile-first mindset
+- CSS Modules: total control, but lots of boilerplate.
+- Styled Components: React integration, but adds weight.
+- Vanilla CSS: zero dependencies, but slow to iterate.
+- Tailwind v4: ultra-fast iteration, small bundle, mobile-first mindset.
 
-### Theme configuration (tailwind.config.cjs)
+### Essential Configuration (tailwind.config.cjs)
 
 ```javascript
 // tailwind.config.cjs (excerpt)
@@ -90,27 +85,25 @@ module.exports = {
 }
 ```
 
-(Place here a screenshot of `tailwind.config.cjs` open in the editor)
-
 ---
 
-## Reusable UI components
+## Reusable UI Components
 
-The biggest pain point was repeating the same label + input + error pattern. The solution: single-purpose components.
+The most repeated problem: duplicating the same label + input + error pattern seven times. The solution was to create single-responsibility components.
 
-Before: duplicated markup and inconsistencies
+Before: duplication and risk of inconsistencies
 
 ```tsx
 <label className="block text-sm font-medium text-gray-700">
   Food <span className="text-red-600">*</span>
 </label>
 <input className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md" />
-<span className="text-sm text-red-600">Required</span>
+<span className="text-sm text-red-600">Required field</span>
 ```
 
-After: components with clear APIs
+After: components with a clear API
 
-- Label.tsx — shows label, accessible asterisk and sr-only for screen readers:
+- Label.tsx — shows the label, accessible asterisk, and sr-only for screen readers:
 
 ```tsx
 <label className="block text-sm text-gray-700 font-medium">
@@ -124,12 +117,9 @@ After: components with clear APIs
 </label>
 ```
 
-(Place here Storybook capture → Label → Required)
+- Input.tsx — with forwardRef, state handling (default, error, focus), and shared classes.
 
-- Input.tsx — forwardRef, error handling, focus and shared classes:
-(Place here Storybook capture → Input → Default / Error / Focus)
-
-- RadioGroup — replaced many selects; better UX on mobile with larger targets:
+- RadioGroup — replaced selects in many cases; better for mobile due to large touch targets:
 
 ```tsx
 <RadioGroup
@@ -142,17 +132,13 @@ After: components with clear APIs
 />
 ```
 
-(Place two side-by-side captures: native mobile select vs custom RadioGroup grid)
-
-(Place here Storybook capture → RadioGroup → Grid layout + error)
-
 ---
 
-## Accessibility: from theory to automated tests
+## Accessibility: Applied Theory and Automated Testing
 
-Thinking accessible is not enough — measure it. I integrated axe-core into unit tests to prevent regressions.
+It's not enough to think "it's accessible"; you have to measure it. I integrated axe-core into unit tests to validate accessibility in dynamic states.
 
-Sample test (Jest + Testing Library + axe):
+Example test (Jest + Testing Library + axe):
 
 ```ts
 it('form with visible errors remains accessible', async () => {
@@ -162,63 +148,54 @@ it('form with visible errors remains accessible', async () => {
 })
 ```
 
-CI result: 0 violations even with visible errors.
+Actual CI result: 0 violations even with visible errors.
 
-(Place here a screenshot of axe-core report or green test in CI)
-
-I also verified keyboard navigation and visible focus via DevTools:
-
-(Place here Chrome DevTools → Accessibility → focus order screenshot)
+I also tested keyboard navigation and visible focus in DevTools.
 
 ---
 
-## Storybook: visual QA and living documentation
+## Storybook: Visual QA and Living Documentation
 
-Storybook enabled exploring states and automating interactions:
+Storybook let me explore concrete states and automate interactions:
 
-- addons: a11y and interactions
-- stories I keep maintained:
+- addons: a11y and interactions.
+- useful stories I keep maintained:
   - Button: Primary / Secondary / Loading / Disabled
   - Input: Default / Error / Typing (with play function)
   - RadioGroup: Vertical / Grid / Error
   - RegistrationForm: MinimalSubmit (happy path automated)
 
-(Place here collage/screenshots of Storybook Canvas with states, Interactions panel, RegistrationForm → MinimalSubmit)
-
-(Place here screenshot of Storybook sidebar with the component list)
-
 ---
 
-## Current project status
+## Current Project Status
 
 What works today:
 
 - ✅ 100% mobile-first form with proper touch targets
 - ✅ Contrast automatically validated (axe-core = 0 violations)
 - ✅ Components documented and tested in Storybook
-- ✅ Design system centralized in Tailwind config
-- ✅ MealType options derived from Zod schema (no hardcoding)
 
 Next steps:
 
 - Data visualization (charts and reports)
 - Search and filtering in history
-- CSV/PDF export
-- PWA + offline caching
-
-(Place here final responsive screenshot: mobile + desktop form)
 
 ---
 
-## Final thoughts
+## Final Thoughts
 
-This chapter was not about "making it pretty" — it was about building a maintainable visual architecture. Tailwind shortened iteration loops, Storybook reduced manual QA time, and accessibility tests forced me to consider dynamic states. Side projects are great laboratories: experiment, fail, learn and iterate.
-
-Next part → Part 7: Data visualization and reports (simple charts, aggregations and trends).
+Next part → Part 7: Data visualization and reports.
 
 ---
 
 ## Series Navigation
 
-- [← Part 5: The Registration Form](./side-project-nutritional-tracker-5.en.md)
-- [Part 7: Migration to Next.js, Storybook, and Accessibility →](./side-project-nutritional-tracker-7.en.md)
+- [← Part 5: The Registration Form](/posts/nutritional-tracker-part5/)
+- [Part 7: Migration to Next.js, Storybook, and Accessibility →](/posts/nutritional-tracker-part7/)
+
+### Additional Resources
+
+- [Official TailwindCSS v4 Documentation](https://tailwindcss.com/docs/installation)
+- [WCAG Accessibility Guide](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [Storybook for UI Components](https://storybook.js.org/docs/react/get-started/introduction)
+- [Axe-core for Accessibility Testing](https://github.com/dequelabs/axe-core)
