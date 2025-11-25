@@ -5,7 +5,7 @@ description: "We solve the LeetCode 'Rotate Array' problem with three different 
 updated: ""
 tags:
   - leetcode
-  - top-interview
+  - top-interview-150
 draft: false
 pin: 0
 toc: true

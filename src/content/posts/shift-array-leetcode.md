@@ -5,7 +5,7 @@ description: "Resolvemos el problema de LeetCode 'Shift Array' con tres enfoques
 updated: ""
 tags:
   - leetcode
-  - top-interview
+  - top-interview-150
 draft: false
 pin: 0
 toc: true
