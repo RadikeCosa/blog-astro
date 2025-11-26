@@ -1,3 +1,4 @@
+---
 title: "is-fiz-buzz"
 published: 2025-11-26T11:13:35.638Z
 description: ''
@@ -9,7 +10,7 @@ pin: 0
 toc: true
 lang: "en"
 abbrlink: "is-fiz-buzz"
-
+---
 ## Introduction
 
 Today's problem is a variant of the classic "FizzBuzz" challenge, which happened to be yesterday's daily problem. In this new task, we must check if a given array strictly follows the FizzBuzz rules from 1 up to the last element.
