@@ -1,15 +1,17 @@
-title: "ball-trajectory"
+---
+title: "ball-trajectory - FreeCodeCamp Daily Challenge"
 published: 2025-11-29T14:09:51.898Z
 description: ''
 updated: ''
 tags:
-  - algoritmos
+  - freeCodeCamp
+  - daily-challenge
 draft: false
 pin: 0
 toc: true
 lang: "en"
 abbrlink: "ball-trajectory"
-
+---
 ## Challenge: Ball Trajectory (FreeCodeCamp Daily Challenge)
 
 Have you ever wondered how classic video games like Pong calculate the movement of a ball? Today's FreeCodeCamp challenge invites us to simulate that behavior in a matrix using JavaScript.
