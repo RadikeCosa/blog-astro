@@ -10,7 +10,7 @@ draft: false
 pin: 0
 toc: true
 lang: "en"
-abbrlink: "rotate-array-leetcode"
+abbrlink: "shift-array-leetcode"
 ---
 
 ## Rotate an Array - LeetCode #189
