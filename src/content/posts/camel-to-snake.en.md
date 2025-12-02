@@ -44,7 +44,7 @@ Another option is to use regular expressions with `replace`, searching for all u
 function toSnakeLoop(camelCaseStr) {
   let snakeCaseStr = ''
   for (let char of camelCaseStr) {
-    if (char >= 'A' && char <= 'Z') {
+    if (char === char.toUpperCase()) {
       snakeCaseStr += `_${char.toLowerCase()}`
     }
     else {

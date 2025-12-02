@@ -44,7 +44,7 @@ Otra opción es usar expresiones regulares con `replace`, buscando todas las may
 function toSnakeLoop(camelCaseStr) {
   let snakeCaseStr = ''
   for (let char of camelCaseStr) {
-    if (char >= 'A' && char <= 'Z') {
+    if (char === char.toUpperCase()) {
       snakeCaseStr += `_${char.toLowerCase()}`
     }
     else {
