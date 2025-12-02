@@ -1,7 +1,7 @@
 ---
 title: "Fingerprint Test - FreeCodeCamp Daily Challenge"
 published: 2025-11-17T11:33:17.020Z
-description: 'Solving the FreeCodeCamp daily challenge "fingerprint-test".'
+description: 'We solve the FreeCodeCamp daily challenge "fingerprint-test".'
 updated: ''
 tags:
   - freecodecamp
@@ -13,168 +13,56 @@ lang: "en"
 abbrlink: "fingerprint-test"
 ---
 
-## Introduction
+## What's the challenge about?
 
-In this article we solve the FreeCodeCamp daily challenge **"Fingerprint Test"**. The task is practical and straightforward: given two strings that represent fingerprints (only lowercase letters), determine whether they "match" according to two criteria:
+In this FreeCodeCamp challenge, we have two strings (fingerprints) made only of lowercase letters. We want to know if they are similar enough to be considered "the same" using two simple rules:
 
-1. **Identical length**: Both strings must have exactly the same length.
-2. **Difference tolerance**: The number of differing characters must not exceed 10% of the total length.
+1. **They must have the same length** (the same number of letters).
+2. **They can't be too different**: up to 10% of the letters can be different.
 
-Below is an efficient JavaScript solution, the reasoning step by step, algorithmic complexity, and test cases and implementation notes.
+## Simple examples
 
-## Problem statement
+- `helloworld` and `jelloworld` → Only the first letter is different, so they match.
+- `abc` and `xyz` → All letters are different, so they don't match.
 
-Given two strings `fingerprint1` and `fingerprint2`, determine whether they match under the following rules:
+## How do we solve it?
 
-**Rule 1 – Identical length:**
-$$
-\text{length}(\text{fingerprint1}) = \text{length}(\text{fingerprint2})
-$$
+The idea is to compare letter by letter:
+- If the strings don't have the same number of letters, return `false`.
+- If they do, count how many letters are different.
+- If the differences don't exceed 10% of the total, return `true`.
 
-**Rule 2 – Difference tolerance:**
-$$
-\frac{d}{n} \leq 0.10
-$$
-
-Where $d$ is the number of positions with different characters and $n$ is the string length.
-
-## Examples
-
-### Example 1: Valid match
-
-```bash
-fingerprint1 = "helloworld"
-fingerprint2 = "jelloworld"
-```
-
-- Length: $n = 10$
-- Differences: $d = 1$ (position 0: 'h' vs 'j')
-- Ratio: $\frac{1}{10} = 0.1 \leq 0.10$ ✓ → Match
-
-### Example 2: No match
-
-```bash
-fingerprint1 = "abc"
-fingerprint2 = "xyz"
-```
-
-- Length: $n = 3$
-- Differences: $d = 3$
-- Ratio: $\frac{3}{3} = 1.0 > 0.10$ ✗ → No match
-
-## Proposed solution
+## Simple JavaScript code
 
 ```javascript
-/**
- * FreeCodeCamp Problem: Is Match
- *
- * @param {string} fingerprint1 - The first fingerprint string
- * @param {string} fingerprint2 - The second fingerprint string
- * @returns {boolean} True if the fingerprints match according to the rules, otherwise false
- */
 function isMatch(fingerprint1, fingerprint2) {
-  const len1 = fingerprint1.length
-  const len2 = fingerprint2.length
-
-  // If lengths differ, they don't match
-  if (len1 !== len2) {
+  if (fingerprint1.length !== fingerprint2.length)
     return false
-  }
-
   let differences = 0
-
-  for (let i = 0; i < len1; i++) {
-    if (fingerprint1[i] !== fingerprint2[i]) {
+  for (let i = 0; i < fingerprint1.length; i++) {
+    if (fingerprint1[i] !== fingerprint2[i])
       differences++
-    }
   }
-
-  // Compare against the 10% threshold
-  return differences <= len1 * 0.1
+  return differences <= fingerprint1.length * 0.1
 }
-
-export default isMatch
 ```
 
-## Analysis and strategy
+## Why does it work?
+- It only compares what's needed.
+- It's fast even for long strings.
+- It's easy to understand and modify.
 
-The approach is a straightforward linear comparison with three main steps:
+## Interesting cases
+- If both strings are empty, they are considered a match.
+- If only one letter is different and the total is 10 or more, they still match.
 
-### 1. Length validation
-
-If $|\text{fingerprint1}| \neq |\text{fingerprint2}|$, return `false`.
-
-### 2. Count differences
-
-Traverse both strings and count positions with differing characters:
-
-$$
-d = \sum_{i=0}^{n-1} \mathbb{1}[\text{fingerprint1}[i] \neq \text{fingerprint2}[i]]
-$$
-
-### 3. Threshold evaluation
-
-Compare $d$ with 10% of the length:
-
-$$
-\text{match} \iff d \leq 0.1 \cdot n
-$$
-
-### Integer variant (avoiding floating point)
-
-To avoid floating point arithmetic, the equivalent condition is:
-
-$$
-10 \cdot d \leq n
-$$
-
-or in code:
+## Try it yourself
 
 ```javascript
-return differences * 10 <= len1;
+isMatch('helloworld', 'jelloworld') // true
+isMatch('abc', 'xyz') // false
+isMatch('test', 'test') // true
+isMatch('abc', 'abx') // true
 ```
 
-This removes rounding concerns.
-
-## Implementation notes
-
-- Precision: Using `differences <= len1 * 0.1` is acceptable; alternatively use `differences * 10 <= len1` to stay in integers.
-- Empty strings: If both are empty ($n = 0$), then $d = 0$ and the function returns `true`.
-- Input guarantee: The challenge states lowercase letters only; otherwise normalize or validate.
-
-## Complexity
-
-- Time: O(n), with n = length of strings.
-- Space: O(1).
-
-## Test cases (Vitest)
-
-The repository tests cover relevant scenarios:
-
-```javascript
-expect(isMatch('helloworld', 'helloworld')).toBe(true)
-expect(isMatch('helloworld', 'helloworlds')).toBe(false)
-expect(isMatch('helloworld', 'jelloworld')).toBe(true)
-expect(isMatch('thequickbrownfoxjumpsoverthelazydog', 'thequickbrownfoxjumpsoverthelazydog')).toBe(true)
-```
-
-### Run tests
-
-```bash
-npm install
-npm test
-```
-
-## Optimizations and variants
-
-- Use `Math.floor(n * 0.1)` or `Math.ceil(n * 0.1)` if the domain requires explicit rounding.
-- Return diagnostic object when debugging: `{ match, differences, threshold, diffPositions }`.
-- If insertions/deletions are allowed, use Levenshtein distance (more expensive).
-
-## Edge cases
-
-- ("", "") → true
-- ("a", "b") → false
-- For small n, consider whether to use floor/ceil when interpreting the 10% threshold.
-
----
+That's it! This challenge is that simple. You can try your own examples or change the tolerance percentage to make it stricter or more flexible.
