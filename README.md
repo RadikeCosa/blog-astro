@@ -71,7 +71,7 @@ A modern, high-performance **technical blog and portfolio** built with cutting-e
 - **Image Optimization**: Automatic LQIP (Low Quality Image Placeholders) generation
 - **Asset Pipeline**: Sharp-based image processing with WebP conversion
 - **Code Splitting**: Lazy loading for comments and analytics
-- **CSS-in-JS**: UnoCSS with atomic CSS approach for minimal bundle size
+- **Atomic CSS**: UnoCSS engine generating optimized utility classes for minimal bundle size
 - **Compression**: Astro Compress for HTML/CSS/JS minification
 
 ### SEO & Accessibility
