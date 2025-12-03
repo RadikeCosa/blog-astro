@@ -3,7 +3,9 @@ title: "¿Sudoku válido? - LeetCode #36 Top-Interview 10/150"
 published: 2025-12-03
 pubDate: 2025-12-03
 description: "Validamos un tablero de Sudoku 9x9 en una sola pasada, explicando la fórmula clave y patrones útiles para entrevistas."
-tags: ["leetcode", "algoritmos", "hash-set", "validación", "entrevista"]
+tags:
+- leetcode
+- top-interview-150
 category: "coding-challenges"
 lang: "es"
 ---

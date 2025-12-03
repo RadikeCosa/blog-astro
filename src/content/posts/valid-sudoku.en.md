@@ -1,3 +1,15 @@
+---
+title: "Valid Sudoku - LeetCode #36 Top-Interview 10/150"
+published: 2025-12-03
+pubDate: 2025-12-03
+description: "We validate a 9x9 Sudoku board in a single pass, explaining the key formula and useful patterns for interviews."
+tags:
+- leetcode
+- top-interview-150
+category: "coding-challenges"
+lang: "en"
+---
+
 ## Introduction
 
 How can you tell if a Sudoku board is valid without solving it? This challenge, part of the [LeetCode Top Interview 150 series](https://leetcode.com/studyplan/top-interview-150/), is a classic technical interview question. We will validate a 9x9 Sudoku board efficiently—not solve it, nor check if it is solvable, just ensure it follows the basic Sudoku rules.
