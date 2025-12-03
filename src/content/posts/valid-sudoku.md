@@ -27,7 +27,7 @@ El tablero se representa como una matriz 2D de caracteres, donde `'.'` indica un
 Cada celda $(i, j)$ pertenece a una subcuadrícula calculada así:
 
 $$
-	ext{boxIndex} = \left\lfloor \frac{i}{3} \right\rfloor \times 3 + \left\lfloor \frac{j}{3} \right\rfloor
+	\text{boxIndex} = \left\lfloor \frac{i}{3} \right\rfloor \times 3 + \left\lfloor \frac{j}{3} \right\rfloor
 $$
 
 ## Estrategia y Análisis
