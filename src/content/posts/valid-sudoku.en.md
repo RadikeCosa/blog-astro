@@ -24,20 +24,6 @@ How can you tell if a Sudoku board is valid without solving it? This challenge, 
 
 The board is represented as a 2D array of characters, where `'.'` indicates an empty cell.
 
-## Board and Subgrid Visualization
-
-To understand how the 3x3 subgrids are grouped, see the following diagram:
-
-```mermaid
-flowchart TB
-		sub0["0"] -.-> sub1["1"] -.-> sub2["2"]
-		sub3["3"] -.-> sub4["4"] -.-> sub5["5"]
-		sub6["6"] -.-> sub7["7"] -.-> sub8["8"]
-
-		classDef box fill:#f9f,stroke:#333,stroke-width:1px;
-		class sub0,sub1,sub2,sub3,sub4,sub5,sub6,sub7,sub8 box
-```
-
 Each cell $(i, j)$ belongs to a subgrid calculated as:
 
 $$

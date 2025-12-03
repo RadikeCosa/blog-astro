@@ -24,20 +24,6 @@ lang: "es"
 
 El tablero se representa como una matriz 2D de caracteres, donde `'.'` indica una celda vacía.
 
-## Visualización del Tablero y Subcuadrículas
-
-Para entender cómo se agrupan las subcuadrículas 3x3, observa el siguiente diagrama:
-
-```mermaid
-flowchart TB
-    sub0["0"] -.-> sub1["1"] -.-> sub2["2"]
-    sub3["3"] -.-> sub4["4"] -.-> sub5["5"]
-    sub6["6"] -.-> sub7["7"] -.-> sub8["8"]
-
-    classDef box fill:#f9f,stroke:#333,stroke-width:1px;
-    class sub0,sub1,sub2,sub3,sub4,sub5,sub6,sub7,sub8 box
-```
-
 Cada celda $(i, j)$ pertenece a una subcuadrícula calculada así:
 
 $$
