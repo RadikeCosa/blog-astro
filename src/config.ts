@@ -29,24 +29,24 @@ export const themeConfig: ThemeConfig = {
     // default theme mode
     mode: 'light', // light, dark, auto
     light: {
-      // primary color - Dark slate for titles and important elements
-      primary: 'oklch(25% 0.015 240)',
-      // secondary color - Medium gray for body text
-      secondary: 'oklch(45% 0.01 240)',
-      // background color - Clean white with very subtle blue tint
-      background: 'oklch(98% 0.005 240)',
-      // highlight color - Subtle blue for selections and hover states
-      highlight: 'oklch(70% 0.12 240 / 0.15)',
+      // primary color - Rich charcoal for titles and important elements (enhanced depth)
+      primary: 'oklch(20% 0.02 240)',
+      // secondary color - Refined gray for body text (improved readability)
+      secondary: 'oklch(42% 0.015 240)',
+      // background color - Pristine white with subtle warmth
+      background: 'oklch(99% 0.003 260)',
+      // highlight color - Vibrant blue for selections and hover states (more noticeable)
+      highlight: 'oklch(65% 0.15 240 / 0.18)',
     },
     dark: {
-      // primary color - Light gray for dark mode titles
-      primary: 'oklch(90% 0.01 240)',
-      // secondary color - Medium light gray for dark mode text
-      secondary: 'oklch(70% 0.01 240)',
-      // background color - Dark gray with subtle blue undertone
-      background: 'oklch(15% 0.01 240)',
-      // highlight color - Muted blue for dark mode selections
-      highlight: 'oklch(50% 0.12 240 / 0.2)',
+      // primary color - Bright off-white for dark mode titles (enhanced readability)
+      primary: 'oklch(93% 0.012 240)',
+      // secondary color - Soft light gray for dark mode text (reduced eye strain)
+      secondary: 'oklch(72% 0.015 240)',
+      // background color - Deep charcoal with blue undertone (professional depth)
+      background: 'oklch(18% 0.015 240)',
+      // highlight color - Electric blue for dark mode selections (modern accent)
+      highlight: 'oklch(55% 0.15 240 / 0.25)',
     },
   },
   // COLOR SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END

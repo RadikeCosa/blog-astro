@@ -20,12 +20,12 @@ export default defineConfig({
         dark: {
           colors: {
             ...dark,
-            // Updated container colors for dark mode - more muted and professional
-            note: 'oklch(65% 0.08 240 / 0.8)', // muted blue
-            tip: 'oklch(65% 0.08 160 / 0.8)', // muted green
-            important: 'oklch(65% 0.08 280 / 0.8)', // muted purple
-            warning: 'oklch(65% 0.08 60 / 0.8)', // muted orange
-            caution: 'oklch(65% 0.08 20 / 0.8)', // muted red
+            // Enhanced container colors for dark mode - balanced vibrancy
+            note: 'oklch(62% 0.10 240 / 0.85)', // refined blue with depth
+            tip: 'oklch(62% 0.10 160 / 0.85)', // fresh green
+            important: 'oklch(62% 0.10 280 / 0.85)', // elegant purple
+            warning: 'oklch(62% 0.10 50 / 0.85)', // warm orange
+            caution: 'oklch(62% 0.10 15 / 0.85)', // alert red
           },
         },
       },
@@ -34,12 +34,12 @@ export default defineConfig({
   theme: {
     colors: {
       ...light,
-      // Updated container colors for light mode - subtle and professional
-      note: 'oklch(55% 0.12 240 / 0.8)', // subtle blue
-      tip: 'oklch(55% 0.12 160 / 0.8)', // subtle green
-      important: 'oklch(55% 0.12 280 / 0.8)', // subtle purple
-      warning: 'oklch(55% 0.12 60 / 0.8)', // subtle orange
-      caution: 'oklch(55% 0.12 20 / 0.8)', // subtle red
+      // Enhanced container colors for light mode - vibrant but professional
+      note: 'oklch(52% 0.14 240 / 0.85)', // clear blue
+      tip: 'oklch(52% 0.14 160 / 0.85)', // vibrant green
+      important: 'oklch(52% 0.14 280 / 0.85)', // rich purple
+      warning: 'oklch(52% 0.14 50 / 0.85)', // bright orange
+      caution: 'oklch(52% 0.14 15 / 0.85)', // strong red
     },
     fontFamily: {
       // Simplified font stack for tech blog - clean and modern
