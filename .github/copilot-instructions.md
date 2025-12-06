@@ -1,286 +1,165 @@
-# GitHub Copilot Instructions for Blog-Astro
+# Instrucciones Unificadas para Redacción y Colaboración en Blog-Astro
 
-This document provides guidance for GitHub Copilot when working with this Astro-based blog project.
+> **Este documento reemplaza y fusiona las instrucciones previas de Copilot y Mejora de Redacción.**
 
-## Project Overview
+## Propósito y Alcance
 
-This is a multilingual blog built with Astro, featuring:
-- Support for English and Spanish content
-- Markdown-based posts with frontmatter
-- Tag-based organization
-- RSS/Atom feeds
-- SEO optimization
-- Code syntax highlighting with copy buttons
-- Image optimization with LQIP (Low Quality Image Placeholders)
-- Mermaid diagrams and KaTeX math support
+Guía integral para la creación, mejora y traducción de posts técnicos en el blog, dirigida tanto a la IA (Copilot) como a autores humanos. Incluye reglas de redacción, estructura, visuales, flujo multilingüe y colaboración.
 
-## Drafting Posts
+---
 
-### Workflow for Problem-Solving Posts (LeetCode/FreeCodeCamp Exercises)
+## 1. Flujo de Trabajo General
 
-When creating a post about solving a coding exercise (LeetCode, FreeCodeCamp, etc.), the user will provide relevant files containing:
-- **The problem description**: Challenge statement, constraints, input/output examples
-- **The solution**: The implemented code and algorithm approach
-- **The process**: Thought process, alternative approaches considered, optimization steps
+### 1.1. Tipos de Posts
+- **Resolución de problemas** (LeetCode, FreeCodeCamp, etc.)
+- **Posts de proyectos** (explicación de código, arquitectura, decisiones)
+- **Posts generales** (notas, reflexiones, guías)
 
-The AI agent's role is to:
+### 1.2. Fases del Proceso
+1. **Redacción inicial en español**
+2. **Mejora de redacción y estilo**
+3. **Revisión colaborativa**
+4. **Traducción al inglés**
+5. **Publicación de ambas versiones**
 
-#### 1. Analyze Context
-Review all provided files to understand the coding challenge, solution approach, and problem-solving journey.
+---
 
-#### 2. Structure the Narrative
-Create a clear, engaging post following this pattern:
-- **Introduction**: Present the challenge and why it's interesting or useful
-- **Problem Statement**: Clearly explain the problem, constraints, and examples
-- **Approach & Analysis**: Explain the strategy and reasoning behind the solution
-  - Initial thoughts and observations
-  - Key insights that led to the solution
-  - Alternative approaches considered
-- **Solution**: Present the implementation with detailed explanations
-  - Code walkthrough
-  - Complexity analysis (time and space)
-- **Optimization** (if applicable): Discuss improvements and trade-offs
-- **Conclusion**: Key takeaways, patterns learned, and when to apply this approach
+## 2. Mejora de Redacción y Estilo
 
-#### 3. Write with Agility
-Use a clear, direct writing style that:
-- Explains technical concepts concisely
-- Uses active voice and present tense when appropriate
-- Includes practical examples and real code snippets
-- Avoids unnecessary jargon while maintaining technical accuracy
+- Oraciones concisas, sin relleno innecesario
+- Eliminar redundancias y explicaciones circulares
+- Accesible para principiantes, interesante para avanzados
+- Mantener tono técnico-cercano y voz del autor
+- Uso de listas, tablas, bloques de código comentados
+- Secciones claras con encabezados
+- Preguntas retóricas y emojis/símbolos para feedback visual
 
-#### 4. Enhance with Visual Elements
-Always include when applicable:
+### Checklist de Mejora
+- [ ] ¿Las oraciones son directas y sin palabras de relleno?
+- [ ] ¿Cada sección aporta información nueva (sin redundancias)?
+- [ ] ¿Un principiante puede seguir el razonamiento paso a paso?
+- [ ] ¿Un lector avanzado encuentra algo interesante (optimizaciones, trade-offs)?
+- [ ] ¿Los diagramas/fórmulas agregados clarifican conceptos?
+- [ ] ¿La ortografía y gramática están correctas?
+- [ ] ¿El frontmatter (title, description, tags) es preciso?
 
-**Mathematical notation** (KaTeX): For algorithms, complexity analysis, recurrence relations
-```markdown
-The time complexity is $O(n \log n)$ where $n$ is the input size.
+---
 
-For recurrence relations:
-$$
-T(n) = 2T(n/2) + O(n) = O(n \log n)
-$$
+## 3. Visuales: Diagramas Mermaid y KaTeX
 
-For mathematical proofs or formulas:
-$$
-\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
-$$
-```
+### 3.1. Mermaid
+- Usar para flujos, estructuras de datos, relaciones, árboles de decisión
+- Preferir diagramas verticales (`TD`/`TB`) para mejor visualización móvil
+- Proteger caracteres especiales en nodos: envolver texto con `""` dentro del delimitador de forma
+- Ejemplo:
 
-**Mermaid diagrams**: For visualizing algorithms, data structures, decision trees, state transitions
-```markdown
 ```mermaid
-graph TD
-    A[Input Array] --> B{Is Sorted?}
-    B -->|Yes| C[Binary Search]
-    B -->|No| D[Sort First]
-    D --> C
-    C --> E[Return Result]
-```
+flowchart TD
+  A["Entrada (array)"] --> B["Procesar"]
+  B --> C["Salida: resultado"]
 ```
 
-```markdown
-```mermaid
-flowchart LR
-    A[Start] --> B[Initialize Pointers]
-    B --> C{Left < Right?}
-    C -->|Yes| D[Process]
-    D --> E[Move Pointers]
-    E --> C
-    C -->|No| F[Return]
-```
-```
+### 3.2. KaTeX
+- Usar para fórmulas de complejidad, definiciones formales, expresiones matemáticas
+- Inline: `$O(n \log n)$`  |  Block: `$$...$$`
 
-For algorithm visualization with recursion:
-```markdown
-```mermaid
-graph TD
-    A["solve(0, n)"] --> B["solve(0, n/2)"]
-    A --> C["solve(n/2, n)"]
-    B --> D["solve(0, n/4)"]
-    B --> E["solve(n/4, n/2)"]
-```
-```
+---
 
-#### 5. Technical Depth
-Include:
-- Code snippets with proper syntax highlighting and language tags
-- Algorithm complexity analysis (Big O notation)
-- Step-by-step solution walkthrough with comments
-- Test cases and edge cases explanation
-- Visual traces of algorithm execution when helpful
-- Links to related problems or patterns
-- Comparison of different approaches (brute force vs optimized)
+## 4. Estructura Recomendada de Posts
 
-#### 6. Frontmatter Template for Problem-Solving Posts
+1. **Introducción/Enunciado**
+2. **Análisis Inicial**
+3. **Desarrollo de la Solución**
+4. **Implementación** (código comentado)
+5. **Análisis de Complejidad**
+6. **Casos Edge**
+7. **Reflexiones/Aprendizajes**
+8. **Recursos**
+
+---
+
+## 5. Proceso Multilingüe
+
+- Escribir y mejorar primero en español (`.es.md`, `lang: "es"`)
+- Revisar y aprobar versión en español
+- Traducir al inglés (`.en.md`, `lang: "en"`), adaptando expresiones y manteniendo diagramas/fórmulas
+- Publicar ambas versiones juntas
+
+---
+
+## 6. Frontmatter y Convenciones
+
+### 6.1. Campos requeridos
 ```yaml
 ---
-title: "[Problem Name]: [Approach/Pattern Used]"
+title: Título del post
 pubDate: YYYY-MM-DD
-description: "A concise summary of the problem and solution approach"
-tags: ["leetcode", "algorithms", "data-structures", "specific-pattern"]
-category: "coding-challenges" # or "algorithms"
-lang: "en" # or "es"
----
-```
-
-### Workflow for Project Posts
-
-When creating a post about a project, the user will provide:
-- **Relevant files**: Code snippets, configuration files, project structure
-- **Documentation draft**: Raw notes, features list, technical decisions, challenges faced
-
-The AI agent's role is to:
-
-1. **Analyze Project Context**: Review all provided files to understand the project's purpose, architecture, and implementation details
-2. **Structure the Documentation**: Create a well-organized post following this pattern:
-   - **Introduction**: What the project is and why it exists
-   - **Features**: Key capabilities and functionalities
-   - **Technical Stack**: Technologies, frameworks, and tools used
-   - **Architecture**: System design and component structure (use Mermaid diagrams)
-   - **Implementation Details**: Notable code patterns, algorithms, or solutions
-   - **Challenges & Solutions**: Problems encountered and how they were resolved
-   - **Lessons Learned**: Key takeaways and future improvements
-   - **Demo/Usage**: How to use or interact with the project
-3. **Enhance Technical Writing**: Ensure clear, professional technical documentation
-4. **Add Visual Elements**: Include diagrams, code snippets, and visual aids where helpful
-5. **Maintain Project Context**: Preserve technical accuracy while making content accessible
-
-### Workflow for General Posts
-
-When creating other types of posts, the initial workflow involves pasting your raw notes into the newly created markdown file. These notes may be unordered or loosely structured. The AI agent's role is to:
-
-1. **Organize Content**: Rearrange the notes into a logical structure with clear sections (e.g., introduction, body, conclusion).
-2. **Enhance Readability**: Ensure the post is easy to read by improving sentence flow, grammar, and clarity.
-3. **Add Comments**: Provide inline comments or suggestions for areas that need further elaboration or clarification.
-4. **Ensure Coherence**: Verify that the post has a consistent tone and style, and that ideas are presented in a coherent manner.
-5. **Optimize Structure**: Suggest or implement headings, subheadings, and formatting to make the post visually appealing and easy to navigate.
-
-### Tips for Effective Collaboration
-
-- **For problem-solving posts**: Share all relevant files (problem statement, solution code, thought process)
-- **For project posts**: Provide relevant code files and a draft of the documentation with features, technical decisions, and challenges
-- **For general posts**: Paste your notes as comprehensively as possible, even if they are unordered
-- Highlight any specific points or sections you want the agent to focus on
-- **Iterative Editing**: When editing posts, provide suggestions one at a time and implement them individually rather than making multiple changes at once. This allows for better review and refinement of each improvement
-- Review the AI's edits and suggestions, and iterate as needed to finalize the post
-- **For technical posts**: Indicate if you want specific sections with diagrams or mathematical notation
-
-### Language Workflow
-
-**IMPORTANT**: All posts are initially written in Spanish (`.es.md`).
-
-1. **Write in Spanish first**: Create and complete the post in Spanish with `lang: "es"` in the frontmatter
-2. **Review and finalize**: Ensure the Spanish version is polished and complete
-3. **Generate translation**: Before making a commit, create the English translation (`.en.md`) with `lang: "en"`
-4. **Commit both versions**: Always commit Spanish and English versions together
-
-This ensures consistency across languages and that both versions are available simultaneously.
-
-## Content Structure
-
-### Post Files Location
-- English posts: `src/content/posts/*.en.md`
-- Spanish posts: `src/content/posts/*.es.md`
-- Drafts: `src/content/drafts/`
-
-### Frontmatter Required Fields
-```yaml
----
-title: Post Title
-pubDate: YYYY-MM-DD
-description: Brief post description
+description: Breve descripción
 tags: [tag1, tag2]
-category: category-name
-lang: en # or "es"
+category: categoría
+lang: es # o "en"
 ---
 ```
 
-### Optional Frontmatter Fields
+### 6.2. Opcionales
 ```yaml
 draft: false
 image: /images/post-image.jpg
-imageAlt: Image description
-author: Author Name
+imageAlt: Descripción de la imagen
+author: Nombre del autor
 ```
 
-## Code Style Guidelines
+---
 
-### TypeScript/JavaScript
-- Use TypeScript for type safety
-- Follow ESLint configuration in `eslint.config.mjs`
-- Use modern ES6+ syntax
-- Prefer functional components for Astro
+## 7. Código y Formato
 
-### Markdown
-- Use proper heading hierarchy (H1 for title, H2 for sections, H3 for subsections)
-- Include code language tags for syntax highlighting
-- Use relative links for internal references
-- Optimize images and provide alt text
+- TypeScript: usar tipado, seguir ESLint, ES6+, componentes funcionales
+- Markdown: jerarquía de headings, code blocks con lenguaje, links relativos, imágenes optimizadas
+- CSS: UnoCSS, estilos en `src/styles/`, mobile-first
 
-### CSS
-- UnoCSS utility classes are available (see `uno.config.ts`)
-- Custom styles in `src/styles/`
-- Follow mobile-first responsive design
+---
 
-## Scripts Available
+## 8. Colaboración y Revisión
 
-- `pnpm new-post`: Create a new post with template
-- `pnpm format-posts`: Format existing posts
-- `pnpm apply-lqip`: Generate LQIP for images
-- `pnpm update-theme`: Update theme colors
+- Sugerir cambios uno a la vez para revisión iterativa
+- Explicar cada modificación significativa
+- Esperar feedback antes de traducir
+- Mantener consistencia y claridad
 
-## Common Tasks
+---
 
-### Creating a New Post
-1. Run `pnpm new-post` or create file manually in `src/content/posts/`
-2. Use the frontmatter template above
-3. Write content with proper markdown formatting
-4. Include code examples with language tags
-5. Add tags for organization
+## 9. Recursos y Tareas Comunes
 
-### Adding Images
-1. Place images in `src/assets/images/`
-2. Reference in markdown: `![Alt text](../../assets/images/filename.jpg)`
-3. Run `pnpm apply-lqip` to generate placeholders
+- Scripts: `pnpm new-post`, `pnpm format-posts`, `pnpm apply-lqip`, `pnpm update-theme`
+- Ubicación de archivos: `src/content/posts/`, `src/content/drafts/`, imágenes en `src/assets/images/`
+- Validar markdown, probar localmente, revisar enlaces e imágenes, accesibilidad
 
-### Adding Mermaid Diagrams
-Use code blocks with `mermaid` language tag:
-```markdown
+---
+
+## 10. Qué NO hacer
+
+- ❌ Cambiar la voz del autor
+- ❌ Agregar formalidad excesiva
+- ❌ Simplificar en exceso
+- ❌ Diagramas/matemáticas solo por estética
+- ❌ Eliminar humor sutil o comentarios personales
+
+---
+
+## 11. Ejemplo de Diagrama Mermaid
+
 ```mermaid
-graph LR
-    A[Start] --> B[Process]
-    B --> C[End]
+flowchart TD
+  A["Array A"] --> SA["Set A"]
+  B["Array B"] --> SB["Set B"]
+  SA --> F1["Filtrar: no en B"]
+  SB --> F2["Filtrar: no en A"]
+  F1 --> R["Resultado"]
+  F2 --> R
 ```
-```
 
-### Adding Math Equations
-Use KaTeX syntax:
-- Inline: `$E = mc^2$`
-- Block: `$$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$$`
+---
 
-## SEO Considerations
+## 12. Notas Finales
 
-- Keep titles under 60 characters
-- Descriptions between 120-160 characters
-- Use descriptive URLs (slug based on filename)
-- Include relevant keywords in content naturally
-- Add alt text to all images
-- Use proper heading structure
-
-Refer to `SEO_OPTIMIZATION_GUIDE.md` for detailed SEO guidelines.
-
-## Multilingual Support
-
-- Create separate files for each language (`.en.md`, `.es.md`)
-- Keep consistent URL structure across languages
-- Translate all frontmatter fields
-- Use language-specific tags when appropriate
-
-## Important Notes
-
-- Always validate markdown syntax before committing
-- Test locally with `pnpm dev` before publishing
-- Check for broken links and images
-- Ensure mobile responsiveness of custom components
-- Follow accessibility guidelines (WCAG 2.1 AA)
+Este documento es la referencia principal para la colaboración y redacción en el blog. Si tienes dudas, consulta aquí antes de preguntar o modificar el flujo.
