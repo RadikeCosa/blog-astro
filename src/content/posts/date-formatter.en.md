@@ -1,20 +1,18 @@
-title: "date-formatter"
+---
+title: "Date Formatter - FreeCodeCamp Daily Challenge"
 published: 2025-12-06T22:34:37.768Z
-description: ''
+description: 'Today we solve "Date Formatter", a classic string and date manipulation challenge.'
 updated: ''
 tags:
-  - algoritmos
+  - freecodecamp
+  - daily-challenge
 draft: false
 pin: 0
 toc: true
 lang: "en"
 abbrlink: "date-formatter"
-title: "Date Formatter: convert English dates to YYYY-MM-DD"
-pubDate: 2025-12-06
-description: 'How to transform English dates to ISO format with JavaScript, step by step.'
-tags: [algorithms, dates, javascript]
-category: algorithms
-lang: en
+---
+
 ## 🗓️ Date Formatter — Explanation & Solution
 
 ### Problem Statement
@@ -73,18 +71,27 @@ flowchart TD
  */
 function formatDate(dateString) {
   // Split parts: [Month, Day,, Year]
-  const [monthName, dayWithComma, year] = dateString.split(" ");
+  const [monthName, dayWithComma, year] = dateString.split(' ')
   // Remove comma from day
-  const day = dayWithComma.replace(",", "").padStart(2, "0");
+  const day = dayWithComma.replace(',', '').padStart(2, '0')
   // Month mapping
   const monthMap = {
-    January: "01", February: "02", March: "03", April: "04",
-    May: "05", June: "06", July: "07", August: "08",
-    September: "09", October: "10", November: "11", December: "12"
-  };
-  const month = monthMap[monthName];
+    January: '01',
+    February: '02',
+    March: '03',
+    April: '04',
+    May: '05',
+    June: '06',
+    July: '07',
+    August: '08',
+    September: '09',
+    October: '10',
+    November: '11',
+    December: '12'
+  }
+  const month = monthMap[monthName]
   // Build result
-  return `${year}-${month}-${day}`;
+  return `${year}-${month}-${day}`
 }
 ```
 
