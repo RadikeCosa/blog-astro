@@ -1,6 +1,6 @@
 ---
 title: "String Compression - FreeCodeCamp Daily-Challenge"
-pubDate: 2025-12-07
+published: 2025-12-07T12:24:38.096Z
 description: 'We solve the FreeCodeCamp daily challenge "String Compression", explore alternatives, and analyze its complexity.'
 tags:
   - freecodecamp
