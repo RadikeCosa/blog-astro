@@ -4,7 +4,7 @@ published: 2025-12-11T14:25:58.544Z
 description: "Solving the 'Candlelight' challenge from FreeCodeCamp, analyzing the problem and developing an efficient solution in JavaScript."
 updated: ''
 tags: [freecodecamp, daily-challenge]
-category: "problems"
+category: "daily"
 lang: en
 abbrlink: "candlelight"
 ---
