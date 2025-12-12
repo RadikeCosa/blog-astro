@@ -1,6 +1,36 @@
-# Instrucciones Unificadas para Redacción y Colaboración en Blog-Astro
 
-> **Este documento reemplaza y fusiona las instrucciones previas de Copilot y Mejora de Redacción.**
+# Formato de Frontmatter para Posts del Blog
+
+Todo post debe comenzar con un bloque de frontmatter en YAML, siguiendo este formato:
+
+```yaml
+---
+title: "Validador de Ipv4 - FreeCodeCamp #25 Daily Challenge"
+published: 2025-12-12T22:57:04.267Z
+description: 'Resolvemos "Ipv4 Validator", un desafío de FreeCodeCamp que trabaja validación y análisis de strings.'
+updated: ''
+tags:
+  - freecodecamp
+  - daily-challenge
+draft: false
+pin: 0
+toc: true
+lang: "es"
+abbrlink: "ipv4-validator"
+---
+
+```
+
+Opcionales:
+```yaml
+draft: false
+image: /images/post-image.jpg
+imageAlt: Descripción de la imagen
+author: Nombre del autor
+```
+
+# Instrucciones  para Redacción y Colaboración en Blog-Astro
+
 
 ## Propósito y Alcance
 

@@ -95,6 +95,7 @@ function repeatVowels(str) {
 ## Reflections and Learnings
 
 What did we learn?
+
 - How to use an incremental counter for progressive logic.
 - String manipulation and case control.
 
