@@ -134,13 +134,3 @@ It's $O(1)$: only 4 blocks and simple variables are used.
 
 - [IPv4 - Wikipedia](https://en.wikipedia.org/wiki/IPv4)
 - [Regular Expressions in JavaScript - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-
----
-# Quality Checklist
-
-- [x] Direct, concise sentences
-- [x] No redundancies
-- [x] Step-by-step for beginners
-- [x] Includes Mermaid diagram
-- [x] Clear, commented code
-- [x] Correct frontmatter

@@ -142,11 +142,3 @@ Es $O(1)$: solo se usan 4 bloques y variables simples.
 - [Expresiones regulares en JavaScript - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions)
 
 ---
-# Checklist de calidad
-
-- [x] Oraciones directas y sin relleno
-- [x] Sin redundancias
-- [x] Paso a paso claro para principiantes
-- [x] Incluye diagrama Mermaid
-- [x] Código comentado y claro
-- [x] Frontmatter correcto
