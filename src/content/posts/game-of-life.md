@@ -140,7 +140,7 @@ function gameOfLife(grid) {
 
 ---
 
-## Visualizando el proceso (¡Mermaid!)
+## Visualizando el proceso
 
 ```mermaid
 flowchart TD
