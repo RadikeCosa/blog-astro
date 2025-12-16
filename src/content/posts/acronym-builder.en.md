@@ -47,9 +47,11 @@ Given a string of one or more words, return the acronym following these rules:
 1. Split the string into words.
 2. Define a `Set` with the ignore words.
 3. Iterate each word:
-	 - If it’s the first word, always take it.
-	 - If not in the ignore set, take it.
-	 - Add the first letter (uppercase) to the acronym.
+
+- If it’s the first word, always take it.
+- If not in the ignore set, take it.
+- Add the first letter (uppercase) to the acronym.
+
 4. Join the letters and return the result.
 
 ```js
@@ -71,16 +73,16 @@ function buildAcronym(str) {
 
 ```mermaid
 flowchart TD
-	A["Start"] --> B["Split into words"]
-	B --> C["Iterate words"]
-	C --> D{"Is it first or not in ignore?"}
-	D -- Yes --> E["Add first letter (uppercase)"]
-	D -- No --> F["Skip"]
-	E --> G["Next word"]
-	F --> G
-	G --> H{"End?"}
-	H -- No --> C
-	H -- Yes --> I["Join letters and return"]
+A["Start"] --> B["Split into words"]
+B --> C["Iterate words"]
+C --> D{"Is it first or not in ignore?"}
+D -- Yes --> E["Add first letter (uppercase)"]
+D -- No --> F["Skip"]
+E --> G["Next word"]
+F --> G
+G --> H{"End?"}
+H -- No --> C
+H -- Yes --> I["Join letters and return"]
 ```
 
 ---
