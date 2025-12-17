@@ -1,5 +1,5 @@
 ---
-title: "Unique Characters - Daily Challenge"
+title: "Unique Characters -  FreeCodeCamp #30 Daily Challenge"
 published: 2025-12-16T16:45:42.925Z
 description: "Solving the classic 'Unique Characters' problem: how do you know if a string has all unique characters? We analyze, optimize, and explain step by step."
 updated: ''

@@ -1,5 +1,5 @@
 ---
-title: "Caracteres Unicos - Daily Challenge"
+title: "Caracteres Unicos - FreeCodeCamp #30 Daily Challenge"
 published: 2025-12-16T16:45:42.925Z
 description: "Resolvemos el clásico problema de 'Unique Characters': ¿cómo saber si una cadena tiene todos sus caracteres distintos? Analizamos, optimizamos y explicamos paso a paso."
 updated: ''
