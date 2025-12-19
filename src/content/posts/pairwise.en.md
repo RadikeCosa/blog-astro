@@ -148,12 +148,3 @@ For very large arrays, a hashmap could reduce complexity, but complicates index 
 - Related problems: Two Sum, Pair Sum, array pair combinatorics
 
 ---
-
-### Quality Checklist
-
-- [x] Direct, filler-free sentences
-- [x] Each section adds new information
-- [x] Step-by-step explanation for beginners
-- [x] Visuals (Mermaid, KaTeX) add clarity
-- [x] Spelling and grammar checked
-- [x] Accurate and complete frontmatter
