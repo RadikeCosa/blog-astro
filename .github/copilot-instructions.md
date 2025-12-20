@@ -139,6 +139,15 @@ imageAlt: Descripción de la imagen
 author: Nombre del autor
 ```
 
+### 6.3. Convención de títulos y descripciones para posts de retos
+
+- **Título (`title`)**: En español, comienza con la traducción del nombre del problema, seguido de la plataforma y el número de reto.
+  - Ejemplo: `"De A Pares - FreeCodeCamp #131 Daily Challenge"`
+- **Descripción (`description`)**: Incluye el nombre original del problema en inglés y un resumen breve en español.
+  - Ejemplo: `'Analizamos y resolvemos el problema pairwise: encontrar pares que suman un objetivo y sumar sus índices. Incluye explicación, código, visuales y reflexiones.'`
+
+> Mantener este formato para todos los posts de resolución de problemas (FreeCodeCamp, LeetCode, etc.) para asegurar consistencia y claridad.
+
 ---
 
 ## 7. Código y Formato
