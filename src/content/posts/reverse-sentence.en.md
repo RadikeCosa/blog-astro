@@ -51,19 +51,6 @@ All cases normalize spaces and reverse the word order.
 2. **Reverse** the array.
 3. **Join** with `.join(' ')` to ensure a single space.
 
-<details>
-<summary>📝 <b>Flowchart (Mermaid)</b></summary>
-
-```mermaid
-flowchart TD
-  A["Input: string"] --> B[".trim()"]
-  B --> C[".split(/\\s+/)"]
-  C --> D[".reverse()"]
-  D --> E[".join(' ')"]
-  E --> F["Output: reversed string"]
-```
-</details>
-
 ### JavaScript Implementation
 
 ```javascript
@@ -106,13 +93,3 @@ Auxiliary arrays proportional to the input size are created: $$O(n)$$
 - [String.prototype.split() - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
 - [Array.prototype.reverse() - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
 - [Array.prototype.join() - MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
-
----
-
-### Publication Checklist ✅
-
-- [x] Direct, filler-free sentences
-- [x] No redundancies
-- [x] Clear step-by-step explanation
-- [x] Visuals and examples included
-- [x] Correct frontmatter and tags
