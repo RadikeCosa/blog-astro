@@ -108,8 +108,6 @@ export default function buyItems(amount, items) {
 - Simulación greedy secuencial.
 - Código simple, claro y óptimo para el caso.
 
-¿Qué mejorarías? ¿Y si las tasas fueran dinámicas? 💬
-
 ---
 
 ## 📚 Recursos

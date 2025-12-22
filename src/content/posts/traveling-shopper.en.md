@@ -108,8 +108,6 @@ export default function buyItems(amount, items) {
 - Sequential greedy simulation.
 - Simple, clear, and optimal code for this case.
 
-What would you improve? What if rates were dynamic? 💬
-
 ---
 
 ## 📚 Resources
