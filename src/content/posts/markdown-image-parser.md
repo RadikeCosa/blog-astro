@@ -1,8 +1,7 @@
 ---
-title: Markdown Image Parser
 title: "Parseador de Imágenes en Markdown - FreeCodeCamp #136 Daily Challenge"
 published: 2025-12-24T11:18:16.755Z
-description: 'Resolvemos "Markdown Image Parser" de FreeCodeCamp: extraemos y convertimos imágenes en formato Markdown a HTML usando JavaScript y expresiones regulares. Incluye explicación, código y análisis.'
+description: 'Resolvemos "Markdown Image Parser" de FreeCodeCamp: extraemos y convertimos imágenes en formato Markdown a HTML usando JavaScript y expresiones regulares. Incluye explicación, códi[...]
 updated: ''
 tags:
   - freecodecamp
