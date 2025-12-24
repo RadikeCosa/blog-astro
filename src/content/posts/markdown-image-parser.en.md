@@ -1,7 +1,7 @@
 ---
 title: "Markdown Image Parser - FreeCodeCamp #136 Daily Challenge"
 published: 2025-12-24T11:18:16.755Z
-description: 'We solve FreeCodeCamp\'s "Markdown Image Parser": extract and convert Markdown image strings to HTML using JavaScript and regular expressions. Includes explanation, code, and analysis.'
+description: 'We solve FreeCodeCamps "Markdown Image Parser": extract and convert Markdown image strings to HTML using JavaScript and regular expressions. Includes explanation, code, and analysis.'
 updated: ''
 tags:
   - freecodecamp
