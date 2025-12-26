@@ -1,6 +1,6 @@
 ---
-title: "Generador de Copos de Nieve - FreeCodeCamp Daily Challenge"
-published: 2025-12-26T13:06:17.663Z
+title: "Generador de Copos de Nieve - FreeCodeCamp #137 Daily Challenge"
+published: 2025-12-25T13:06:17.663Z
 description: 'Resolvemos el reto "Snowflake Generator" de FreeCodeCamp: manipulación de strings para reflejar patrones de texto. Incluye explicación, código, casos edge y análisis.'
 updated: ''
 tags:

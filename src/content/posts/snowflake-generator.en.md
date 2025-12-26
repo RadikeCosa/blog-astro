@@ -1,5 +1,5 @@
 ---
-title: "Snowflake Generator - FreeCodeCamp Daily Challenge"
+title: "Snowflake Generator - FreeCodeCamp #137 Daily Challenge"
 published: 2025-12-25T13:06:17.663Z
 description: 'We solve the "Snowflake Generator" challenge from FreeCodeCamp: string manipulation to mirror text patterns. Includes explanation, code, edge cases, and analysis.'
 updated: ''
