@@ -50,7 +50,7 @@ Luego unir con `_` y convertir a mayúsculas.
 strategia: Normalizar → Transformar
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Input<br/>(cualquier formato)"] --> B["Normalizar a snake_case"]
     B --> C["Split por '_'"]
     C --> D["toUpperCase() cada palabra"]

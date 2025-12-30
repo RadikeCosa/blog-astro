@@ -51,7 +51,7 @@ Then join with `_` and convert to uppercase.
 ### Strategy: Normalize → Transform
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Input<br/>(any format)"] --> B["Normalize to snake_case"]
     B --> C["Split by '_'"]
     C --> D["toUpperCase() each word"]
