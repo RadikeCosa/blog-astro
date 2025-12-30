@@ -1,5 +1,5 @@
 ---
-title: "Sum the Numbers in a String - FreeCodeCamp #141 Daily Challenge"
+title: "Sum the Numbers in a String - FreeCodeCamp #142 Daily Challenge"
 published: 2025-12-30T16:32:03.166Z
 description: 'We analyze and solve the "Sum the String" problem: extract and sum all positive integers within a text string. Includes explanation, code, visuals, and complexity analysis.'
 updated: ''
@@ -70,17 +70,17 @@ flowchart TD
  */
 function stringSum(str: string): number {
   // Look for sequences of one or more digits (\d+) globally (g)
-  const matches = str.match(/\d+/g);
+  const matches = str.match(/\d+/g)
 
   if (!matches) {
-    return 0;
+    return 0
   }
 
   // Convert each match to a number and accumulate
-  return matches.reduce((acc, num) => acc + Number(num), 0);
+  return matches.reduce((acc, num) => acc + Number(num), 0)
 }
 
-export default stringSum;
+export default stringSum
 ```
 
 ---
