@@ -1,6 +1,6 @@
 ---
 title: "Combustible Para Despegue - FreeCodeCamp #141 Daily Challenge"
-published: 2025-12-30T14:57:40.162Z
+published: 2025-12-29T14:57:40.162Z
 description: 'Analizamos y resolvemos "Take Off Fuel": un desafío de FreeCodeCamp sobre conversión de unidades y lógica de redondeo. Incluye explicación paso a paso, código en JavaScript y análisis de complejidad.'
 updated: ''
 tags:
