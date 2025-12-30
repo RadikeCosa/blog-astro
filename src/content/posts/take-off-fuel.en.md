@@ -1,6 +1,6 @@
 ---
 title: "Take Off Fuel - FreeCodeCamp #141 Daily Challenge"
-published: 2025-12-30T14:57:40.162Z
+published: 2025-12-29T14:57:40.162Z
 description: 'We analyze and solve "Take Off Fuel": a FreeCodeCamp challenge about unit conversion and rounding logic. Includes step-by-step explanation, JavaScript code, and complexity analysis.'
 updated: ''
 tags:
