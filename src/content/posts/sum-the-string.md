@@ -36,6 +36,7 @@ La clave reside en identificar secuencias ininterrumpidas de dígitos como una �
 4. `stringSum("a1b20c300")` → `321` ($1 + 20 + 300$).
 
 Casos borde:
+
 - `stringSum("")` → `0` (string vacío).
 - `stringSum("abc")` → `0` (sin números).
 - `stringSum("0a0b0")` → `0` (ceros explícitos).
@@ -70,17 +71,17 @@ flowchart TD
  */
 function stringSum(str: string): number {
   // Buscamos secuencias de uno o más dígitos (\d+) globalmente (g)
-  const matches = str.match(/\d+/g);
+  const matches = str.match(/\d+/g)
 
   if (!matches) {
-    return 0;
+    return 0
   }
 
   // Convertimos cada coincidencia a número y acumulamos
-  return matches.reduce((acc, num) => acc + Number(num), 0);
+  return matches.reduce((acc, num) => acc + Number(num), 0)
 }
 
-export default stringSum;
+export default stringSum
 ```
 
 ---
