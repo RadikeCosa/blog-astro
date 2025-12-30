@@ -1,5 +1,5 @@
 ---
-title: "Suma los Números del String - FreeCodeCamp #141 Daily Challenge"
+title: "Suma el String - FreeCodeCamp #142 Daily Challenge"
 published: 2025-12-30T16:32:03.166Z
 description: 'Analizamos y resolvemos el problema "Sum the String": extraer y sumar todos los números enteros positivos dentro de una cadena de texto. Incluye explicación, código, visuales y análisis de complejidad.'
 updated: ''
