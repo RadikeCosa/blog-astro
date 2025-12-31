@@ -1,5 +1,5 @@
 ---
-title: "Frecuencia de Palabras - FreeCodeCamp #141 Daily Challenge"
+title: "Frecuencia de Palabras - FreeCodeCamp #35 Daily Challenge"
 published: 2025-12-30T18:37:47.361Z
 description: 'Resolvemos "Word Frequency": encontrar las tres palabras más frecuentes en un párrafo, ignorando puntuación y mayúsculas. Incluye análisis de complejidad y visuales.'
 updated: ''

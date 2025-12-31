@@ -1,5 +1,5 @@
 ---
-title: "Top 3 Most Frequent Words - FreeCodeCamp #142 Daily Challenge"
+title: "Top 3 Most Frequent Words - FreeCodeCamp #35 Daily Challenge"
 published: 2025-12-13T10:00:00.000Z
 description: 'We analyze and solve the "Most Frequent Words" challenge: finding the top 3 words in a paragraph. Includes explanation, code, visuals, and complexity analysis.'
 updated: ''
