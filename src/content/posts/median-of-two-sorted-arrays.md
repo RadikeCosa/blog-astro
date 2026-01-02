@@ -379,4 +379,3 @@ Esta solución funciona pero es demasiado lenta y usa mucha memoria.
 
 - [LeetCode Problem #4](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 - [Búsqueda Binaria](https://es.wikipedia.org/wiki/B%C3%BAsqueda_binaria) - Wikipedia
-- Este problema aparece frecuentemente en entrevistas de empresas como Google, Facebook y Amazon
